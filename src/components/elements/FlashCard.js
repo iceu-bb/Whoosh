@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 
-const FlashCard = ({ className }) => {
+const FlashCard = ({ className, english, polish, key, style }) => {
   const [flipped, set] = useState(false);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -11,34 +11,30 @@ const FlashCard = ({ className }) => {
   });
 
   return (
-    <div className={className} onClick={() => set(!flipped)}>
+    <animated.div className={className} style={style} key={key}>
       <animated.div
+        onClick={() => set(!flipped)}
         style={{ opacity: opacity.interpolate(o => 1 - o), transform }}
         className='side front'
       >
-        Front
+        {english}
       </animated.div>
       <animated.div
+        onClick={() => set(!flipped)}
         style={{
           opacity,
           transform: transform.interpolate(t => `${t} rotateX(180deg)`)
         }}
         className='side back'
       >
-        Back
+        {polish}
       </animated.div>
-    </div>
+    </animated.div>
   );
 };
 
 export default styled(FlashCard)`
-  padding: 200px;
-  background-color: pink;
-  margin: 0 auto;
   position: relative;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
 
   .side {
     display: flex;
