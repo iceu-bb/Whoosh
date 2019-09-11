@@ -31,3 +31,32 @@ export const registerAccount = values => async (
     });
   }
 };
+
+export const loginUser = values => async (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
+  const firebase = getFirebase();
+  try {
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(values.email, values.password);
+    dispatch(closeModal());
+  } catch (error) {
+    console.log(error);
+    throw new SubmissionError({
+      _error: 'Wystąpił błąd przy próbie logowania. Spróbuj Ponownie.'
+    });
+  }
+};
+
+export const logoutUser = () => async (dispatch, getState, { getFirebase }) => {
+  const firebase = getFirebase();
+  try {
+    await firebase.logout();
+    window.alert('Zostałeś poprawnie wylogowany!');
+  } catch (error) {
+    console.log(error);
+  }
+};

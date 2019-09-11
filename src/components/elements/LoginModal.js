@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { closeModal } from '../../redux/modal/modalActionts';
 import TextInputForm from '../../components/elements/forms/TextInputForm';
+import { loginUser } from '../../redux/auth/authActions';
 
 const ModalWrapper = styled.div`
   background: rgba(0, 0, 0, 0.5);
@@ -24,16 +25,12 @@ const ModalInner = styled.div`
   background-color: #fff;
 `;
 
-const LoginModal = ({ closeModal, handleSubmit }) => {
+const LoginModal = ({ closeModal, handleSubmit, loginUser }) => {
   return (
     <ModalWrapper>
       <ModalInner>
         <button onClick={() => closeModal()}>Zamknij Modal</button>
-        <form
-          onSubmit={handleSubmit(() => {
-            console.log('logged');
-          })}
-        >
+        <form onSubmit={handleSubmit(loginUser)}>
           <Field
             name='email'
             component={TextInputForm}
@@ -55,5 +52,5 @@ const LoginModal = ({ closeModal, handleSubmit }) => {
 
 export default connect(
   null,
-  { closeModal }
+  { closeModal, loginUser }
 )(reduxForm({ form: 'loginForm' })(LoginModal));

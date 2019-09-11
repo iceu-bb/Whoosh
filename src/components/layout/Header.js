@@ -4,8 +4,13 @@ import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom';
 import { blue, yellow } from '../../utilities';
 import { openModal } from '../../redux/modal/modalActionts';
+import { logoutUser } from '../../redux/auth/authActions';
+import SignOut from '../elements/SignOut';
 
-const Header = ({ className, openModal }) => {
+const Header = ({ className, openModal, auth, profile, logoutUser }) => {
+  const isAuthenticated = auth.isLoaded && !auth.isEmpty;
+  const userName = profile.displayName;
+
   return (
     <header className={className}>
       <Link to='/' className='logo'>
@@ -23,29 +28,50 @@ const Header = ({ className, openModal }) => {
               Dodaj fiszkę
             </NavLink>
           </li>
-          <li>
-            <div className='link' onClick={() => openModal('LoginModal', null)}>
-              Zaloguj się
-            </div>
-          </li>
-          <li>
-            <div
-              className='link'
-              onClick={() => openModal('RegisterModal', null)}
-            >
-              Zarejestruj się
-            </div>
-          </li>
+          {!isAuthenticated && (
+            <>
+              <li>
+                <div
+                  className='link'
+                  onClick={() => openModal('LoginModal', null)}
+                >
+                  Zaloguj się
+                </div>
+              </li>
+              <li>
+                <div
+                  className='link'
+                  onClick={() => openModal('RegisterModal', null)}
+                >
+                  Zarejestruj się
+                </div>
+              </li>
+            </>
+          )}
+
+          {isAuthenticated && (
+            <>
+              <span>{userName}</span>
+              <li>
+                <SignOut logoutUser={logoutUser} />
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>
   );
 };
 
+const mapStateToProps = state => ({
+  auth: state.firebase.auth,
+  profile: state.firebase.profile
+});
+
 export default styled(
   connect(
-    null,
-    { openModal }
+    mapStateToProps,
+    { openModal, logoutUser }
   )(Header)
 )`
   min-height: 70px;
