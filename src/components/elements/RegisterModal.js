@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { closeModal } from '../../redux/modal/modalActionts';
 import TextInputForm from '../../components/elements/forms/TextInputForm';
+import { registerAccount } from '../../redux/auth/authActions';
 
 const ModalWrapper = styled.div`
   background: rgba(0, 0, 0, 0.5);
@@ -24,27 +25,32 @@ const ModalInner = styled.div`
   background-color: #fff;
 `;
 
-const RegisterModal = ({ closeModal, handleSubmit }) => {
+const RegisterModal = ({ closeModal, handleSubmit, registerAccount }) => {
   return (
     <ModalWrapper>
       <ModalInner>
         <button onClick={() => closeModal()}>Zamknij Modal</button>
-        <form
-          onSubmit={handleSubmit(() => {
-            console.log('register');
-          })}
-        >
+        <form onSubmit={handleSubmit(registerAccount)}>
           <Field
             name='email'
             component={TextInputForm}
             type='text'
-            placeholder='Email Address'
+            placeholder='adres e-mail'
+            label='adres e-mail'
           />
           <Field
             name='password'
             component={TextInputForm}
             type='password'
-            placeholder='Password'
+            placeholder='hasło'
+            label='hasło'
+          />
+          <Field
+            name='displayName'
+            component={TextInputForm}
+            type='text'
+            placeholder='nazwa użytkownika'
+            label='nazwa użytkownika'
           />
           <button type='submit'>Zarejestruj konto</button>
         </form>
@@ -55,5 +61,5 @@ const RegisterModal = ({ closeModal, handleSubmit }) => {
 
 export default connect(
   null,
-  { closeModal }
+  { closeModal, registerAccount }
 )(reduxForm({ form: 'registerForm' })(RegisterModal));
