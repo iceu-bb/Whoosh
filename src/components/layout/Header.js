@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom';
 import { blue, yellow } from '../../utilities';
+import { openModal } from '../../redux/modal/modalActionts';
 
-const Header = ({ className }) => {
+const Header = ({ className, openModal }) => {
   return (
     <header className={className}>
       <Link to='/' className='logo'>
@@ -22,14 +24,17 @@ const Header = ({ className }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to='#' className='link'>
+            <div className='link' onClick={() => openModal('LoginModal', null)}>
               Zaloguj się
-            </NavLink>
+            </div>
           </li>
           <li>
-            <NavLink to='#' className='link'>
+            <div
+              className='link'
+              onClick={() => openModal('RegisterModal', null)}
+            >
               Zarejestruj się
-            </NavLink>
+            </div>
           </li>
         </ul>
       </nav>
@@ -37,7 +42,12 @@ const Header = ({ className }) => {
   );
 };
 
-export default styled(Header)`
+export default styled(
+  connect(
+    null,
+    { openModal }
+  )(Header)
+)`
   min-height: 70px;
   background-color: ${blue};
   display: flex;

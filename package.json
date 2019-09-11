@@ -15,6 +15,7 @@
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-firestore": "^0.9.0",
+    "redux-form": "^8.2.6",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.3.2",
     "styled-components-modifiers": "^1.2.4"
