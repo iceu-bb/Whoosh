@@ -5,11 +5,13 @@ import Header from './components/layout/Header';
 import Test from './components/layout/Test';
 import Add from './components/layout/Add';
 import CardContainer from './components/layout/CardContainer';
+import ModalManager from './redux/modal/ModalManager';
 
 function App() {
   return (
     <>
       <GlobalStyle />
+      <ModalManager />
       <Header />
       <main>
         <CardContainer />

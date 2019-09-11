@@ -1,7 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { openModal } from '../../redux/modal/modalActionts';
 
-const Test = () => {
-  return <div>Testowy Component</div>;
+const Test = ({ openModal }) => {
+  return (
+    <div>
+      Testowy Component
+      <button onClick={() => openModal('TestModal', null)}>Otwórz Modal</button>
+    </div>
+  );
 };
 
-export default Test;
+export default connect(
+  null,
+  { openModal }
+)(Test);

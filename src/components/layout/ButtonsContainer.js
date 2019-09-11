@@ -5,12 +5,18 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 const ButtonsContainer = ({ className, setIndex, index }) => {
   return (
     <div className={className}>
-      <button onClick={() => setIndex(index => (index - 1) % 4)}>
+      <button
+        style={{ padding: '30px' }}
+        onClick={() => setIndex(index => (index - 1) % 4)}
+      >
         <FaArrowLeft />
       </button>
       <p>2/24</p>
-      <button>
-        <FaArrowRight onClick={() => setIndex(index => (index + 1) % 4)} />
+      <button
+        style={{ padding: '30px' }}
+        onClick={() => setIndex(index => (index + 1) % 4)}
+      >
+        <FaArrowRight />
       </button>
     </div>
   );
