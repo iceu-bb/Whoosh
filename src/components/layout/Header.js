@@ -6,11 +6,11 @@ import { blue, yellow } from '../../utilities';
 const Header = ({ className }) => {
   return (
     <header className={className}>
-      <Link to='/' exact className='logo'>
+      <Link to='/' className='logo'>
         Fiszki
       </Link>
       <nav>
-        <ul class='list'>
+        <ul className='list'>
           <li>
             <NavLink to='/test' className='link'>
               Test Page
@@ -59,7 +59,7 @@ export default styled(Header)`
   }
 
   .list > li {
-    padding: 10px;
+    padding: 10px 20px;
   }
 
   .link {

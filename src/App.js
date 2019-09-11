@@ -4,6 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Test from './components/layout/Test';
 import Add from './components/layout/Add';
+import CardContainer from './components/layout/CardContainer';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <GlobalStyle />
       <Header />
       <main>
+        <CardContainer />
         <Switch>
           <Route exact path='/test' component={Test} />
           <Route exact path='/add' component={Add} />
