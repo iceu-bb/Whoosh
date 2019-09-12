@@ -3,6 +3,7 @@ import { useTransition, animated, config } from 'react-spring';
 import { FlashCard } from '../elements';
 import ButtonsContainer from './ButtonsContainer';
 import CardList from './CardList';
+import AddCard from './AddCard';
 
 // const staticcards = [
 //   { id: 0, polish: 'Jabłko', english: 'Apple' },
@@ -11,7 +12,7 @@ import CardList from './CardList';
 //   { id: 3, polish: 'Arbuz', english: 'Watermelon' }
 // ];
 
-const CardContainer = ({ cards }) => {
+const CardContainer = ({ cards, categoryName }) => {
   // index of current Card
   const [index, setIndex] = useState(0);
 
@@ -33,7 +34,6 @@ const CardContainer = ({ cards }) => {
     },
     config: config.gentle
   });
-
   return (
     <div
       style={{
@@ -41,7 +41,7 @@ const CardContainer = ({ cards }) => {
         width: '800px'
       }}
     >
-      <div>Nazwa kategorii</div>
+      <div>{categoryName}</div>
       <div
         style={{
           height: '300px'
@@ -63,6 +63,7 @@ const CardContainer = ({ cards }) => {
         length={cards.length}
       />
       <div>Przyciski do zmiany karty</div>
+      <AddCard categoryName={categoryName} />
       <CardList cards={cards} length={cards.length} />
     </div>
   );

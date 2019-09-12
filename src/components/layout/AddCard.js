@@ -2,16 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import TextInputForm from '../elements/forms/TextInputForm';
-import SelectInputForm from '../elements/forms/SelectInputForm';
+// import SelectInputForm from '../elements/forms/SelectInputForm';
 import { addCard } from '../../redux/category/actions';
-import {
-  composeValidators,
-  combineValidators,
-  isRequired,
-  createValidator,
-  hasLengthGreaterThan,
-  hasLengthBetween
-} from 'revalidate';
+import { combineValidators, isRequired } from 'revalidate';
 
 const validate = combineValidators({
   category: isRequired({ message: 'Wyboerz kategorię' }),
@@ -31,25 +24,26 @@ const AddCard = ({
   pristine,
   submitting,
   reset,
-  addCard
+  addCard,
+  categoryName
 }) => {
   return (
     <div style={{ padding: 100 }}>
       Dodaj Fiszkę
       <form
         onSubmit={handleSubmit(values => {
-          addCard(values);
+          addCard(values, categoryName);
           reset();
         })}
       >
-        <Field
+        {/* <Field
           name='category'
           component={SelectInputForm}
           options={categories}
           type='select'
           placeholder='wybierz kategorię'
           label='wybierz kategorię'
-        />
+        /> */}
         <Field
           name='english'
           component={TextInputForm}
