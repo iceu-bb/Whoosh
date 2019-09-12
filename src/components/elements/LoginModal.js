@@ -25,7 +25,14 @@ const ModalInner = styled.div`
   background-color: #fff;
 `;
 
-const LoginModal = ({ closeModal, handleSubmit, loginUser }) => {
+const LoginModal = ({
+  closeModal,
+  handleSubmit,
+  loginUser,
+  error,
+  touched,
+  pristine
+}) => {
   return (
     <ModalWrapper>
       <ModalInner>
@@ -43,7 +50,10 @@ const LoginModal = ({ closeModal, handleSubmit, loginUser }) => {
             type='password'
             placeholder='Password'
           />
-          <button type='submit'>Zaloguj się</button>
+          {error && <span>{error}</span>}
+          <button type='submit' disabled={touched || pristine}>
+            Zaloguj się
+          </button>
         </form>
       </ModalInner>
     </ModalWrapper>

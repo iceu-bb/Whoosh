@@ -5,6 +5,52 @@ import { Field, reduxForm } from 'redux-form';
 import { closeModal } from '../../redux/modal/modalActionts';
 import TextInputForm from '../../components/elements/forms/TextInputForm';
 import { registerAccount } from '../../redux/auth/authActions';
+import {
+  composeValidators,
+  combineValidators,
+  isRequired,
+  createValidator,
+  hasLengthGreaterThan,
+  hasLengthBetween
+} from 'revalidate';
+
+const isValidEmail = createValidator(
+  message => value => {
+    if (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+      return message;
+    }
+  },
+  'Nieprawidłowy adres email'
+);
+
+const isMinimumOneCipher = createValidator(
+  message => value => {
+    if (value && !/^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/i.test(value)) {
+      return message;
+    }
+  },
+  'Hasło musi zawierać przynajmniej jedną cyfre'
+);
+
+const validate = combineValidators({
+  email: composeValidators(
+    isRequired({ message: 'email jest wymagany' }),
+    isValidEmail
+  )(),
+  password: composeValidators(
+    isRequired({ message: 'hasło jest wymagane' }),
+    hasLengthGreaterThan(7)({
+      message: 'Hasło musi mieć minimum 8 znaków'
+    }),
+    isMinimumOneCipher
+  )(),
+  displayName: composeValidators(
+    isRequired({ message: 'Nazwa użytkownika jest wymagana' }),
+    hasLengthBetween(2, 32)({
+      message: 'Nazwa musi składać się z minimum 3 znaków, maksymalnie 32 znaki'
+    })
+  )()
+});
 
 const ModalWrapper = styled.div`
   background: rgba(0, 0, 0, 0.5);
@@ -25,7 +71,15 @@ const ModalInner = styled.div`
   background-color: #fff;
 `;
 
-const RegisterModal = ({ closeModal, handleSubmit, registerAccount }) => {
+const RegisterModal = ({
+  closeModal,
+  handleSubmit,
+  registerAccount,
+  invalid,
+  submitting,
+  pristine,
+  error
+}) => {
   return (
     <ModalWrapper>
       <ModalInner>
@@ -52,7 +106,10 @@ const RegisterModal = ({ closeModal, handleSubmit, registerAccount }) => {
             placeholder='nazwa użytkownika'
             label='nazwa użytkownika'
           />
-          <button type='submit'>Zarejestruj konto</button>
+          {error && <span>{error}</span>}
+          <button type='submit' disabled={invalid || submitting || pristine}>
+            Zarejestruj konto
+          </button>
         </form>
       </ModalInner>
     </ModalWrapper>
@@ -62,4 +119,4 @@ const RegisterModal = ({ closeModal, handleSubmit, registerAccount }) => {
 export default connect(
   null,
   { closeModal, registerAccount }
-)(reduxForm({ form: 'registerForm' })(RegisterModal));
+)(reduxForm({ form: 'registerForm', validate })(RegisterModal));

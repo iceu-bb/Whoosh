@@ -46,7 +46,7 @@ export const loginUser = values => async (
   } catch (error) {
     console.log(error);
     throw new SubmissionError({
-      _error: 'Wystąpił błąd przy próbie logowania. Spróbuj Ponownie.'
+      _error: 'Wprowadziłeś niepoprawne dane. Spróbuj Ponownie.'
     });
   }
 };
