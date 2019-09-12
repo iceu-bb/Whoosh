@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTransition, animated, config } from 'react-spring';
 import { FlashCard } from '../elements';
 import ButtonsContainer from './ButtonsContainer';
+import CardList from './CardList';
 
 // const staticcards = [
 //   { id: 0, polish: 'Jabłko', english: 'Apple' },
@@ -56,8 +57,13 @@ const CardContainer = ({ cards }) => {
             />
           ))}
       </div>
-      <ButtonsContainer setIndex={setIndex} index={index} />
+      <ButtonsContainer
+        setIndex={setIndex}
+        index={index}
+        length={cards.length}
+      />
       <div>Przyciski do zmiany karty</div>
+      <CardList cards={cards} length={cards.length} />
     </div>
   );
 };

@@ -2,20 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
-const ButtonsContainer = ({ className, setIndex, index }) => {
+const ButtonsContainer = ({ className, setIndex, index, length }) => {
   return (
     <div className={className}>
       <button
-        disabled={index === 0}
         style={{ padding: '30px' }}
-        onClick={() => setIndex(index => (index - 1) % 4)}
+        onClick={() => setIndex(index => (index - 1) % length)}
+        disabled={index === 0}
       >
         <FaArrowLeft />
       </button>
-      <p>2/24</p>
+      <p>
+        {index + 1}/{length}
+      </p>
       <button
         style={{ padding: '30px' }}
-        onClick={() => setIndex(index => (index + 1) % 4)}
+        onClick={() => setIndex(index => (index + 1) % length)}
+        disabled={index + 1 === length}
       >
         <FaArrowRight />
       </button>
