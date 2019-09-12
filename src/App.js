@@ -4,7 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Test from './components/layout/Test';
 import Add from './components/layout/Add';
-import CardContainer from './components/layout/CardContainer';
+import CardDashboard from './components/layout/CardDashboard';
 import ModalManager from './redux/modal/ModalManager';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <ModalManager />
       <Header />
       <main>
-        <CardContainer />
+        <CardDashboard />
 
         <Switch>
           <Route exact path='/test' component={Test} />

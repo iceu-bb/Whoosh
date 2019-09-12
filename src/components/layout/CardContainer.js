@@ -3,14 +3,14 @@ import { useTransition, animated, config } from 'react-spring';
 import { FlashCard } from '../elements';
 import ButtonsContainer from './ButtonsContainer';
 
-const cards = [
-  { id: 0, polish: 'Jabłko', english: 'Apple' },
-  { id: 1, polish: 'Śliwka', english: 'Plum' },
-  { id: 2, polish: 'Gruszka', english: 'Pear' },
-  { id: 3, polish: 'Arbuz', english: 'Watermelon' }
-];
+// const staticcards = [
+//   { id: 0, polish: 'Jabłko', english: 'Apple' },
+//   { id: 1, polish: 'Śliwka', english: 'Plum' },
+//   { id: 2, polish: 'Gruszka', english: 'Pear' },
+//   { id: 3, polish: 'Arbuz', english: 'Watermelon' }
+// ];
 
-const CardContainer = () => {
+const CardContainer = ({ cards }) => {
   // index of current Card
   const [index, setIndex] = useState(0);
 
@@ -46,14 +46,15 @@ const CardContainer = () => {
           height: '300px'
         }}
       >
-        {transitions.map(({ item, key, props: animation }) => (
-          <FlashCard
-            key={key}
-            style={animation}
-            polish={item.polish}
-            english={item.english}
-          />
-        ))}
+        {cards.length !== 0 &&
+          transitions.map(({ item, key, props: animation }) => (
+            <FlashCard
+              key={key}
+              style={animation}
+              polish={item.polish}
+              english={item.english}
+            />
+          ))}
       </div>
       <ButtonsContainer setIndex={setIndex} index={index} />
       <div>Przyciski do zmiany karty</div>

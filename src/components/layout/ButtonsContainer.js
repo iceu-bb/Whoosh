@@ -6,6 +6,7 @@ const ButtonsContainer = ({ className, setIndex, index }) => {
   return (
     <div className={className}>
       <button
+        disabled={index === 0}
         style={{ padding: '30px' }}
         onClick={() => setIndex(index => (index - 1) % 4)}
       >
