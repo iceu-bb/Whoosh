@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { closeModal } from '../../redux/modal/modalActionts';
 import TextInputForm from '../../components/elements/forms/TextInputForm';
-import { loginUser } from '../../redux/auth/authActions';
+import { loginUser, socialLogin } from '../../redux/auth/authActions';
 
 const ModalWrapper = styled.div`
   background: rgba(0, 0, 0, 0.5);
@@ -31,7 +31,8 @@ const LoginModal = ({
   loginUser,
   error,
   touched,
-  pristine
+  pristine,
+  socialLogin
 }) => {
   return (
     <ModalWrapper>
@@ -54,6 +55,7 @@ const LoginModal = ({
           <button type='submit' disabled={touched || pristine}>
             Zaloguj się
           </button>
+          <button onClick={() => socialLogin('google')}>Google Log In</button>
         </form>
       </ModalInner>
     </ModalWrapper>
@@ -62,5 +64,5 @@ const LoginModal = ({
 
 export default connect(
   null,
-  { closeModal, loginUser }
+  { closeModal, loginUser, socialLogin }
 )(reduxForm({ form: 'loginForm' })(LoginModal));

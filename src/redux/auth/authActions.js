@@ -60,3 +60,29 @@ export const logoutUser = () => async (dispatch, getState, { getFirebase }) => {
     console.log(error);
   }
 };
+
+export const socialLogin = selectedProvider => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  try {
+    dispatch(closeModal());
+    let user = await firebase.login({
+      provider: selectedProvider,
+      type: 'popup'
+    });
+    // Take user name from provider site
+    if (user.additionalUserInfo.isNewUser) {
+      await firestore.set(`users/${user.user.uid}`, {
+        displayName: user.profile.displayName,
+        createdAt: firestore.FieldValue.serverTimestamp()
+      });
+    }
+    window.alert(`Logged in successfully`);
+  } catch (error) {
+    console.log(error);
+  }
+};
