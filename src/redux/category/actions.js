@@ -37,3 +37,29 @@ export const fetchCategory = collectionName => async (
     dispatch(asyncActionError());
   }
 };
+
+export const addCard = values => async (
+  dispatch,
+  getState,
+  { getFirestore, getFirebase }
+) => {
+  const firestore = getFirestore();
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+  const { category, english, polish } = values;
+  try {
+    await firestore
+      .collection('categories')
+      .doc('collections')
+      .collection(`${category}`)
+      .add({
+        english,
+        polish,
+        author: user.displayName,
+        authorId: user.uid,
+        createdAt: firestore.FieldValue.serverTimestamp()
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
