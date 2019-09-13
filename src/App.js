@@ -3,10 +3,10 @@ import GlobalStyle from './GlobalStyle';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Test from './components/layout/Test';
-import AddCard from './components/layout/AddCard';
-import AddCategory from './components/layout/AddCategory';
-import CategoriesDashboard from './components/layout/CategoriesDashboard';
-import CardDashboard from './components/layout/CardDashboard';
+import AddCard from './components/card/AddCard';
+import AddCategory from './components/category/AddCategory';
+import CategoriesDashboard from './components/category/CategoriesDashboard';
+import CardDashboard from './components/card/CardDashboard';
 import ModalManager from './redux/modal/ModalManager';
 
 function App() {
