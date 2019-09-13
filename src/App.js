@@ -17,12 +17,12 @@ function App() {
     <>
       <GlobalStyle />
       <ModalManager />
-      <Header />
+      {/* <Header /> */}
       <main>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <Hero />
+          {/* <Hero />
           <Wave />
-          <Section1 />
+          <Section1 /> */}
           <Switch>
             <Route exact path='/' component={CategoriesDashboard} />
             <Route exact path='/test' component={Test} />

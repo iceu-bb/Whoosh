@@ -27,7 +27,6 @@ const Header = ({ className }) => {
     x: moved ? 0 : 100
   });
 
-  console.log(moved);
   return (
     <header className={className} moved={moved}>
       <animated.div
@@ -37,7 +36,7 @@ const Header = ({ className }) => {
         }}
       />
 
-      <Link to='/' className={moved ? 'logo yellow' : 'logo '} moved={moved}>
+      <Link to='/' className={moved ? 'logo yellow' : 'logo '}>
         Fiszki
       </Link>
       <Nav moved={moved} />

@@ -72,6 +72,8 @@ export const addCard = (values, categoryName) => async (
   const firebase = getFirebase();
   const user = firebase.auth().currentUser;
   const { english, polish } = values;
+
+  // 1) add new Card to Category
   try {
     await firestore.collection(`${categoryName}_words`).add({
       english,
@@ -80,6 +82,13 @@ export const addCard = (values, categoryName) => async (
       authorId: user.uid,
       createdAt: firestore.FieldValue.serverTimestamp()
     });
+
+    // 2) increment cardCounter
+    await firestore.update(`categories/${categoryName}`, {
+      cardCounter: firestore.FieldValue.increment(1)
+    });
+
+    window.alert(`Dodałeś kartę do zestawu ${categoryName}`);
   } catch (error) {
     console.log(error);
   }
@@ -105,7 +114,8 @@ export const addCategory = values => async (
         authorId: user.uid,
         createdAt: firestore.FieldValue.serverTimestamp(),
         private: false,
-        editable: true
+        editable: true,
+        cardCounter: 0
       });
 
     // 2) create data for collection with pattern: categoryName_words
@@ -113,7 +123,7 @@ export const addCategory = values => async (
       init: true
     });
 
-    console.log('pomyślnie utworzono');
+    window.alert(`Dodałeś kategorię ${categoryName}`);
   } catch (error) {
     console.log(error);
   }

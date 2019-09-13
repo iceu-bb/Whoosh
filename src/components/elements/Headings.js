@@ -9,11 +9,11 @@ export const HeadingH1 = styled.h1`
 `;
 
 export const HeadingH2 = styled.h2`
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 30px;
 `;
 
-export const HeadingH3 = styled.h2`
+export const HeadingH3 = styled.h3`
   color: ${orange};
   font-size: 1rem;
   margin-bottom: 20px;
