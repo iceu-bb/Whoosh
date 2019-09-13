@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Exo:300,400,500&display=swap&subset=latin-ext');
 
     html {
-
+        font-size: 62.5%;
     }
 
     *, *::before, *::after{
@@ -15,8 +15,18 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background-color: #ddd;
+        background-image:
+            linear-gradient(
+      to right, 
+      #e35a35,
+      #F0CB35
+    );
+
         ${fontExo};
+    }
+
+    main {
+       
     }
 `;
 
