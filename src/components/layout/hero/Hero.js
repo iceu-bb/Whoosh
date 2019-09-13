@@ -25,5 +25,5 @@ export default styled(Hero)`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 100px;
-  padding: 100px 0 50px;
+  padding: 250px 0 50px;
 `;

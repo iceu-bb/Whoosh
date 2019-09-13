@@ -1,19 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Link, NavLink } from 'react-router-dom';
-import { blue, yellow } from '../../../utilities';
+import { NavLink } from 'react-router-dom';
+import { yellow } from '../../../utilities';
 import { Button } from '../../elements';
 import { openModal } from '../../../redux/modal/modalActionts';
 import { logoutUser } from '../../../redux/auth/authActions';
 import SignOut from './SignOut';
 
-const Nav = ({ className, openModal, auth, profile, logoutUser }) => {
+const Nav = ({ className, moved, openModal, auth, profile, logoutUser }) => {
   const isAuthenticated = auth.isLoaded && !auth.isEmpty;
   const userName = profile.displayName;
   return (
     <nav className={className}>
-      <ul className='list'>
+      <ul className={moved ? 'list black' : 'list'}>
         <li>
           <NavLink to='/test' className='link'>
             Test Page
@@ -76,17 +76,24 @@ export default styled(
     align-items: center;
   }
 
+  .black {
+    color: #000;
+  }
+
   .list > li {
     padding: 10px 20px;
   }
 
   .link {
-    color: #fff;
+    color: inherit;
     font-size: 1.8rem;
     font-weight: 400;
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
+    position: relative;
+    z-index: 30;
+    transition: all 0.3s ease;
 
     &:hover {
       color: ${yellow};
