@@ -39,7 +39,12 @@ const Nav = ({ className, moved, openModal, auth, profile, logoutUser }) => {
                 className='link'
                 onClick={() => openModal('RegisterModal', null)}
               >
-                <Button>Zarejestruj się</Button>
+                <Button
+                  modifiers='nav'
+                  className={moved ? 'orange-background' : ''}
+                >
+                  Zarejestruj się
+                </Button>
               </div>
             </li>
           </>
@@ -78,6 +83,11 @@ export default styled(
 
   .black {
     color: #000;
+  }
+
+  .orange-background {
+    border: none;
+    background-image: linear-gradient(to right, #e35a35, #f0cb35);
   }
 
   .list > li {

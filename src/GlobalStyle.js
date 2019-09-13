@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         background-image:
             linear-gradient(
-      to right, 
+      to right,
       #e35a35,
       #F0CB35
     );
@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     main {
-       
+
     }
 `;
 

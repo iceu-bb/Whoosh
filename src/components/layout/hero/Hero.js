@@ -14,7 +14,7 @@ const Hero = ({ className }) => {
           providing feedback and focus to drive success.
         </Paragraph>
 
-        <Button>Dołącz do nas</Button>
+        <Button modifiers='white'>Dołącz do nas</Button>
       </div>
       <div>laptop image here </div>
     </div>
