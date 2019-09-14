@@ -128,3 +128,42 @@ export const addCategory = values => async (
     console.log(error);
   }
 };
+
+export const removeCard = (categoryName, cardId) => async (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+  try {
+    // 1) delete doc
+    await firestore.delete(`${categoryName}_words/${cardId}`);
+
+    // 2) update cardCounter
+    await firestore.update(`categories/${categoryName}`, {
+      cardCounter: firestore.FieldValue.increment(-1)
+    });
+
+    window.alert('successful removed card');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateCard = (values, categoryName, cardId) => async (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+  const { english, polish } = values;
+  try {
+    await firestore.update(`${categoryName}_words/${cardId}`, {
+      english,
+      polish
+    });
+    window.alert('successful edited card');
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CardItem from './CardItem';
 
-const ListOfCard = ({ className, cards, length }) => {
+const ListOfCard = ({ className, cards, length, categoryName }) => {
   return (
     <div className={className}>
       <p className='text'>
@@ -14,7 +14,7 @@ const ListOfCard = ({ className, cards, length }) => {
       </p>
       <div className='grid'>
         {cards.map(card => (
-          <CardItem key={card.id} card={card} />
+          <CardItem key={card.id} card={card} categoryName={categoryName} />
         ))}
       </div>
     </div>

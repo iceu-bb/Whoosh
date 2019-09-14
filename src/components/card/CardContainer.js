@@ -52,7 +52,11 @@ const CardContainer = ({ cards, categoryName, className }) => {
         kategorii bądź usunąć to które wcześniej stworzyłeś :)
       </section>
       <AddCard categoryName={categoryName} />
-      <CardList cards={cards} length={cards.length} />
+      <CardList
+        cards={cards}
+        length={cards.length}
+        categoryName={categoryName}
+      />
     </div>
   );
 };

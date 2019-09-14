@@ -10,7 +10,7 @@ const TextInputForm = ({
 }) => {
   return (
     <>
-      <label>{label}</label>
+      {label && <label>{label}</label>}
       <div>
         <input {...input} placeholder={placeholder} type={type} />
         {touched && error && <span>{error}</span>}
