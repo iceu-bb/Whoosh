@@ -5,25 +5,18 @@ import { Field, reduxForm } from 'redux-form';
 import { closeModal } from '../../redux/modal/modalActionts';
 import TextInputForm from '../../components/elements/forms/TextInputForm';
 import { loginUser, socialLogin } from '../../redux/auth/authActions';
+import { Button } from './index';
 
-const ModalWrapper = styled.div`
-  background: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalInner = styled.div`
-  min-width: 300px;
-  min-height: 250px;
-  background-color: #fff;
-`;
+import {
+  ModalWrapper,
+  ModalInner,
+  Header,
+  SocialLoginWrapper,
+  SocialIcon,
+  StyledForm,
+  SubmissionError,
+  CloseButton
+} from './index';
 
 const LoginModal = ({
   closeModal,
@@ -37,26 +30,36 @@ const LoginModal = ({
   return (
     <ModalWrapper>
       <ModalInner>
-        <button onClick={() => closeModal()}>Zamknij Modal</button>
-        <form onSubmit={handleSubmit(loginUser)}>
+        <Header>
+          <span>Zaloguj się </span>
+          <CloseButton onClick={() => closeModal()}>x</CloseButton>
+        </Header>
+        <SocialLoginWrapper onClick={() => socialLogin('google')}>
+          <SocialIcon src='./assets/google-icon.png' alt='google icon' />
+          Zaloguj sie przez Google
+        </SocialLoginWrapper>
+        <StyledForm onSubmit={handleSubmit(loginUser)}>
           <Field
             name='email'
             component={TextInputForm}
             type='text'
-            placeholder='Email Address'
+            label='Nazwa użytkownika'
+            placeholder='Wprowadź nazwę użytkownika'
+            ownClassName='login-input'
           />
           <Field
             name='password'
             component={TextInputForm}
             type='password'
-            placeholder='Password'
+            label='Hasło'
+            placeholder='Wprowadź swoje hasło'
+            ownClassName='login-input'
           />
-          {error && <span>{error}</span>}
-          <button type='submit' disabled={touched || pristine}>
+          {error && <SubmissionError>{error}</SubmissionError>}
+          <Button type='submit' disabled={touched || pristine}>
             Zaloguj się
-          </button>
-          <button onClick={() => socialLogin('google')}>Google Log In</button>
-        </form>
+          </Button>
+        </StyledForm>
       </ModalInner>
     </ModalWrapper>
   );

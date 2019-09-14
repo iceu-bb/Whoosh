@@ -4,7 +4,19 @@ import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { closeModal } from '../../redux/modal/modalActionts';
 import TextInputForm from '../../components/elements/forms/TextInputForm';
-import { registerAccount } from '../../redux/auth/authActions';
+import { registerAccount, socialLogin } from '../../redux/auth/authActions';
+import { Button } from './index';
+import {
+  ModalWrapper,
+  ModalInner,
+  Header,
+  SocialLoginWrapper,
+  SocialIcon,
+  StyledForm,
+  SubmissionError,
+  CloseButton
+} from './index';
+
 import {
   composeValidators,
   combineValidators,
@@ -52,29 +64,11 @@ const validate = combineValidators({
   )()
 });
 
-const ModalWrapper = styled.div`
-  background: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalInner = styled.div`
-  min-width: 300px;
-  min-height: 250px;
-  background-color: #fff;
-`;
-
 const RegisterModal = ({
   closeModal,
   handleSubmit,
   registerAccount,
+  socialLogin,
   invalid,
   submitting,
   pristine,
@@ -83,14 +77,22 @@ const RegisterModal = ({
   return (
     <ModalWrapper>
       <ModalInner>
-        <button onClick={() => closeModal()}>Zamknij Modal</button>
-        <form onSubmit={handleSubmit(registerAccount)}>
+        <Header>
+          <span>Zarejestruj się </span>
+          <CloseButton onClick={() => closeModal()}>x</CloseButton>
+        </Header>
+        <SocialLoginWrapper onClick={() => socialLogin('google')}>
+          <SocialIcon src='./assets/google-icon.png' alt='google icon' />
+          Kontynuuj przez Google
+        </SocialLoginWrapper>
+        <StyledForm onSubmit={handleSubmit(registerAccount)}>
           <Field
             name='email'
             component={TextInputForm}
             type='text'
             placeholder='adres e-mail'
             label='adres e-mail'
+            ownClassName='login-input'
           />
           <Field
             name='password'
@@ -98,6 +100,7 @@ const RegisterModal = ({
             type='password'
             placeholder='hasło'
             label='hasło'
+            ownClassName='login-input'
           />
           <Field
             name='displayName'
@@ -105,12 +108,13 @@ const RegisterModal = ({
             type='text'
             placeholder='nazwa użytkownika'
             label='nazwa użytkownika'
+            ownClassName='login-input'
           />
           {error && <span>{error}</span>}
-          <button type='submit' disabled={invalid || submitting || pristine}>
+          <Button type='submit' disabled={invalid || submitting || pristine}>
             Zarejestruj konto
-          </button>
-        </form>
+          </Button>
+        </StyledForm>
       </ModalInner>
     </ModalWrapper>
   );
@@ -118,5 +122,5 @@ const RegisterModal = ({
 
 export default connect(
   null,
-  { closeModal, registerAccount }
+  { closeModal, registerAccount, socialLogin }
 )(reduxForm({ form: 'registerForm', validate })(RegisterModal));

@@ -35,5 +35,27 @@ export const Button = styled.button`
     filter: grayscale(20%);
   }
 
+  &:disabled {
+    filter: grayscale(80%);
+  }
+
   ${applyStyleModifiers(BUTTON_MODIFIERS)}
+`;
+
+export const CloseButton = styled.button`
+  color: #fff;
+  font-size: 20px;
+  background: inherit;
+  border: 2px solid #ccc;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #ffb300;
+  }
 `;
