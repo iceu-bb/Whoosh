@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { useTransition, animated, config } from 'react-spring';
+import styled from 'styled-components';
+import { useTransition, config } from 'react-spring';
 import { FlashCard } from '../elements';
 import ButtonsContainer from './ButtonsContainer';
 import CardList from './CardList';
 import AddCard from './AddCard';
 
-// const staticcards = [
-//   { id: 0, polish: 'Jabłko', english: 'Apple' },
-//   { id: 1, polish: 'Śliwka', english: 'Plum' },
-//   { id: 2, polish: 'Gruszka', english: 'Pear' },
-//   { id: 3, polish: 'Arbuz', english: 'Watermelon' }
-// ];
-
-const CardContainer = ({ cards, categoryName }) => {
+const CardContainer = ({ cards, categoryName, className }) => {
   // index of current Card
   const [index, setIndex] = useState(0);
 
@@ -35,18 +29,9 @@ const CardContainer = ({ cards, categoryName }) => {
     config: config.gentle
   });
   return (
-    <div
-      style={{
-        margin: '0 auto',
-        width: '800px'
-      }}
-    >
-      <div>{categoryName}</div>
-      <div
-        style={{
-          height: '300px'
-        }}
-      >
+    <div className={className}>
+      <span className='name'>{categoryName}</span>
+      <div className='card-container'>
         {cards.length !== 0 &&
           transitions.map(({ item, key, props: animation }) => (
             <FlashCard
@@ -62,11 +47,30 @@ const CardContainer = ({ cards, categoryName }) => {
         index={index}
         length={cards.length}
       />
-      <div>Przyciski do zmiany karty</div>
+      <section style={{ padding: 200 }}>
+        Ta kategoria istnieje od ... dni. Pod spodem możesz dodać słówko do tej
+        kategorii bądź usunąć to które wcześniej stworzyłeś :)
+      </section>
       <AddCard categoryName={categoryName} />
       <CardList cards={cards} length={cards.length} />
     </div>
   );
 };
 
-export default CardContainer;
+export default styled(CardContainer)`
+  background-color: #fff;
+  padding: 100px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .card-container {
+    height: 250px;
+    width: 400px;
+  }
+
+  .name {
+    font-size: 2rem;
+    margin-bottom: 60px;
+  }
+`;

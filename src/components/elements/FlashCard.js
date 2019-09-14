@@ -34,24 +34,27 @@ const FlashCard = ({ className, english, polish, key, style }) => {
 };
 
 export default styled(FlashCard)`
-  position: relative;
-
   .side {
+    font-size: 4rem;
+    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 300px;
+    width: 400px;
     height: 250px;
-    position: absolute;
     cursor: pointer;
+    position: absolute;
+    top: 0;
+    backface-visibility: hidden;
+    border: 0.5px solid #eee;
+    border-radius: 5px;
+
     will-change: transform, opacity;
   }
 
   .front {
-    background-color: yellow;
   }
 
   .back {
-    background-color: salmon;
   }
 `;

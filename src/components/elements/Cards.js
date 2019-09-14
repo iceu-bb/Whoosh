@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { applyStyleModifiers } from 'styled-components-modifiers';
 import { orange } from '../../utilities';
 
 export const Card1 = styled.div`
@@ -10,7 +9,7 @@ export const Card1 = styled.div`
   cursor: pointer;
   text-decoration: none;
   color: #000;
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
 
   &:hover {
     outline: 4px solid orange;
