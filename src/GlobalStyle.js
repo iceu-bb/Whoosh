@@ -21,12 +21,15 @@ const GlobalStyle = createGlobalStyle`
       #FC7751,
       #F1BC2E
     );
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
 
         ${fontExo};
     }
 
     main {
-
+        
     }
 `;
 

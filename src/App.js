@@ -20,30 +20,30 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <Wave />
+        <Wave trend='up' />
         <div style={{ width: '100vw', backgroundColor: 'white' }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <Section1 />
-            <Switch>
-              <Route exact path='/' component={CategoriesDashboard} />
-              <Route exact path='/test' component={Test} />
-              <Route
-                exact
-                path='/category/:categoryId'
-                component={CardDashboard}
-              />
-              <Route
-                exact
-                path='/add'
-                render={() => (
-                  <>
-                    <AddCard />
-                    <AddCategory />
-                  </>
-                )}
-              />
-            </Switch>
-          </div>
+          {/* <div style={{ maxWidth: '1200px', margin: '0 auto' }}> */}
+          <Section1 />
+          <Switch>
+            <Route exact path='/' component={CategoriesDashboard} />
+            <Route exact path='/test' component={Test} />
+            <Route
+              exact
+              path='/category/:categoryId'
+              component={CardDashboard}
+            />
+            <Route
+              exact
+              path='/add'
+              render={() => (
+                <>
+                  <AddCard />
+                  <AddCategory />
+                </>
+              )}
+            />
+          </Switch>
+          {/* </div> */}
         </div>
       </main>
     </>

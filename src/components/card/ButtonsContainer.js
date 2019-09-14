@@ -28,8 +28,7 @@ const ButtonsContainer = ({ className, setIndex, index, length }) => {
 };
 
 export default styled(ButtonsContainer)`
-  margin-top: 25px;
-  background-color: salmon;
+  margin: 25px auto 200px;
   display: flex;
   align-items: center;
   width: 500px;

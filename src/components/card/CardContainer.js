@@ -5,6 +5,8 @@ import { FlashCard, HeadingH3 } from '../elements';
 import ButtonsContainer from './ButtonsContainer';
 import CardList from './CardList';
 import AddCard from './AddCard';
+import Wave from '../layout/Wave';
+import CardSummary from './CardSummary';
 
 const CardContainer = ({ cards, categoryName, className }) => {
   // index of current Card
@@ -47,10 +49,8 @@ const CardContainer = ({ cards, categoryName, className }) => {
         index={index}
         length={cards.length}
       />
-      <section style={{ padding: 200 }}>
-        Ta kategoria istnieje od ... dni. Pod spodem możesz dodać słówko do tej
-        kategorii bądź usunąć to które wcześniej stworzyłeś :)
-      </section>
+      <Wave trend='down' />
+      <CardSummary categoryName={categoryName} />
       <AddCard categoryName={categoryName} />
       <CardList
         cards={cards}
@@ -64,11 +64,13 @@ const CardContainer = ({ cards, categoryName, className }) => {
 export default styled(CardContainer)`
   background-color: #fff;
   padding: 100px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+  &:first-child {
+    text-align: center;
+  }
 
   .card-container {
+    margin: 0 auto;
     height: 250px;
     width: 400px;
   }
