@@ -30,5 +30,6 @@ export default styled(CategoriesContainer)`
     grid-template-columns: repeat(auto-fill, 350px);
     grid-column-gap: 30px;
     grid-row-gap: 30px;
+    justify-content: center;
   }
 `;

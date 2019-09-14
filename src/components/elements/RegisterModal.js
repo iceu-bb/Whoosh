@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import { animated } from 'react-spring';
 import { Field, reduxForm } from 'redux-form';
 import { closeModal } from '../../redux/modal/modalActionts';
 import TextInputForm from '../../components/elements/forms/TextInputForm';
 import { registerAccount, socialLogin } from '../../redux/auth/authActions';
+import { useAnimationOnModal, useLockBodyScroll } from '../../helpers';
 import { Button } from './index';
 import {
   ModalWrapper,
@@ -74,49 +75,77 @@ const RegisterModal = ({
   pristine,
   error
 }) => {
+  useLockBodyScroll();
+  const [on, toggle, transition, opacityAnimate] = useAnimationOnModal();
   return (
-    <ModalWrapper>
-      <ModalInner>
-        <Header>
-          <span>Zarejestruj się </span>
-          <CloseButton onClick={() => closeModal()}>x</CloseButton>
-        </Header>
-        <SocialLoginWrapper onClick={() => socialLogin('google')}>
-          <SocialIcon src='./assets/google-icon.png' alt='google icon' />
-          Kontynuuj przez Google
-        </SocialLoginWrapper>
-        <StyledForm onSubmit={handleSubmit(registerAccount)}>
-          <Field
-            name='email'
-            component={TextInputForm}
-            type='text'
-            placeholder='adres e-mail'
-            label='adres e-mail'
-            ownClassName='login-input'
-          />
-          <Field
-            name='password'
-            component={TextInputForm}
-            type='password'
-            placeholder='hasło'
-            label='hasło'
-            ownClassName='login-input'
-          />
-          <Field
-            name='displayName'
-            component={TextInputForm}
-            type='text'
-            placeholder='nazwa użytkownika'
-            label='nazwa użytkownika'
-            ownClassName='login-input'
-          />
-          {error && <span>{error}</span>}
-          <Button type='submit' disabled={invalid || submitting || pristine}>
-            Zarejestruj konto
-          </Button>
-        </StyledForm>
-      </ModalInner>
-    </ModalWrapper>
+    <animated.div style={opacityAnimate}>
+      <ModalWrapper>
+        {transition.map(
+          ({ item, key, props: animation }) =>
+            item && (
+              <>
+                <animated.div style={animation}>
+                  <ModalInner>
+                    <Header>
+                      <span>Zarejestruj się </span>
+                      <CloseButton
+                        onClick={() => {
+                          toggle(!on);
+                          setTimeout(() => {
+                            closeModal();
+                          }, 200);
+                        }}
+                      >
+                        x
+                      </CloseButton>
+                    </Header>
+                    <SocialLoginWrapper onClick={() => socialLogin('google')}>
+                      <SocialIcon
+                        src='./assets/google-icon.png'
+                        alt='google icon'
+                      />
+                      Kontynuuj przez Google
+                    </SocialLoginWrapper>
+                    <StyledForm onSubmit={handleSubmit(registerAccount)}>
+                      <Field
+                        name='email'
+                        component={TextInputForm}
+                        type='text'
+                        placeholder='adres e-mail'
+                        label='adres e-mail'
+                        ownClassName='login-input'
+                      />
+                      <Field
+                        name='password'
+                        component={TextInputForm}
+                        type='password'
+                        placeholder='hasło'
+                        label='hasło'
+                        ownClassName='login-input'
+                      />
+                      <Field
+                        name='displayName'
+                        component={TextInputForm}
+                        type='text'
+                        placeholder='nazwa użytkownika'
+                        label='nazwa użytkownika'
+                        ownClassName='login-input'
+                      />
+                      {error && <span>{error}</span>}
+                      <Button
+                        type='submit'
+                        disabled={invalid || submitting || pristine}
+                      >
+                        Zarejestruj konto
+                      </Button>
+                    </StyledForm>
+                  </ModalInner>
+                </animated.div>
+              </>
+            )
+        )}
+      </ModalWrapper>
+    </animated.div>
   );
 };
 
