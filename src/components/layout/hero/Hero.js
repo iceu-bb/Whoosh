@@ -22,6 +22,8 @@ const Hero = ({ className }) => {
 };
 
 export default styled(Hero)`
+  margin: 0 auto;
+  max-width: 1200px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 100px;

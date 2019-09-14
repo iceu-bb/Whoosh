@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { animated } from 'react-spring';
 import { Field, reduxForm } from 'redux-form';
 import { closeModal } from '../../redux/modal/modalActionts';
-import TextInputForm from '../../components/elements/forms/TextInputForm';
+import TextInputForm from '../elements/forms/TextInputForm';
 import { registerAccount, socialLogin } from '../../redux/auth/authActions';
 import { useAnimationOnModal, useLockBodyScroll } from '../../helpers';
-import { Button } from './index';
+import { Button } from '../elements/index';
 import {
   ModalWrapper,
   ModalInner,
@@ -16,7 +16,7 @@ import {
   StyledForm,
   SubmissionError,
   CloseButton
-} from './index';
+} from '../elements/index';
 
 import {
   composeValidators,

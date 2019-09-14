@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { animated } from 'react-spring';
 import { Field, reduxForm } from 'redux-form';
 import { closeModal } from '../../redux/modal/modalActionts';
-import TextInputForm from '../../components/elements/forms/TextInputForm';
+import TextInputForm from '../elements/forms/TextInputForm';
 import { loginUser, socialLogin } from '../../redux/auth/authActions';
-import { Button } from './index';
+import { Button } from '../elements/index';
 import { useAnimationOnModal, useLockBodyScroll } from '../../helpers';
 
 import {
@@ -17,7 +17,7 @@ import {
   StyledForm,
   SubmissionError,
   CloseButton
-} from './index';
+} from '../elements/index';
 
 const LoginModal = ({
   closeModal,

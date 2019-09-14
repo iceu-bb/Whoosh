@@ -19,29 +19,31 @@ function App() {
       <ModalManager />
       <Header />
       <main>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          {/* <Hero />
-          <Wave />
-          <Section1 /> */}
-          <Switch>
-            <Route exact path='/' component={CategoriesDashboard} />
-            <Route exact path='/test' component={Test} />
-            <Route
-              exact
-              path='/category/:categoryId'
-              component={CardDashboard}
-            />
-            <Route
-              exact
-              path='/add'
-              render={() => (
-                <>
-                  <AddCard />
-                  <AddCategory />
-                </>
-              )}
-            />
-          </Switch>
+        <Hero />
+        <Wave />
+        <div style={{ width: '100vw', backgroundColor: 'white' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <Section1 />
+            <Switch>
+              <Route exact path='/' component={CategoriesDashboard} />
+              <Route exact path='/test' component={Test} />
+              <Route
+                exact
+                path='/category/:categoryId'
+                component={CardDashboard}
+              />
+              <Route
+                exact
+                path='/add'
+                render={() => (
+                  <>
+                    <AddCard />
+                    <AddCategory />
+                  </>
+                )}
+              />
+            </Switch>
+          </div>
         </div>
       </main>
     </>

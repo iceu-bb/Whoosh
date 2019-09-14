@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTransition, config } from 'react-spring';
-import { FlashCard } from '../elements';
+import { FlashCard, HeadingH3 } from '../elements';
 import ButtonsContainer from './ButtonsContainer';
 import CardList from './CardList';
 import AddCard from './AddCard';
@@ -30,7 +30,7 @@ const CardContainer = ({ cards, categoryName, className }) => {
   });
   return (
     <div className={className}>
-      <span className='name'>{categoryName}</span>
+      <HeadingH3 modifiers='big'>{categoryName}</HeadingH3>
       <div className='card-container'>
         {cards.length !== 0 &&
           transitions.map(({ item, key, props: animation }) => (
@@ -71,10 +71,5 @@ export default styled(CardContainer)`
   .card-container {
     height: 250px;
     width: 400px;
-  }
-
-  .name {
-    font-size: 2rem;
-    margin-bottom: 60px;
   }
 `;

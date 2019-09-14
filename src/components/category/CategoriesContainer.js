@@ -23,6 +23,7 @@ const CategoriesContainer = ({ categories, className }) => {
 export default styled(CategoriesContainer)`
   padding: 100px 0;
   text-align: center;
+  background-color: #ddd;
 
   .grid {
     margin: 0 auto;

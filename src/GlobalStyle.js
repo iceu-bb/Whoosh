@@ -18,8 +18,8 @@ const GlobalStyle = createGlobalStyle`
         background-image:
             linear-gradient(
       to right,
-      #e35a35,
-      #F0CB35
+      #FC7751,
+      #F1BC2E
     );
 
         ${fontExo};
