@@ -21,7 +21,7 @@ const CardItem = ({
   const handleSubmission = async values => {
     await updateCard(values, categoryName, card.id);
     setEdit(!isEdited);
-    history.go(0);
+    // history.go(0);
   };
 
   return (
@@ -51,7 +51,7 @@ const CardItem = ({
             <button
               onClick={async () => {
                 await removeCard(categoryName, card.id);
-                history.go(0);
+                // history.go(0);
               }}
             >
               Delete card

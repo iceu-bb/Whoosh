@@ -6,6 +6,10 @@ const HEADING_MODIFIERS = {
   big: () => `
   font-size: 3rem;
   margin-bottom: 100px;
+  `,
+  medium: () => `
+  font-size: 1.8rem;
+  margin-bottom: 10px;
   `
 };
 

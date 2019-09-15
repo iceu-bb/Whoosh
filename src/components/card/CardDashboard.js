@@ -1,17 +1,24 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import CardContainer from './CardContainer';
-import { fetchCategoryItems } from '../../redux/category/actions';
+import { subscribeCollectionChanges } from '../../redux/category/actions';
 
 const CardDashboard = ({
   listOfCards,
-  fetchCategoryItems,
+  subscribeCollectionChanges,
   isLoading,
   match
 }) => {
   const categoryName = `${match.params.categoryId}`;
+
   useEffect(() => {
-    fetchCategoryItems(categoryName);
+    let unsubscribe = () => {};
+    subscribeCollectionChanges(categoryName, func => {
+      unsubscribe = func;
+    });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return isLoading ? (
@@ -32,5 +39,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchCategoryItems }
+  { subscribeCollectionChanges }
 )(CardDashboard);

@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import TextInputForm from '../elements/forms/TextInputForm';
 // import SelectInputForm from '../elements/forms/SelectInputForm';
 import { addCard } from '../../redux/category/actions';
 import { combineValidators, isRequired } from 'revalidate';
+import { HeadingH3, Button } from '../elements';
 
 const validate = combineValidators({
   category: isRequired({ message: 'Wyboerz kategorię' }),
@@ -25,12 +27,14 @@ const AddCard = ({
   submitting,
   reset,
   addCard,
-  categoryName
+  categoryName,
+  className
 }) => {
   return (
-    <div style={{ padding: 100 }}>
-      Dodaj Fiszkę
+    <div className={className} style={{ padding: 100 }}>
+      <HeadingH3 modifiers='medium'>Dodaj fiszkę do zestawu</HeadingH3>
       <form
+        className='form'
         onSubmit={handleSubmit(values => {
           addCard(values, categoryName);
           reset();
@@ -50,6 +54,7 @@ const AddCard = ({
           type='text'
           placeholder='angielska wersja'
           label='angielska wersja'
+          ownClassName='login-input'
         />
         <Field
           name='polish'
@@ -57,17 +62,25 @@ const AddCard = ({
           type='text'
           placeholder='polska wersja'
           label='polska wersja'
+          ownClassName='login-input'
         />
         {error && <span>{error}</span>}
-        <button type='submit' disabled={invalid || submitting || pristine}>
+        <Button type='submit' disabled={invalid || submitting || pristine}>
           Dodaj Fiszkę
-        </button>
+        </Button>
       </form>
     </div>
   );
 };
 
-export default connect(
-  null,
-  { addCard }
-)(reduxForm({ form: 'registerNewCard', validate })(AddCard));
+export default styled(
+  connect(
+    null,
+    { addCard }
+  )(reduxForm({ form: 'registerNewCard', validate })(AddCard))
+)`
+  .form {
+    margin: 0 auto;
+    max-width: 500px;
+  }
+`;

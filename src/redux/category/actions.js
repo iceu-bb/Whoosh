@@ -35,31 +35,41 @@ export const fetchCategoriesList = () => async (
   }
 };
 
-export const fetchCategoryItems = collectionName => async (
-  dispatch,
-  getState,
-  { getFirestore }
-) => {
+export const subscribeCollectionChanges = (
+  collectionName,
+  setUnsubscribe
+) => async (dispatch, getState, { getFirestore }) => {
   const firestore = getFirestore();
   try {
-    dispatch(asyncActionStart());
-    let categoryRef = firestore.collection(`${collectionName}_words`);
-    let documentSnapshot = await categoryRef.get();
-
     let data = [];
-    for (let i = 0; i < documentSnapshot.docs.length; i++) {
-      let card = {
-        ...documentSnapshot.docs[i].data(),
-        id: documentSnapshot.docs[i].id
-      };
-      data.push(card);
-    }
-    console.log(data);
-    dispatch({ type: FETCH_CATEGORY_ITEMS, payload: data });
-    dispatch(asyncActionFinish());
+    const unsubscribe = firestore
+      .collection(`${collectionName}_words`)
+      .onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        // listening for changes
+        changes.forEach(change => {
+          if (change.type === 'added') {
+            // add flashcard
+            let card = {
+              ...change.doc.data(),
+              id: change.doc.id
+            };
+            data.push(card);
+          } else if (change.type === 'removed') {
+            // filter deleted document
+            data = data.filter(el => el.id != change.doc.id);
+          } else if (change.type === 'modified') {
+            //find item and update english and polish words
+            let item = data.find(el => el.id === change.doc.id);
+            item.english = change.doc.data().english;
+            item.polish = change.doc.data().polish;
+          }
+          dispatch({ type: FETCH_CATEGORY_ITEMS, payload: data });
+        });
+      });
+    setUnsubscribe(unsubscribe);
   } catch (error) {
     console.log(error);
-    dispatch(asyncActionError());
   }
 };
 
@@ -88,7 +98,7 @@ export const addCard = (values, categoryName) => async (
       cardCounter: firestore.FieldValue.increment(1)
     });
 
-    window.alert(`Dodałeś kartę do zestawu ${categoryName}`);
+    // window.alert(`Dodałeś kartę do zestawu ${categoryName}`);
   } catch (error) {
     console.log(error);
   }
@@ -144,7 +154,7 @@ export const removeCard = (categoryName, cardId) => async (
       cardCounter: firestore.FieldValue.increment(-1)
     });
 
-    window.alert('successful removed card');
+    // window.alert('successful removed card');
   } catch (error) {
     console.log(error);
   }
@@ -162,7 +172,7 @@ export const updateCard = (values, categoryName, cardId) => async (
       english,
       polish
     });
-    window.alert('successful edited card');
+    // window.alert('successful edited card');
   } catch (error) {
     console.log(error);
   }
