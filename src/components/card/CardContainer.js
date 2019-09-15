@@ -71,7 +71,7 @@ export default styled(CardContainer)`
 
   .card-container {
     margin: 0 auto;
-    height: 250px;
-    width: 400px;
+    height: 300px;
+    width: 500px;
   }
 `;

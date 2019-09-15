@@ -40,8 +40,8 @@ export default styled(FlashCard)`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 400px;
-    height: 250px;
+    width: 500px;
+    height: 300px;
     cursor: pointer;
     position: absolute;
     top: 0;

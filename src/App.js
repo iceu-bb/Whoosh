@@ -11,6 +11,7 @@ import ModalManager from './redux/modal/ModalManager';
 import Hero from './components/layout/hero/Hero';
 import Wave from './components/layout/Wave';
 import Section1 from './components/layout/section1/Section1';
+import Section2 from './components/layout/section2/Section2';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <div style={{ width: '100vw', backgroundColor: 'white' }}>
           {/* <div style={{ maxWidth: '1200px', margin: '0 auto' }}> */}
           <Section1 />
+
           <Switch>
             <Route exact path='/' component={CategoriesDashboard} />
             <Route exact path='/test' component={Test} />
@@ -43,6 +45,7 @@ function App() {
               )}
             />
           </Switch>
+          <Section2 />
           {/* </div> */}
         </div>
       </main>
