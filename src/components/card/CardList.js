@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import CardItem from './CardItem';
+import CardListItem from './CardListItem';
 
 const ListOfCard = ({ className, cards, length, categoryName }) => {
   return (
@@ -14,7 +14,7 @@ const ListOfCard = ({ className, cards, length, categoryName }) => {
       </p>
       <div className='grid'>
         {cards.map(card => (
-          <CardItem key={card.id} card={card} categoryName={categoryName} />
+          <CardListItem key={card.id} card={card} categoryName={categoryName} />
         ))}
       </div>
     </div>
@@ -22,9 +22,11 @@ const ListOfCard = ({ className, cards, length, categoryName }) => {
 };
 
 export default styled(ListOfCard)`
-  background-color: green;
+  background-color: #ddd;
+  margin: 0 auto;
   padding: 10px;
-  width: 90%;
+  max-width: 1200px;
+  width: 100%;
 
   .grid {
     display: grid;

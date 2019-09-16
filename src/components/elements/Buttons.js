@@ -45,7 +45,7 @@ export const Button = styled.button`
 
 export const CloseButton = styled.button`
   color: #fff;
-  font-size: 20px;
+  font-size: 18px;
   background: inherit;
   border: 2px solid #ccc;
   width: 40px;
@@ -59,4 +59,12 @@ export const CloseButton = styled.button`
   &:hover {
     background-color: #ffb300;
   }
+`;
+
+export const IconButton = styled(CloseButton)`
+  background-color: orange;
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
 `;

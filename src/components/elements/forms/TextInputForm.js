@@ -9,6 +9,7 @@ const TextInputForm = ({
   label,
   placeholder,
   type,
+  autoFocus,
   meta: { touched, error }
 }) => {
   return (
@@ -19,6 +20,7 @@ const TextInputForm = ({
         {...input}
         placeholder={placeholder}
         type={type}
+        autoFocus={autoFocus}
       />
       {label && <label className='label'>{label}</label>}
     </div>
@@ -56,5 +58,15 @@ export default styled(TextInputForm)`
     font-size: 1.2rem;
     color: #aaa;
     text-transform: uppercase;
+  }
+
+  .flashcard-input {
+    width: 100%;
+    height: 35px;
+    font-size: 1.4rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding-right: 15px;
+    margin-bottom: 5px;
   }
 `;

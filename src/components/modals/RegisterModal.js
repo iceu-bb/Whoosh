@@ -7,6 +7,7 @@ import TextInputForm from '../elements/forms/TextInputForm';
 import { registerAccount, socialLogin } from '../../redux/auth/authActions';
 import { useAnimationOnModal, useLockBodyScroll } from '../../helpers';
 import { Button } from '../elements/index';
+import { FaTimes } from 'react-icons/fa';
 import {
   ModalWrapper,
   ModalInner,
@@ -96,7 +97,7 @@ const RegisterModal = ({
                           }, 200);
                         }}
                       >
-                        x
+                        <FaTimes />
                       </CloseButton>
                     </Header>
                     <SocialLoginWrapper onClick={() => socialLogin('google')}>
