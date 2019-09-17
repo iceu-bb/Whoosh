@@ -6,7 +6,6 @@ import { yellow } from '../../../utilities';
 import { Button } from '../../elements';
 import { openModal } from '../../../redux/modal/modalActionts';
 import { logoutUser } from '../../../redux/auth/authActions';
-import SignOut from './SignOut';
 import CategorySearch from '../../category/CategorySearch';
 import UserLink from './UserLink';
 

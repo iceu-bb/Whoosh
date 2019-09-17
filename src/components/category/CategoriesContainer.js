@@ -2,19 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import CategoryCard from './CategoryCard';
 import { HeadingH2 } from '../elements';
-import { declinedWord } from '../../helpers';
 
-const CategoriesContainer = ({ categories, className, failMessage, showTitle }) => {
+const CategoriesContainer = ({
+  categories,
+  className,
+  failMessage,
+  showTitle
+}) => {
   return (
     <>
       {categories.length === 0 ? (
         <div className={className}>{failMessage}</div>
       ) : (
         <div className={className}>
-          {showTitle && (<HeadingH2>
-            {categories.length} {declinedWord('zestaw', categories.length)} do
-            nauki, a ich liczba ciągle rośnie
-          </HeadingH2> )}
+          {showTitle && <HeadingH2>{showTitle}</HeadingH2>}
           <div className='grid'>
             {categories.map(category => (
               <CategoryCard key={category.id} category={category} />

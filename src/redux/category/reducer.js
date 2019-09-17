@@ -1,13 +1,15 @@
 import {
   FETCH_CATEGORY_ITEMS,
   FETCH_CATEGORY_LIST,
-  SEARCH_CATEGORIES
+  SEARCH_CATEGORIES,
+  GET_USER_CATEGORIES
 } from './constants';
 
 const initialState = {
   currentCategoryItems: [],
   categoriesList: [],
-  filteredCategories: []
+  filteredCategories: [],
+  userCategories: []
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -18,6 +20,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, categoriesList: [...payload] };
     case SEARCH_CATEGORIES:
       return { ...state, filteredCategories: [...payload] };
+    case GET_USER_CATEGORIES:
+      return { ...state, userCategories: [...payload] };
     default:
       return state;
   }

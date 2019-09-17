@@ -1,13 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CategoriesContainer from './CategoriesContainer';
+import { declinedWord } from '../../helpers';
 
 const SearchCategoryDashboard = ({ categories }) => {
-  console.log(categories);
+  const message = `Znaleziono (${categories.length}) ${declinedWord(
+    'zestaw',
+    categories.length
+  )}`;
+
   return (
     <div>
-      <CategoriesContainer categories={categories || []} failMessage="Nie znaleziono żadnego zestawu pasującego do wzorca. Wyszukaj ponownie" showTitle={false}
-      /> 
+      <CategoriesContainer
+        categories={categories || []}
+        failMessage='Nie znaleziono żadnego zestawu pasującego do wzorca. Wyszukaj ponownie'
+        showTitle={message}
+      />
     </div>
   );
 };

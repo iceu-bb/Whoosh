@@ -1,7 +1,8 @@
 import {
   FETCH_CATEGORY_ITEMS,
   FETCH_CATEGORY_LIST,
-  SEARCH_CATEGORIES
+  SEARCH_CATEGORIES,
+  GET_USER_CATEGORIES
 } from './constants';
 
 import {
@@ -189,4 +190,17 @@ export const searchCategory = value => (dispatch, getState) => {
     type: SEARCH_CATEGORIES,
     payload: data
   });
+};
+
+export const getUserCategories = userId => (dispatch, getState) => {
+  const categories = getState().category.categoriesList;
+  try {
+    const data = categories.filter(item => item.authorId === userId);
+    dispatch({
+      type: GET_USER_CATEGORIES,
+      payload: data
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };

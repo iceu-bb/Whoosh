@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaCaretDown } from 'react-icons/fa';
 import SignOut from './SignOut';
+import { Link } from 'react-router-dom';
 
 const UserLink = ({ className, userName, moved, logoutUser }) => {
   const [openPanel, setOpenPanel] = useState(false);
@@ -16,9 +17,15 @@ const UserLink = ({ className, userName, moved, logoutUser }) => {
       {openPanel && (
         <div className='panel'>
           <ul className='list'>
-            <li className='list-item'>Moje zestawy do nauki</li>
-            <li className='list-item'>Ustawienia</li>
-            <li className='list-item'>Pomoc</li>
+            <li className='list-item'>
+              <Link to='/user/my-categories'>Moje zestawy do nauki</Link>
+            </li>
+            <li className='list-item'>
+              <Link to='/user/settings'>Ustawienia</Link>
+            </li>
+            <li className='list-item'>
+              <Link to='/user/faq'>Pomoc</Link>
+            </li>
             <li className='list-item'>
               <SignOut logoutUser={logoutUser} />
             </li>
@@ -78,6 +85,11 @@ export default styled(UserLink)`
 
     &:hover {
       background-color: #eee;
+    }
+
+    & > a {
+      text-decoration: none;
+      color: inherit;
     }
   }
 

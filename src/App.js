@@ -14,6 +14,9 @@ import Section1 from './components/layout/section1/Section1';
 import Section2 from './components/layout/section2/Section2';
 import Goodbye from './components/layout/goodbye/Goodbye';
 import SearchCategoryDashboard from './components/category/SearchCategoryDashboard';
+import UserDashboard from './components/layout/userSection/UserDashboard';
+import UserSettings from './components/layout/userSection/UserSettings';
+import UserFaq from './components/layout/userSection/UserFaq';
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function App() {
             <Route exact path='/' component={CategoriesDashboard} />
             <Route exact path='/test' component={Test} />
             <Route exact path='/search' component={SearchCategoryDashboard} />
+            <Route exact path='/user/my-categories' component={UserDashboard} />
+            <Route exact path='/user/settings' component={UserSettings} />
+            <Route exact path='/user/faq' component={UserFaq} />
             <Route
               exact
               path='/category/:categoryId'
