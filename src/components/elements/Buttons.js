@@ -45,7 +45,7 @@ export const Button = styled.button`
 
 export const CloseButton = styled.button`
   color: #fff;
-  font-size: 18px;
+  font-size: 1.8rem;
   background: inherit;
   border: 2px solid #ccc;
   width: 40px;
@@ -66,5 +66,12 @@ export const IconButton = styled(CloseButton)`
   font-size: 2rem;
   width: 50px;
   height: 50px;
+  line-height: 50px;
+`;
+
+export const SearchIcon = styled(CloseButton)`
+  font-size: 1.5rem;
+  width: 30px;
+  height: 30px;
   line-height: 50px;
 `;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
@@ -7,17 +7,27 @@ import { Button } from '../../elements';
 import { openModal } from '../../../redux/modal/modalActionts';
 import { logoutUser } from '../../../redux/auth/authActions';
 import SignOut from './SignOut';
+import CategorySearch from '../../category/CategorySearch';
 
 const Nav = ({ className, moved, openModal, auth, profile, logoutUser }) => {
   const isAuthenticated = auth.isLoaded && !auth.isEmpty;
   const userName = profile.displayName;
+  const [openSearch, setSearch] = useState(false);
   return (
     <nav className={className}>
       <ul className={moved ? 'list black' : 'list'}>
         <li>
-          <NavLink to='/test' className='link'>
-            Test Page
-          </NavLink>
+          {openSearch ? (
+            <CategorySearch
+              moved={moved}
+              setSearch={setSearch}
+              openSearch={openSearch}
+            />
+          ) : (
+            <div className='link' onClick={() => setSearch(true)}>
+              Wyszukaj zestaw
+            </div>
+          )}
         </li>
         <li>
           <NavLink to='/add' className='link'>

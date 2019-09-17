@@ -13,6 +13,7 @@ import Wave from './components/layout/Wave';
 import Section1 from './components/layout/section1/Section1';
 import Section2 from './components/layout/section2/Section2';
 import Goodbye from './components/layout/goodbye/Goodbye';
+import SearchCategoryDashboard from './components/category/SearchCategoryDashboard';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={CategoriesDashboard} />
             <Route exact path='/test' component={Test} />
+            <Route exact path='/search' component={SearchCategoryDashboard} />
             <Route
               exact
               path='/category/:categoryId'

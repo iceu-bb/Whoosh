@@ -1,12 +1,14 @@
-import { FETCH_CATEGORY_ITEMS, FETCH_CATEGORY_LIST } from './constants';
+import {
+  FETCH_CATEGORY_ITEMS,
+  FETCH_CATEGORY_LIST,
+  SEARCH_CATEGORIES
+} from './constants';
 
 const initialState = {
   currentCategoryItems: [],
-  categoriesList: []
+  categoriesList: [],
+  filteredCategories: []
 };
-
-// !!! zmienić reducer ITEMS dodać to kategori !!! currentCattegory
-//  pobrac to z paramsow
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
@@ -14,6 +16,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, currentCategoryItems: [...payload] };
     case FETCH_CATEGORY_LIST:
       return { ...state, categoriesList: [...payload] };
+    case SEARCH_CATEGORIES:
+      return { ...state, filteredCategories: [...payload] };
     default:
       return state;
   }

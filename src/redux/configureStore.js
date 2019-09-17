@@ -4,7 +4,6 @@ import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './rootRedcuer';
 import thunk from 'redux-thunk';
-
 import firebase from '../firebase';
 
 const rrfConfig = {

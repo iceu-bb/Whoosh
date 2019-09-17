@@ -2,21 +2,27 @@ import React from 'react';
 import styled from 'styled-components';
 import CategoryCard from './CategoryCard';
 import { HeadingH2 } from '../elements';
+import { declinedWord } from '../../helpers';
 
-const CategoriesContainer = ({ categories, className }) => {
+const CategoriesContainer = ({ categories, className, failMessage, showTitle }) => {
   return (
-    <div className={className}>
-      {/* odmienić przez przypadki */}
-      <HeadingH2 style={{ marginBottom: 100 }}>
-        {categories.length} zestawów do nauki, a ich liczba ciągle rośnie
-      </HeadingH2>
-      <div className='grid'>
-        {categories.length !== 0 &&
-          categories.map(category => (
-            <CategoryCard key={category.id} category={category} />
-          ))}
-      </div>
-    </div>
+    <>
+      {categories.length === 0 ? (
+        <div className={className}>{failMessage}</div>
+      ) : (
+        <div className={className}>
+          {showTitle && (<HeadingH2>
+            {categories.length} {declinedWord('zestaw', categories.length)} do
+            nauki, a ich liczba ciągle rośnie
+          </HeadingH2> )}
+          <div className='grid'>
+            {categories.map(category => (
+              <CategoryCard key={category.id} category={category} />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -24,8 +30,10 @@ export default styled(CategoriesContainer)`
   padding: 100px 0;
   text-align: center;
   background-color: #ddd;
+  font-size: 2.5rem;
 
   .grid {
+    max-width: 1200px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, 350px);

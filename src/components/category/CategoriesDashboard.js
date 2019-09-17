@@ -9,7 +9,11 @@ const CategoriesDashboard = ({ fetchCategoriesList, categories }) => {
   }, []);
   return (
     <div>
-      <CategoriesContainer categories={categories} />
+      <CategoriesContainer
+        categories={categories}
+        failMessage='loading data'
+        showTitle={true}
+      />
     </div>
   );
 };

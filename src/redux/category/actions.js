@@ -1,4 +1,9 @@
-import { FETCH_CATEGORY_ITEMS, FETCH_CATEGORY_LIST } from './constants';
+import {
+  FETCH_CATEGORY_ITEMS,
+  FETCH_CATEGORY_LIST,
+  SEARCH_CATEGORIES
+} from './constants';
+
 import {
   asyncActionStart,
   asyncActionFinish,
@@ -26,7 +31,6 @@ export const fetchCategoriesList = () => async (
       };
       data.push(card);
     }
-    console.log(data);
     dispatch({ type: FETCH_CATEGORY_LIST, payload: data });
     dispatch(asyncActionFinish());
   } catch (error) {
@@ -176,4 +180,13 @@ export const updateCard = (values, categoryName, cardId) => async (
   } catch (error) {
     console.log(error);
   }
+};
+
+export const searchCategory = value => (dispatch, getState) => {
+  const categories = getState().category.categoriesList;
+  const data = categories.filter(item => item.name.includes(value));
+  dispatch({
+    type: SEARCH_CATEGORIES,
+    payload: data
+  });
 };

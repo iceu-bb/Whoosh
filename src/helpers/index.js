@@ -46,8 +46,31 @@ export const useOnClickOutside = (ref, handler) => {
       document.removeEventListener('mousedown', listener);
       document.removeEventListener('touchstart', listener);
     };
-  }, // ... callback/cleanup to run every render. It's not a big deal ... // ... function on every render that will cause this effect ... // It's worth noting that because passed in handler is a new ... // Add ref and handler to effect dependencies
-  // ... but to optimize you can wrap handler in useCallback before ...
-  // ... passing it into this hook.
-  [ref, handler]);
+  }, [ref, handler]); // ... passing it into this hook. // ... but to optimize you can wrap handler in useCallback before ... // ... callback/cleanup to run every render. It's not a big deal ... // ... function on every render that will cause this effect ... // It's worth noting that because passed in handler is a new ... // Add ref and handler to effect dependencies
+};
+
+export const declinedWord = (word, number) => {
+  const words = {
+    array1: ['pojęć', 'pojęcie', 'pojęcia'],
+    array2: ['zestawów', 'zestaw', 'zestawy']
+  };
+  let helperNumber = '';
+  let helperWord = 0;
+  if (!word && !number) return;
+
+  // helperNumber decides which array to chose
+  if (word === 'pojęcie') {
+    helperNumber = '1';
+  } else if (word === 'zestaw') {
+    helperNumber = '2';
+  } else return;
+
+  //helperWord decides which word from array to chose
+  number === 1
+    ? (helperWord = 1)
+    : number === 2 || number === 3 || number === 4
+    ? (helperWord = 2)
+    : (helperWord = 0);
+
+  return words['array' + helperNumber][helperWord];
 };

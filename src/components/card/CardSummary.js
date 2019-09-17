@@ -7,7 +7,6 @@ const CardSummary = ({ className, categoryName }) => {
     <section className={className}>
       <div className='container'>
         <HeadingH2>Obracaj fiszki i ucz się!</HeadingH2>
-        <p> Zestaw {categoryName} istnieje od ... dni.</p>
         <p style={{ marginBottom: 30 }}>
           Pod spodem możesz dodać słówko do tej kategorii badż edytować i usunąć
           te fiszki które dodałeś wcześniej.
