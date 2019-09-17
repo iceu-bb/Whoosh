@@ -15,7 +15,9 @@ const CategoriesContainer = ({
         <div className={className}>{failMessage}</div>
       ) : (
         <div className={className}>
-          {showTitle && <HeadingH2>{showTitle}</HeadingH2>}
+          {showTitle && (
+            <HeadingH2 modifiers='marginBig'>{showTitle}</HeadingH2>
+          )}
           <div className='grid'>
             {categories.map(category => (
               <CategoryCard key={category.id} category={category} />
@@ -30,7 +32,7 @@ const CategoriesContainer = ({
 export default styled(CategoriesContainer)`
   padding: 100px 0;
   text-align: center;
-  background-color: #ddd;
+  background-color: #fff;
   font-size: 2.5rem;
 
   .grid {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HeadingH2 } from '../../elements';
+import { HeadingH2, Paragraph } from '../../elements';
 
 const Section2 = ({ className }) => {
   return (
@@ -8,21 +8,22 @@ const Section2 = ({ className }) => {
       <div className='container'>
         <div className='text first'>
           <HeadingH2>Ucz się lepiej</HeadingH2>
-          Ucz się lepiej Ponad 90% uczniów korzystających z Quizlet zgłasza
-          poprawę swoich ocen szkolnych. Zobacz w jaki sposób proste narzędzia
-          Quizlet mogą pomóc Ci w nauce dowolnego materiału, od algebry,
-          historii Polski w szkole średniej, a nawet ekonometrii w szkole
-          wyższej.
+          <Paragraph modifiers='feature'>
+            Ponad 90% uczniów korzystających z Whoosh zgłasza poprawę swoich
+            ocen szkolnych. Zobacz w jaki sposób proste narzędzia Whoosh mogą
+            pomóc Ci w nauce angielskiego na każdym etapie edukacji, zarówno w
+            podstawówce jak i w skzole wyższej.
+          </Paragraph>
         </div>
-        <div className='image second'>IMG</div>
-        <div className='image third'>IMG</div>
+        <div className='image second'></div>
+        <div className='image third'></div>
         <div className='text fourth'>
           <HeadingH2>Podziel się wiedzą</HeadingH2>
-          Podziel się wiedzą Dzięki Quizlet sprawisz, że Twoi uczniowie będą
-          zaangażowani i zmotywowani. Twórz swoje własne zestawy klasowe,
-          współpracuj z innymi nauczycielami, graj w Quizlet Live i organizuj
-          swoim uczniom materiały, aby pomóc im w nauce w bardziej zabawny i
-          efektywny sposób.
+          <Paragraph modifiers='feature'>
+            Dzięki Whoosh będziesz bardziej zaangażowany i zmotywowany. Twórz
+            swoje własne zestawy słówek, współpracuj z innymi uczniami, obracaj
+            fiszki by uczyć się w bardziej zabawny i efektywny sposób.
+          </Paragraph>
         </div>
       </div>
     </section>
@@ -35,7 +36,7 @@ export default styled(Section2)`
   font-size: 1.8rem;
 
   .container {
-    max-width: 900px;
+    max-width: 850px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -49,6 +50,9 @@ export default styled(Section2)`
 
   .image {
     background-color: teal;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   .first {
@@ -60,10 +64,12 @@ export default styled(Section2)`
 
   .second {
     grid-area: 1/2/6/3;
+    background-image: url('../assets/img-4.jpg');
   }
 
   .third {
     grid-area: 4/1/9/2;
+    background-image: url('../assets/img-3.jpg');
   }
 
   .fourth {

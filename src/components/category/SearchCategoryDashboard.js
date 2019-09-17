@@ -4,7 +4,7 @@ import CategoriesContainer from './CategoriesContainer';
 import { declinedWord } from '../../helpers';
 
 const SearchCategoryDashboard = ({ categories }) => {
-  const message = `Znaleziono (${categories.length}) ${declinedWord(
+  const message = `Znaleziono ${categories.length} ${declinedWord(
     'zestaw',
     categories.length
   )}`;

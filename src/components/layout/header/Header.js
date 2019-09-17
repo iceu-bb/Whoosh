@@ -29,17 +29,19 @@ const Header = ({ className }) => {
 
   return (
     <header className={className} moved={moved}>
-      <animated.div
-        className='animated'
-        style={{
-          transform: x.interpolate(x => `translate3d(${-1 * x}%,0,0)`)
-        }}
-      />
+      <div className='container'>
+        <animated.div
+          className='animated'
+          style={{
+            transform: x.interpolate(x => `translate3d(${-1 * x}%,0,0)`)
+          }}
+        />
 
-      <Link to='/' className={moved ? 'logo yellow' : 'logo '}>
-        Fiszki
-      </Link>
-      <Nav moved={moved} />
+        <Link to='/' className={moved ? 'logo yellow' : 'logo '}>
+          Whoosh
+        </Link>
+        <Nav moved={moved} />
+      </div>
     </header>
   );
 };
@@ -49,11 +51,17 @@ export default styled(Header)`
   width: 100%;
   height: 80px;
   background-color: transparent;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   border-bottom: 1px solid #eee;
-  color: #fff;
+
+  .container {
+    max-width: 1800px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+  }
 
   .animated {
     height: 100%;
@@ -68,8 +76,9 @@ export default styled(Header)`
 
   .logo {
     display: inline-block;
-    font-size: 2.5rem;
-    font-weight: 500;
+    font-size: 3.5rem;
+    font-weight: 400;
+    letter-spacing: 3px;
     text-decoration: none;
     color: inherit;
     padding: 10px;

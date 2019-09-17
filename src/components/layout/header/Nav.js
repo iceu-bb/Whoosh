@@ -31,7 +31,7 @@ const Nav = ({ className, moved, openModal, auth, profile, logoutUser }) => {
         </li>
         <li>
           <NavLink to='/add' className='link'>
-            Dodaj fiszkę
+            Dodaj zestaw
           </NavLink>
         </li>
         {!isAuthenticated && (

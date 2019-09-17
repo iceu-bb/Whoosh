@@ -17,6 +17,7 @@ import SearchCategoryDashboard from './components/category/SearchCategoryDashboa
 import UserDashboard from './components/layout/userSection/UserDashboard';
 import UserSettings from './components/layout/userSection/UserSettings';
 import UserFaq from './components/layout/userSection/UserFaq';
+import Footer from './components/layout/Footer';
 
 function App() {
   return (
@@ -25,11 +26,11 @@ function App() {
       <ModalManager />
       <Header />
       <main>
-        {/* <Hero /> */}
+        <Hero />
         <Wave trend='up' />
         <div style={{ width: '100vw', backgroundColor: 'white' }}>
           {/* <div style={{ maxWidth: '1200px', margin: '0 auto' }}> */}
-          {/* <Section1 /> */}
+          <Section1 />
           <Switch>
             <Route exact path='/' component={CategoriesDashboard} />
             <Route exact path='/test' component={Test} />
@@ -53,8 +54,9 @@ function App() {
               )}
             />
           </Switch>
-          {/* <Section2 />
-          <Goodbye /> */}
+          <Section2 />
+          {/* <Goodbye /> */}
+          <Footer />
           {/* </div> */}
         </div>
       </main>

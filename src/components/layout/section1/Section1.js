@@ -1,30 +1,94 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, HeadingH2, HeadingH3, Paragraph } from '../../elements';
+import {
+  Button,
+  HeadingH2,
+  HeadingH3,
+  HeadingH4,
+  Paragraph
+} from '../../elements';
+import { boxShadow1 } from '../../../utilities';
+import { FaTabletAlt, FaBolt, FaPlane, FaBook } from 'react-icons/fa';
 
 const Section1 = ({ className }) => {
   return (
     <div className={className}>
-      <HeadingH3>Our offer</HeadingH3>
-      <HeadingH2>Full-service web development company</HeadingH2>
-      <Paragraph style={{ color: 'black', maxWidth: 600 }}>
-        Our vast expertise in web development fuels successful delivery of
-        websites and applications for our clients. We are agile and understand
-        that time to market is crucial in today’s environment. Here’s what we
-        can help you with.
-      </Paragraph>
-      <div style={{ height: 300 }}>Sekcja z featurami</div>
+      <HeadingH3>Nasza oferta</HeadingH3>
+      <HeadingH2>Whoosh Firma i Misja</HeadingH2>
+      <div className='text-container'>
+        <Paragraph modifiers='feature'>
+          Witaminy w Whoosh, jednej z największcyh w Polsce społeczności
+          e-learningowych. Każdego miesiąca ponad 6 tysięcy aktywnych
+          użytkowników ćwiczy i uczy sie ponad 20 tysięcy zestawów do nauki.
+        </Paragraph>
+        <Paragraph modifiers='feature'>
+          Nasza misia jest prosta, pomagać uczniom ćwiczyć i doskonalić swój
+          język angielski. Whoosh dostarcza angażujące aktywności dzięki którym
+          nauka słownictwa staje się prosta i przyjemna.
+        </Paragraph>
+      </div>
+      <div className='feature-container'>
+        <div className='feature-item'>
+          <FaTabletAlt />
+          <HeadingH4>Responywna platforma</HeadingH4>
+        </div>
+        <div className='feature-item'>
+          <FaPlane />
+          <HeadingH4>Ucz się w podróży</HeadingH4>
+        </div>
+        <div className='feature-item'>
+          <FaBook />
+          <HeadingH4>Popraw wyniki w nauce</HeadingH4>
+        </div>
+        <div className='feature-item'>
+          <FaBolt />
+          <HeadingH4>Bezproblemowa synchronizacja</HeadingH4>
+        </div>
+      </div>
       <Button>Read More</Button>
     </div>
   );
 };
 
 export default styled(Section1)`
-  padding: 50px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 0 100px;
   background-color: #fff;
-  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  border-bottom: 0.5px solid #ddd;
+
+  .text-container {
+    max-width: 600px;
+    text-align: center;
+  }
+
+  .feature-container {
+    margin: 50px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+    justify-content: center;
+  }
+
+  .feature-item {
+    height: 200px;
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    ${boxShadow1};
+    text-align: center;
+    padding: 10px 25px;
+
+    & > svg {
+      font-size: 4rem;
+      margin-bottom: 18px;
+      fill: orange;
+    }
+  }
 `;
