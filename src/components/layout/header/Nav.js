@@ -8,6 +8,7 @@ import { openModal } from '../../../redux/modal/modalActionts';
 import { logoutUser } from '../../../redux/auth/authActions';
 import SignOut from './SignOut';
 import CategorySearch from '../../category/CategorySearch';
+import UserLink from './UserLink';
 
 const Nav = ({ className, moved, openModal, auth, profile, logoutUser }) => {
   const isAuthenticated = auth.isLoaded && !auth.isEmpty;
@@ -61,13 +62,13 @@ const Nav = ({ className, moved, openModal, auth, profile, logoutUser }) => {
         )}
 
         {isAuthenticated && (
-          <>
-            {/* Todo SignIn component */}
-            <li>{userName}</li>
-            <li>
-              <SignOut logoutUser={logoutUser} />
-            </li>
-          </>
+          <li>
+            <UserLink
+              logoutUser={logoutUser}
+              userName={userName}
+              moved={moved}
+            />
+          </li>
         )}
       </ul>
     </nav>

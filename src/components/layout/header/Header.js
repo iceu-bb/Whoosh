@@ -58,7 +58,7 @@ export default styled(Header)`
   .animated {
     height: 100%;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.99);
+    background-color: rgba(255, 242, 238, 0.92);
     position: absolute;
     top: 0;
     left: 0;
