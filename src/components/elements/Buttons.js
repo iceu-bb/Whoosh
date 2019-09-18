@@ -5,13 +5,10 @@ import { applyStyleModifiers } from 'styled-components-modifiers';
 const BUTTON_MODIFIERS = {
   white: () => `
   font-size: 1.4rem;
-  font-weight: 500;
-  padding: 15px 25px;
   background-color: #FCECDA;
   color: ${black};
   `,
   nav: () => `
-  padding: 15px 25px;
   border: 1px solid white;
   background:rgba(255,255,255,.2);
 
@@ -22,7 +19,7 @@ const BUTTON_MODIFIERS = {
 };
 
 export const Button = styled.button`
-  padding: 10px 15px;
+  padding: 15px 25px;
   background: ${orange};
   color: #fff;
   font-size: 1.5rem;

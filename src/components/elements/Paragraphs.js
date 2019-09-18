@@ -18,7 +18,7 @@ const PARAGRAPH_MODIFIERS = {
   `
 };
 
-export const Paragraph = styled.h1`
+export const Paragraph = styled.p`
   font-size: 1.7rem;
   font-weight: 300;
   color: #fff;

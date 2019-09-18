@@ -18,6 +18,7 @@ import UserDashboard from './components/layout/userSection/UserDashboard';
 import UserSettings from './components/layout/userSection/UserSettings';
 import UserFaq from './components/layout/userSection/UserFaq';
 import Footer from './components/layout/Footer';
+import { UserIsAuthenticated } from './redux/auth/authWrapper';
 
 function App() {
   return (
@@ -33,11 +34,23 @@ function App() {
           <Section1 />
           <Switch>
             <Route exact path='/' component={CategoriesDashboard} />
-            <Route exact path='/test' component={Test} />
-            <Route exact path='/search' component={SearchCategoryDashboard} />
+            <Route exact path='/test' component={UserIsAuthenticated(Test)} />
+            <Route
+              exact
+              path='/search'
+              component={UserIsAuthenticated(SearchCategoryDashboard)}
+            />
             <Route exact path='/user/my-categories' component={UserDashboard} />
-            <Route exact path='/user/settings' component={UserSettings} />
-            <Route exact path='/user/faq' component={UserFaq} />
+            <Route
+              exact
+              path='/user/settings'
+              component={UserIsAuthenticated(UserSettings)}
+            />
+            <Route
+              exact
+              path='/user/faq'
+              component={UserIsAuthenticated(UserFaq)}
+            />
             <Route
               exact
               path='/category/:categoryId'
@@ -46,12 +59,7 @@ function App() {
             <Route
               exact
               path='/add'
-              render={() => (
-                <>
-                  <AddCard />
-                  <AddCategory />
-                </>
-              )}
+              component={UserIsAuthenticated(AddCategory)}
             />
           </Switch>
           <Section2 />
