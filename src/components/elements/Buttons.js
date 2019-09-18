@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import { orange, black } from '../../utilities';
+import { orange, black, gradientMain } from '../../utilities';
 import { applyStyleModifiers } from 'styled-components-modifiers';
 
 const BUTTON_MODIFIERS = {
   white: () => `
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 15px 25px;
   background-color: #FCECDA;
   color: ${black};
   `,
@@ -13,9 +16,8 @@ const BUTTON_MODIFIERS = {
   background:rgba(255,255,255,.2);
 
   &:hover {
-    background: #FFB300;
-    border: 1px solid #FFB300;
-    filter: none;
+    background: ${orange};
+    border: 1px solid ${orange};
   }`
 };
 
@@ -33,7 +35,7 @@ export const Button = styled.button`
   transition: all 0.2s ease;
 
   &:hover {
-    filter: grayscale(20%);
+    opacity: 0.9;
   }
 
   &:disabled {

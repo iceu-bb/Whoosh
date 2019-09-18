@@ -3,9 +3,19 @@ import styled from 'styled-components';
 import { FaCaretDown } from 'react-icons/fa';
 import SignOut from './SignOut';
 import { Link } from 'react-router-dom';
+import { orange, black } from '../../../utilities';
+import { useTransition, animated, config } from 'react-spring';
 
 const UserLink = ({ className, userName, moved, logoutUser }) => {
   const [openPanel, setOpenPanel] = useState(false);
+
+  const transition = useTransition(openPanel, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: config.gentle
+  });
+
   return (
     <div
       className={className}
@@ -13,24 +23,32 @@ const UserLink = ({ className, userName, moved, logoutUser }) => {
         setOpenPanel(!openPanel);
       }}
     >
-      <FaCaretDown className='link' style={{ fontSize: '2.5rem' }} />
-      {openPanel && (
-        <div className='panel'>
-          <ul className='list'>
-            <li className='list-item'>
-              <Link to='/user/my-categories'>Moje zestawy do nauki</Link>
-            </li>
-            <li className='list-item'>
-              <Link to='/user/settings'>Ustawienia</Link>
-            </li>
-            <li className='list-item'>
-              <Link to='/user/faq'>Pomoc</Link>
-            </li>
-            <li className='list-item'>
-              <SignOut logoutUser={logoutUser} />
-            </li>
-          </ul>
-        </div>
+      <FaCaretDown
+        className='link'
+        style={{ marginTop: 3, fontSize: '2.5rem' }}
+      />
+      {transition.map(
+        ({ item, key, props: animation }) =>
+          item && (
+            <>
+              <animated.div className='panel' style={animation}>
+                <ul className='list'>
+                  <li className='list-item'>
+                    <Link to='/user/my-categories'>Moje zestawy do nauki</Link>
+                  </li>
+                  <li className='list-item'>
+                    <Link to='/user/settings'>Ustawienia</Link>
+                  </li>
+                  <li className='list-item'>
+                    <Link to='/user/faq'>Pomoc</Link>
+                  </li>
+                  <li className='list-item'>
+                    <SignOut logoutUser={logoutUser} />
+                  </li>
+                </ul>
+              </animated.div>
+            </>
+          )
       )}
     </div>
   );
@@ -52,7 +70,7 @@ export default styled(UserLink)`
     position: absolute;
     top: 58px;
     right: 0;
-    color: ${({ moved }) => (moved ? 'black' : 'orange')};
+    color: ${({ moved }) => (moved ? `${black}` : `${orange}`)};
     border-radius: 6px;
     border: 0.5px solid #ddd;
 

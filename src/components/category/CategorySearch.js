@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { searchCategory } from '../../redux/category/actions';
-import { FaSearch, FaTimes } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 import { CloseButton } from '../elements';
 import { withRouter } from 'react-router-dom';
 
-const CategorySearch = ({ className, searchCategory, setSearch, history }) => {
+const CategorySearch = ({ className, history, searchCategory }) => {
   const [inputValue, setInputValue] = useState('');
   const handleChange = value => setInputValue(value);
   const handleSearch = value => {
@@ -30,14 +30,6 @@ const CategorySearch = ({ className, searchCategory, setSearch, history }) => {
         >
           <FaSearch />
         </CloseButton>
-        <CloseButton
-          className='close-icon'
-          onClick={() => {
-            setSearch(false);
-          }}
-        >
-          <FaTimes />
-        </CloseButton>
       </div>
     </div>
   );
@@ -60,34 +52,25 @@ export default styled(
   }
 
   .input {
-    background-color: ${({ moved }) => (moved ? '#eee' : 'inherit')};
+    background-color: ${({ moved }) => (moved ? '#ccc' : 'inherit')};
     border: ${({ moved }) => (moved ? 'none' : '1px solid #fff')};
     color: inherit;
     font-size: 1.5rem;
-    width: 250px;
+    width: 200px;
     height: 40px;
     border-radius: 20px;
     padding: 0 50px 0 20px;
+    transition: width 0.5s ease;
+
+    &:focus {
+      width: 250px;
+    }
   }
 
   .search-icon {
     color: inherit;
     position: absolute;
     right: 10px;
-    top: 0;
-    border: none;
-    transition: all 0.2s ease;
-
-    &:hover {
-      background-color: inherit;
-      transform: scale(1.1);
-    }
-  }
-  // wrzucić to do jednego stylu
-  .close-icon {
-    color: inherit;
-    position: absolute;
-    left: -40px;
     top: 0;
     border: none;
     transition: all 0.2s ease;

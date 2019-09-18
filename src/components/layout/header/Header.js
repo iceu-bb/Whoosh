@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
 import { useSpring, animated } from 'react-spring';
+import { orange } from '../../../utilities';
 
 const Header = ({ className }) => {
   const [moved, set] = useState(false);
@@ -87,6 +88,6 @@ export default styled(Header)`
   }
 
   .yellow {
-    color: red;
+    color: ${orange};
   }
 `;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { yellow } from '../../../utilities';
+import { yellow, gradientMain } from '../../../utilities';
 import { Button } from '../../elements';
 import { openModal } from '../../../redux/modal/modalActionts';
 import { logoutUser } from '../../../redux/auth/authActions';
@@ -12,22 +12,11 @@ import UserLink from './UserLink';
 const Nav = ({ className, moved, openModal, auth, profile, logoutUser }) => {
   const isAuthenticated = auth.isLoaded && !auth.isEmpty;
   const userName = profile.displayName;
-  const [openSearch, setSearch] = useState(false);
   return (
     <nav className={className}>
       <ul className={moved ? 'list black' : 'list'}>
         <li>
-          {openSearch ? (
-            <CategorySearch
-              moved={moved}
-              setSearch={setSearch}
-              openSearch={openSearch}
-            />
-          ) : (
-            <div className='link' onClick={() => setSearch(true)}>
-              Wyszukaj zestaw
-            </div>
-          )}
+          <CategorySearch moved={moved} />
         </li>
         <li>
           <NavLink to='/add' className='link'>
@@ -97,7 +86,7 @@ export default styled(
 
   .orange-background {
     border: none;
-    background-image: linear-gradient(to right, #e35a35, #f0cb35);
+    ${gradientMain};
   }
 
   .list > li {
@@ -106,8 +95,8 @@ export default styled(
 
   .link {
     color: inherit;
-    font-size: 1.8rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: bold;
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
