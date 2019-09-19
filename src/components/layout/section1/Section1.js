@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import {
   Button,
   HeadingH2,
@@ -45,7 +46,9 @@ const Section1 = ({ className }) => {
           <HeadingH4>Bezproblemowa synchronizacja</HeadingH4>
         </div>
       </div>
-      <Button>Read More</Button>
+      <Button to='/user/faq' as={Link}>
+        Czytaj więcej
+      </Button>
     </div>
   );
 };

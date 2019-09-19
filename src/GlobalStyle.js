@@ -15,13 +15,12 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        ${gradientMain};
+        background-color: #fff;
         overflow-x: hidden;
         ${fontLato};
     }
 
     main {
-
     }
 `;
 

@@ -5,7 +5,7 @@ import { FlashCard, HeadingH3 } from '../elements';
 import ButtonsContainer from './ButtonsContainer';
 import CardList from './CardList';
 import AddCard from './AddCard';
-import Wave from '../layout/Wave';
+import Wave from '../layout/wave/Wave';
 import CardSummary from './CardSummary';
 import CategoryContainer from '../category/CategoriesContainer';
 

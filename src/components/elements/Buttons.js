@@ -28,6 +28,7 @@ export const Button = styled.button`
   border-radius: 7px;
   cursor: pointer;
   text-transform: uppercase;
+  text-decoration: none;
 
   transition: all 0.2s ease;
 

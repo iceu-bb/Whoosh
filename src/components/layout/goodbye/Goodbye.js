@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HeadingH2, HeadingH3 } from '../../elements';
+import { HeadingH2, HeadingH3, Button } from '../../elements';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const Goodbye = ({ className }) => {
   return (
@@ -31,14 +33,18 @@ const Goodbye = ({ className }) => {
             </p>
           </div>
         </div>
+        <Button to='/' as={Link}>
+          Przejdź do strony głównej
+        </Button>
       </div>
     </section>
   );
 };
 
-export default styled(Goodbye)`
+export default styled(withRouter(Goodbye))`
+  margin-top: -80px;
   padding: 100px 0;
-  background-color: #ddd;
+  background-color: #fff;
 
   .container {
     margin: 0 auto;

@@ -54,6 +54,7 @@ export default styled(Footer)`
   font-size: 2rem;
   padding: 20px 30px;
   text-align: center;
+  border-top: 0.5px solid #ddd;
 
   .company-info {
     margin: 0 auto;
@@ -62,7 +63,6 @@ export default styled(Footer)`
   }
 
   .contact {
-    border-top: 1px solid #ddd;
     padding: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
