@@ -123,7 +123,7 @@ export const addCategory = (values, image) => async (
     // 1) upload image to firebase Storage
     const uploadedFile = await storage
       .ref(`images`)
-      .child(image.name)
+      .child(`${categoryName}_photo`)
       .put(image);
 
     // 2) take image URL
@@ -147,6 +147,14 @@ export const addCategory = (values, image) => async (
     // 4) create data for collection with pattern: categoryName_words
     await firestore.add(`${categoryName}_words`, {
       init: true
+    });
+
+    await firestore.add(`${categoryName}_words`, {
+      author: user.displayName,
+      authorId: user.uid,
+      createdAt: firestore.FieldValue.serverTimestamp(),
+      english: 'Naciśnij, żeby zobaczyć jak działają fiszki',
+      polish: 'Przejdź niżej by zobaczyć jakie masz opcje'
     });
 
     window.alert(`Dodałeś kategorię ${categoryName}`);
@@ -211,6 +219,57 @@ export const getUserCategories = userId => (dispatch, getState) => {
       type: GET_USER_CATEGORIES,
       payload: data
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteCategory = categoryName => async (
+  dispatch,
+  getState,
+  { getFirestore, getFirebase }
+) => {
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  const storage = firebase.storage();
+  const batch = firestore.batch();
+  const categories = getState().category.categoriesList;
+  const userId = firebase.auth().currentUser.uid;
+  try {
+    // 1) delete category doc
+    await firestore.delete(`categories/${categoryName}`);
+
+    // 2) delete category photo from storage
+    await storage
+      .ref(`images`)
+      .child(`${categoryName}_photo`)
+      .delete();
+
+    // 3) batch deleting all documents from category words
+    const categorySnapshot = await firestore
+      .collection(`${categoryName}_words`)
+      .get();
+
+    for (let i = 0; i < categorySnapshot.docs.length; i++) {
+      batch.delete(categorySnapshot.docs[i].ref);
+    }
+    batch.commit();
+
+    // 4) update redux state - all categories
+    const data = categories.filter(item => item.name !== categoryName);
+    dispatch({
+      type: FETCH_CATEGORY_LIST,
+      payload: data
+    });
+
+    // update redux state - user categories
+    const data2 = data.filter(item => item.authorId === userId);
+    dispatch({
+      type: GET_USER_CATEGORIES,
+      payload: data2
+    });
+
+    window.alert('successful removed category');
   } catch (error) {
     console.log(error);
   }

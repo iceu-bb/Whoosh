@@ -4,14 +4,22 @@ import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import TextInputForm from '../elements/forms/TextInputForm';
 import { addCategory } from '../../redux/category/actions';
-import { combineValidators, isRequired } from 'revalidate';
 import { HeadingH2, Button, Paragraph } from '../elements';
 import Dropzone from '../elements/imageUpload/Dropzone';
+import { withRouter } from 'react-router-dom';
 
-const validate = combineValidators({
-  name: isRequired({ message: 'Podaj nazwę dla nowego zestawu' }),
-  image: isRequired({ message: 'Dodaj zdjecię aby utworzyć zestaw' })
-});
+const checkIfCategoryNameExist = (categories, name) => {
+  const isExist = categories.filter(item => item.name === name);
+  return isExist.length;
+};
+
+const isExistCategoryName = (value, ...props) => {
+  const categories = props[1].categories;
+  const isExist = checkIfCategoryNameExist(categories, value);
+  return isExist ? 'wybrana nazwa juz istnieje' : undefined;
+};
+
+const required = value => (value ? undefined : 'Required');
 
 const AddCategory = ({
   className,
@@ -21,18 +29,21 @@ const AddCategory = ({
   pristine,
   submitting,
   reset,
-  addCategory
+  addCategory,
+  history,
+  categories
 }) => {
   const [image, setImage] = useState([]);
 
-  const handleCategorySubmit = values => {
-    addCategory(values, image[0]);
-    resetForm();
+  const handleCategorySubmit = async values => {
+    await addCategory(values, image[0]);
+    resetForm(values.name);
   };
 
-  const resetForm = () => {
+  const resetForm = categoryName => {
     setImage([]);
     reset();
+    history.push(`/category/${categoryName}`);
   };
 
   return (
@@ -50,6 +61,7 @@ const AddCategory = ({
           placeholder='Nazwa zestawu'
           label='nazwa zestawu'
           ownClassName='login-input'
+          validate={[isExistCategoryName, required]}
         />
         <Field
           name='image'
@@ -59,7 +71,10 @@ const AddCategory = ({
           setImage={setImage}
         />
         {error && <span>{error}</span>}
-        <Button type='submit' disabled={submitting || pristine}>
+        <Button
+          type='submit'
+          disabled={invalid || image.length === 0 || submitting || pristine}
+        >
           Dodaj Kategorię
         </Button>
       </form>
@@ -67,11 +82,17 @@ const AddCategory = ({
   );
 };
 
+const mapStateToProps = state => ({
+  categories: state.category.categoriesList
+});
+
 export default styled(
-  connect(
-    null,
-    { addCategory }
-  )(reduxForm({ form: 'registerNewCategory', validate })(AddCategory))
+  withRouter(
+    connect(
+      mapStateToProps,
+      { addCategory }
+    )(reduxForm({ form: 'registerNewCategory' })(AddCategory))
+  )
 )`
   padding: 100px 0;
   margin: 0 auto;

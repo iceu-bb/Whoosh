@@ -14,13 +14,7 @@ const PreviewContainer = styled.div`
   border ${({ isDragActive }) => (isDragActive ? '3px dashed black' : 'none')}
 `;
 
-const DropzoneInput = ({
-  setImage,
-  type,
-  image,
-  label,
-  meta: { touched, error }
-}) => {
+const DropzoneInput = ({ setImage, type, image, meta: { touched, error } }) => {
   const onDrop = useCallback(
     acceptedFiles => {
       setImage(

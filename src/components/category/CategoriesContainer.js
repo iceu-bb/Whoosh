@@ -7,7 +7,8 @@ const CategoriesContainer = ({
   categories,
   className,
   failMessage,
-  showTitle
+  showTitle,
+  settings
 }) => {
   return (
     <>
@@ -20,7 +21,11 @@ const CategoriesContainer = ({
           )}
           <div className='grid'>
             {categories.map(category => (
-              <CategoryCard key={category.id} category={category} />
+              <CategoryCard
+                key={category.id}
+                category={category}
+                settings={settings}
+              />
             ))}
           </div>
         </div>

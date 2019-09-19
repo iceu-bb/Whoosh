@@ -16,6 +16,7 @@ const UserDashboard = ({ getUserCategories, userId, categories }) => {
         categories={categories}
         failMessage='Nie znaleziono żadnych pasujących zestawów'
         showTitle={message}
+        settings={true}
       />
     </div>
   );

@@ -7,7 +7,7 @@ import { declinedWord } from '../../helpers';
 const CategoriesDashboard = ({ fetchCategoriesList, categories }) => {
   useEffect(() => {
     fetchCategoriesList();
-  }, []);
+  }, [categories]);
 
   const message = ` ${categories.length} ${declinedWord(
     'zestaw',

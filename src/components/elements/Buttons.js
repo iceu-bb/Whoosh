@@ -60,12 +60,38 @@ export const CloseButton = styled.button`
   }
 `;
 
+const ICON_BUTTON_MODIFIERS = {
+  small: () => `
+    height: 40px;
+    width: 40px;
+    line-height:40px;
+    font-size: 1.8rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #fff;
+      border: 2px solid red;
+    }
+  `,
+  red: () => `
+  background-color: #fff;
+  color: red;
+  `,
+  positioned: () => `
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+  `
+};
+
 export const IconButton = styled(CloseButton)`
   background-color: orange;
   font-size: 2rem;
   width: 50px;
   height: 50px;
   line-height: 50px;
+
+  ${applyStyleModifiers(ICON_BUTTON_MODIFIERS)}
 `;
 
 export const SearchIcon = styled(CloseButton)`

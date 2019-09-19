@@ -53,6 +53,7 @@ export default styled(Header)`
   height: 80px;
   background-color: transparent;
   border-bottom: 1px solid #eee;
+  z-index: 20;
 
   .container {
     max-width: 1800px;

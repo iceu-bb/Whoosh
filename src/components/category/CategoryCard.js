@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Card1 } from '../elements';
+import { deleteCategory } from '../../redux/category/actions';
+import { Card1, IconButton } from '../elements';
 import { declinedWord } from '../../helpers';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 const Image = styled.div`
   height: 75%;
@@ -13,22 +16,45 @@ const Image = styled.div`
   background-position: center;
 `;
 
-const CategoryCard = ({ category }) => {
+const CategoryCard = ({ category, settings, deleteCategory }) => {
   return (
-    <Link to={`/category/${category.name}`} style={{ textDecoration: 'none' }}>
-      <Card1>
-        <Image img={category.imagePath} />
-        <div className='container'>
-          <span className='name'>{category.name}</span>
-          <span>
-            ({category.cardCounter}){' '}
-            {declinedWord('pojęcie', category.cardCounter)}
-          </span>
-          <span className='author'>{category.author}</span>
-        </div>
-      </Card1>
-    </Link>
+    <div style={{ position: 'relative', zIndex: 1 }}>
+      <Link
+        to={`/category/${category.name}`}
+        style={{ textDecoration: 'none' }}
+      >
+        <Card1>
+          <Image img={category.imagePath} />
+          <div className='container'>
+            <span className='name'>{category.name}</span>
+            <span>
+              ({category.cardCounter}){' '}
+              {declinedWord('pojęcie', category.cardCounter)}
+            </span>
+            {settings ? (
+              <span className='hidden'>hidden</span>
+            ) : (
+              <span className='author'>{category.author}</span>
+            )}
+          </div>
+        </Card1>
+      </Link>
+      {settings && (
+        <IconButton
+          modifiers={['small', 'red', 'positioned']}
+          onClick={() => {
+            console.log('kliklem usuń');
+            deleteCategory(category.name);
+          }}
+        >
+          <FaRegTrashAlt />
+        </IconButton>
+      )}
+    </div>
   );
 };
 
-export default CategoryCard;
+export default connect(
+  null,
+  { deleteCategory }
+)(CategoryCard);

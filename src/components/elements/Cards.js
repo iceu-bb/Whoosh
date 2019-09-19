@@ -21,6 +21,7 @@ export const Card1 = styled.div`
     height: 25%;
     justify-content: space-evenly;
     align-items: center;
+    position: relative;
   }
 
   .name {
@@ -29,5 +30,9 @@ export const Card1 = styled.div`
 
   .author {
     color: ${orange};
+  }
+
+  .hidden {
+    visibility: hidden;
   }
 `;
