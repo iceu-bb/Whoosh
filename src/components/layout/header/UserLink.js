@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { FaCaretDown } from 'react-icons/fa';
 import SignOut from './SignOut';
 import { Link } from 'react-router-dom';
 import { orange, black } from '../../../utilities';
 import { useTransition, animated, config } from 'react-spring';
+import { useOnClickOutside } from '../../../helpers';
 
 const UserLink = ({ className, userName, moved, logoutUser }) => {
   const [openPanel, setOpenPanel] = useState(false);
+
+  const buttonRef = useRef();
+  const panelRef = useRef();
+
+  useOnClickOutside(panelRef, event => {
+    if (!buttonRef.current.contains(event.target)) {
+      setOpenPanel(false);
+    }
+  });
 
   const transition = useTransition(openPanel, null, {
     from: { opacity: 0 },
@@ -18,6 +28,7 @@ const UserLink = ({ className, userName, moved, logoutUser }) => {
 
   return (
     <div
+      ref={buttonRef}
       className={className}
       onClick={() => {
         setOpenPanel(!openPanel);
@@ -31,18 +42,18 @@ const UserLink = ({ className, userName, moved, logoutUser }) => {
         ({ item, key, props: animation }) =>
           item && (
             <>
-              <animated.div className='panel' style={animation}>
-                <ul className='list'>
-                  <li className='list-item'>
+              <animated.div ref={panelRef} className='panel' style={animation}>
+                <ul className='panel-list'>
+                  <li className='panel-list-item'>
                     <Link to='/user/my-categories'>Moje zestawy do nauki</Link>
                   </li>
-                  <li className='list-item'>
+                  <li className='panel-list-item'>
                     <Link to='/user/settings'>Ustawienia</Link>
                   </li>
-                  <li className='list-item'>
+                  <li className='panel-list-item'>
                     <Link to='/user/faq'>Pomoc</Link>
                   </li>
-                  <li className='list-item'>
+                  <li className='panel-list-item'>
                     <SignOut logoutUser={logoutUser} />
                   </li>
                 </ul>
@@ -87,31 +98,38 @@ export default styled(UserLink)`
     }
   }
 
-  .list {
+  .panel-list {
     list-style: none;
     display: flex;
     flex-direction: column;
   }
 
-  .list-item {
+  .panel-list-item {
+    width: 100%;
     font-size: 1.5rem;
     display: inline-block;
-    width: 100%;
     white-space: nowrap;
-    padding: 10px 30px;
     transition: all 0.3s ease;
+    text-align: left;
 
     &:hover {
       background-color: #eee;
     }
 
+    &:not(:last-child) {
+      border-bottom: 0.5px solid #ddd;
+    }
+
+    &:last-child {
+      padding: 10px 25px;
+    }
+
     & > a {
+      width: 100%;
+      display: inline-block;
+      padding: 10px 25px;
       text-decoration: none;
       color: inherit;
     }
-  }
-
-  .list-item:not(:last-child) {
-    border-bottom: 0.5px solid #ddd;
   }
 `;

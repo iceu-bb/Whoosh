@@ -7,8 +7,9 @@ import CardList from './CardList';
 import AddCard from './AddCard';
 import Wave from '../layout/Wave';
 import CardSummary from './CardSummary';
+import CategoryContainer from '../category/CategoriesContainer';
 
-const CardContainer = ({ cards, categoryName, className }) => {
+const CardContainer = ({ className, cards, categoryName, categories }) => {
   // index of current Card
   const [index, setIndex] = useState(0);
 
@@ -30,6 +31,12 @@ const CardContainer = ({ cards, categoryName, className }) => {
     },
     config: config.gentle
   });
+
+  const randomCategories =
+    categories.length > 0 &&
+    categories.sort(() => 0.5 - Math.random()).slice(0, 4);
+  // filter out categories created by currnet user and current category
+
   return (
     <div className={className}>
       <HeadingH3 modifiers='big'>{categoryName}</HeadingH3>
@@ -51,6 +58,11 @@ const CardContainer = ({ cards, categoryName, className }) => {
       />
       <Wave trend='down' />
       <CardSummary categoryName={categoryName} />
+      <CategoryContainer
+        categories={randomCategories}
+        showTitle='Być może zainteresują cię również'
+        message='Weird problem'
+      />
       <AddCard categoryName={categoryName} />
       <CardList
         cards={cards}

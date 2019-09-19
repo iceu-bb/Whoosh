@@ -7,7 +7,8 @@ const CardDashboard = ({
   listOfCards,
   subscribeCollectionChanges,
   isLoading,
-  match
+  match,
+  categories
 }) => {
   const categoryName = `${match.params.categoryId}`;
 
@@ -27,14 +28,19 @@ const CardDashboard = ({
     <div>Kategoria nie istnieje bądź jest pusta</div>
   ) : (
     <div>
-      <CardContainer cards={listOfCards} categoryName={categoryName} />
+      <CardContainer
+        cards={listOfCards}
+        categoryName={categoryName}
+        categories={categories}
+      />
     </div>
   );
 };
 
 const mapStateToProps = state => ({
   listOfCards: state.category.currentCategoryItems,
-  isLoading: state.async.loading
+  isLoading: state.async.loading,
+  categories: state.category.categoriesList
 });
 
 export default connect(
