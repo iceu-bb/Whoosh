@@ -9,15 +9,9 @@ import { combineValidators, isRequired } from 'revalidate';
 import { HeadingH3, Button } from '../elements';
 
 const validate = combineValidators({
-  category: isRequired({ message: 'Wyboerz kategorię' }),
-  english: isRequired({ message: 'To pole jest wymagane' }),
-  polish: isRequired({ message: 'To pole jest wymagane' })
+  english: isRequired({ message: 'Podaj angielską wersję' }),
+  polish: isRequired({ message: 'Podaj polską wersję' })
 });
-
-const categories = [
-  { key: 'fruits', text: 'owoce', value: 'fruits' },
-  { key: 'vegetables', text: 'warzywa', value: 'vegetables' }
-];
 
 const AddCard = ({
   handleSubmit,
@@ -31,7 +25,7 @@ const AddCard = ({
   className
 }) => {
   return (
-    <div className={className} style={{ padding: 100 }}>
+    <div className={className} style={{}}>
       <HeadingH3 modifiers='medium'>Dodaj fiszkę do zestawu</HeadingH3>
       <form
         className='form'
@@ -79,6 +73,8 @@ export default styled(
     { addCard }
   )(reduxForm({ form: 'registerNewCard', validate })(AddCard))
 )`
+  padding: 100px;
+
   .form {
     margin: 0 auto;
     max-width: 500px;

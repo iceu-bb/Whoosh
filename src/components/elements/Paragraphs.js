@@ -15,6 +15,11 @@ const PARAGRAPH_MODIFIERS = {
   color: #000;
   font-size: 1.4rem;
   letter-spacing: 0.6px;
+  `,
+  fontBig: () => `
+  font-size: 2rem,
+  line-height: 1.2;
+  font-weight: bold;
   `
 };
 

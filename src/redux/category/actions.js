@@ -109,17 +109,27 @@ export const addCard = (values, categoryName) => async (
   }
 };
 
-export const addCategory = values => async (
+export const addCategory = (values, image) => async (
   dispatch,
   getState,
   { getFirestore, getFirebase }
 ) => {
-  const firestore = getFirestore();
   const firebase = getFirebase();
+  const firestore = getFirestore();
+  const storage = firebase.storage();
   const user = firebase.auth().currentUser;
   const categoryName = values.name;
   try {
-    // 1) create document in a collection of categories
+    // 1) upload image to firebase Storage
+    const uploadedFile = await storage
+      .ref(`images`)
+      .child(image.name)
+      .put(image);
+
+    // 2) take image URL
+    const imageURL = await uploadedFile.ref.getDownloadURL();
+
+    // 3) create document in a collection of categories
     await firestore
       .collection('categories')
       .doc(`${categoryName}`)
@@ -130,10 +140,11 @@ export const addCategory = values => async (
         createdAt: firestore.FieldValue.serverTimestamp(),
         private: false,
         editable: true,
-        cardCounter: 0
+        cardCounter: 0,
+        imagePath: imageURL
       });
 
-    // 2) create data for collection with pattern: categoryName_words
+    // 4) create data for collection with pattern: categoryName_words
     await firestore.add(`${categoryName}_words`, {
       init: true
     });

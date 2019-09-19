@@ -16,6 +16,10 @@ const HEADING3_MODIFIERS = {
 const HEADING2_MODIFIERS = {
   marginBig: () => `
   margin-bottom: 100px;
+  `,
+  orange: () => `
+  color: ${orange};
+  margin-bottom: 50px;
   `
 };
 

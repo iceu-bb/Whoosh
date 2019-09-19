@@ -56,11 +56,7 @@ function App() {
               path='/category/:categoryId'
               component={CardDashboard}
             />
-            <Route
-              exact
-              path='/add'
-              component={UserIsAuthenticated(AddCategory)}
-            />
+            <Route exact path='/add' component={AddCategory} />
           </Switch>
           <Section2 />
           {/* <Goodbye /> */}

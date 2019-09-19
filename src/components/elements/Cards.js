@@ -16,12 +16,6 @@ export const Card1 = styled.div`
     outline: 4px solid orange;
   }
 
-  .img {
-    height: 75%;
-    width: 100%;
-    background-color: teal;
-  }
-
   .container {
     display: flex;
     height: 25%;
