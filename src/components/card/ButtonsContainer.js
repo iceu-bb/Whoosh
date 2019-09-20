@@ -1,14 +1,40 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { orange } from '../../utilities';
 
 const ButtonsContainer = ({ className, setIndex, index, length }) => {
+  useEffect(() => {
+    window.addEventListener('keyup', handleKeyPress);
+    return () => {
+      window.removeEventListener('keyup', handleKeyPress);
+    };
+  }, []);
+
+  const leftButtonRef = useRef(null);
+  const rightButtonRef = useRef(null);
+
+  const handleCardMoveLeft = () => {
+    setIndex(index => (index - 1) % length);
+  };
+  const handleCardMoveRight = () => {
+    setIndex(index => (index + 1) % length);
+  };
+
+  const handleKeyPress = ({ key }) => {
+    if (key === 'ArrowRight') {
+      rightButtonRef.current.click();
+    } else if (key === 'ArrowLeft') {
+      leftButtonRef.current.click();
+    }
+  };
+
   return (
     <div className={className}>
       <button
+        ref={leftButtonRef}
         className='arrow-button'
-        onClick={() => setIndex(index => (index - 1) % length)}
+        onClick={() => handleCardMoveLeft()}
         disabled={index === 0}
       >
         <FaArrowLeft />
@@ -17,8 +43,9 @@ const ButtonsContainer = ({ className, setIndex, index, length }) => {
         {index + 1}/{length}
       </p>
       <button
+        ref={rightButtonRef}
         className='arrow-button'
-        onClick={() => setIndex(index => (index + 1) % length)}
+        onClick={() => handleCardMoveRight()}
         disabled={index + 1 === length}
       >
         <FaArrowRight />

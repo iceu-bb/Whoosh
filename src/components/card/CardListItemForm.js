@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, getFormValues } from 'redux-form';
 import TextInputForm from '../elements/forms/TextInputForm';
 import { useOnClickOutside } from '../../helpers';
 import { IconButton } from '../elements';
@@ -22,16 +22,18 @@ const CardItemForm = ({
 }) => {
   useEffect(() => {
     initialize({ english, polish });
+    return () => {
+      handleSubmission({
+        english: formRef.current.elements[0].value,
+        polish: formRef.current.elements[1].value
+      });
+    };
   }, []);
 
   return (
     <>
       {isEdited && (
-        <form
-          ref={formRef}
-          className={className}
-          onSubmit={handleSubmit(handleSubmission)}
-        >
+        <form ref={formRef} className={className}>
           <div className='form-field'>
             <Field
               name='english'

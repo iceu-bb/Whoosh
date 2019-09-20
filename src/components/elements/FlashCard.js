@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { boxShadow1 } from '../../utilities';
 import { useSpring, animated } from 'react-spring';
 
 const FlashCard = ({ className, english, polish, key, style }) => {
@@ -35,9 +36,10 @@ const FlashCard = ({ className, english, polish, key, style }) => {
 
 export default styled(FlashCard)`
   .side {
-    font-size: 4rem;
+    font-size: 3rem;
     background-color: #fff;
     display: flex;
+    padding: 15px;
     align-items: center;
     justify-content: center;
     width: 500px;
@@ -48,6 +50,9 @@ export default styled(FlashCard)`
     backface-visibility: hidden;
     border: 0.5px solid #eee;
     border-radius: 5px;
+    ${boxShadow1};
+    word-break: break-all;
+    white-space: normal;
 
     will-change: transform, opacity;
   }

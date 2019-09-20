@@ -34,7 +34,7 @@ const Goodbye = ({ className }) => {
           </div>
         </div>
         <Button to='/' as={Link}>
-          Przejdź do strony głównej
+          Strona główna
         </Button>
       </div>
     </section>

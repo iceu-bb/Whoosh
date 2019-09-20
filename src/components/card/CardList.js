@@ -5,28 +5,37 @@ import CardListItem from './CardListItem';
 const ListOfCard = ({ className, cards, length, categoryName }) => {
   return (
     <div className={className}>
-      <p className='text'>
-        Lista słówek w tej kategorii ({length}){' '}
-        <p>
-          możesz wybrać kolejność listy: -od najstarszego, -od najmłodzego,
-          -alfabetycznie
+      <div className='container'>
+        <p className='text'>
+          Lista słówek w tej kategorii ({length - 1})
+          <p>
+            możesz wybrać kolejność listy: -od najstarszego, -od najmłodzego,
+            -alfabetycznie
+          </p>
         </p>
-      </p>
-      <div className='grid'>
-        {cards.map(card => (
-          <CardListItem key={card.id} card={card} categoryName={categoryName} />
-        ))}
+        <div className='grid'>
+          {cards.map(card => (
+            <CardListItem
+              key={card.id}
+              card={card}
+              categoryName={categoryName}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
 export default styled(ListOfCard)`
-  background-color: #ddd;
-  margin: 0 auto;
-  padding: 10px;
-  max-width: 1200px;
-  width: 100%;
+  background-color: #eee;
+  padding: 60px 0 100px;
+
+  .container {
+    margin: 0 auto;
+    padding: 10px;
+    max-width: 1200px;
+  }
 
   .grid {
     display: grid;

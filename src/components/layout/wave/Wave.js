@@ -29,12 +29,12 @@ export default styled(Wave)`
   margin-bottom: ${props => props.trend === 'down' && ' -300px'};
 
   .svg {
-    height: 100%;
+    height: 101%;
     width: 100vw;
   }
 
   .path {
     stroke: none;
-    fill: white;
+    fill: #fff;
   }
 `;

@@ -34,7 +34,7 @@ const CardContainer = ({ className, cards, categoryName, categories }) => {
 
   const randomCategories =
     categories.length > 0 &&
-    categories.sort(() => 0.5 - Math.random()).slice(0, 4);
+    categories.sort(() => 0.5 - Math.random()).slice(0, 3);
   // filter out categories created by currnet user and current category
 
   return (
@@ -59,7 +59,7 @@ const CardContainer = ({ className, cards, categoryName, categories }) => {
       <Wave trend='down' />
       <CardSummary categoryName={categoryName} />
       <CategoryContainer
-        categories={randomCategories}
+        categories={randomCategories || []}
         showTitle='Być może zainteresują cię również'
         message='Weird problem'
       />
@@ -75,7 +75,7 @@ const CardContainer = ({ className, cards, categoryName, categories }) => {
 
 export default styled(CardContainer)`
   background-color: #fff;
-  padding: 100px 0;
+  padding: 100px 0 0;
 
   &:first-child {
     text-align: center;

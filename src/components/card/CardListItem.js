@@ -16,6 +16,8 @@ const CardListItem = ({
   updateCard
 }) => {
   const { english, polish, author } = card;
+  const [englishWord, setEnglishWord] = useState(english);
+  const [polishWord, setPolishWord] = useState(polish);
 
   const buttonRef = useRef();
   const formRef = useRef();
@@ -24,7 +26,9 @@ const CardListItem = ({
 
   const handleSubmission = async values => {
     await updateCard(values, categoryName, card.id);
-    setEdit(!isEdited);
+    setEnglishWord(values.english);
+    setPolishWord(values.polish);
+    setEdit(false);
   };
 
   useOnClickOutside(formRef, event => {
@@ -46,8 +50,8 @@ const CardListItem = ({
         />
       ) : (
         <div className='words'>
-          <div>{english}</div>
-          <div>{polish}</div>
+          <div>{englishWord}</div>
+          <div>{polishWord}</div>
         </div>
       )}
 
@@ -67,7 +71,6 @@ const CardListItem = ({
             >
               <FaRegEdit />
             </IconButton>
-
             <IconButton
               style={{ backgroundColor: 'red' }}
               onClick={() => removeCard(categoryName, card.id)}
