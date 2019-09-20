@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaCaretDown } from 'react-icons/fa';
 import SignOut from './SignOut';
 import { Link } from 'react-router-dom';
-import { orange, black } from '../../../utilities';
+import { orange, black, boxShadow1 } from '../../../utilities';
 import { useTransition, animated, config } from 'react-spring';
 import { useOnClickOutside } from '../../../helpers';
 
@@ -84,6 +84,7 @@ export default styled(UserLink)`
     color: ${({ moved }) => (moved ? `${black}` : `${orange}`)};
     border-radius: 6px;
     border: 0.5px solid #ddd;
+    ${boxShadow1};
 
     &::before {
       content: '';

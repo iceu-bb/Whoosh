@@ -1,30 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Waypoint } from 'react-waypoint';
+import { useSpring, animated, config } from 'react-spring';
 import { HeadingH2, Paragraph } from '../../elements';
 
 const Section2 = ({ className }) => {
+  const [on, toggle] = useState(false);
+  const [on2, toggle2] = useState(false);
+  const animation1 = useSpring({
+    opacity: on ? 1 : 0,
+    transform: on ? 'translate3d(0,0,0)' : 'translate3d(-50%,0,0)',
+    config: config.slow
+  });
+  const animation2 = useSpring({
+    opacity: on2 ? 1 : 0,
+    transform: on2 ? 'translate3d(0,0,0)' : 'translate3d(50%,0,0)',
+    config: config.slow
+  });
+
   return (
     <section className={className}>
       <div className='container'>
-        <div className='text first'>
-          <HeadingH2>Ucz się lepiej</HeadingH2>
-          <Paragraph modifiers='feature'>
-            Ponad 90% uczniów korzystających z Whoosh zgłasza poprawę swoich
-            ocen szkolnych. Zobacz w jaki sposób proste narzędzia Whoosh mogą
-            pomóc Ci w nauce angielskiego na każdym etapie edukacji, zarówno w
-            podstawówce jak i w skzole wyższej.
-          </Paragraph>
-        </div>
+        <Waypoint bottomOffset='30%' onEnter={() => toggle(true)}>
+          <animated.div style={animation1} className='text first'>
+            <HeadingH2>Ucz się lepiej</HeadingH2>
+            <Paragraph modifiers='feature'>
+              Ponad 90% uczniów korzystających z Whoosh zgłasza poprawę swoich
+              ocen szkolnych. Zobacz w jaki sposób proste narzędzia Whoosh mogą
+              pomóc Ci w nauce angielskiego na każdym etapie edukacji, zarówno w
+              podstawówce jak i w skzole wyższej.
+            </Paragraph>
+          </animated.div>
+        </Waypoint>
         <div className='image second'></div>
         <div className='image third'></div>
-        <div className='text fourth'>
-          <HeadingH2>Podziel się wiedzą</HeadingH2>
-          <Paragraph modifiers='feature'>
-            Dzięki Whoosh będziesz bardziej zaangażowany i zmotywowany. Twórz
-            swoje własne zestawy słówek, współpracuj z innymi uczniami, obracaj
-            fiszki by uczyć się w bardziej zabawny i efektywny sposób.
-          </Paragraph>
-        </div>
+        <Waypoint bottomOffset='30%' onEnter={() => toggle2(true)}>
+          <animated.div style={animation2} className='text fourth'>
+            <HeadingH2>Podziel się wiedzą</HeadingH2>
+            <Paragraph modifiers='feature'>
+              Dzięki Whoosh będziesz bardziej zaangażowany i zmotywowany. Twórz
+              swoje własne zestawy słówek, współpracuj z innymi uczniami,
+              obracaj fiszki by uczyć się w bardziej zabawny i efektywny sposób.
+            </Paragraph>
+          </animated.div>
+        </Waypoint>
       </div>
     </section>
   );

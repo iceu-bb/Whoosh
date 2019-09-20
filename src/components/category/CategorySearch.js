@@ -9,10 +9,13 @@ import { withRouter } from 'react-router-dom';
 const CategorySearch = ({ className, history, searchCategory }) => {
   const [inputValue, setInputValue] = useState('');
   const handleChange = value => setInputValue(value);
+  const handleKeyPress = key => key === 'Enter' && handleSearch(inputValue);
   const handleSearch = value => {
     if (value) {
       searchCategory(value);
       history.push('/search');
+    } else {
+      window.alert('wprowadz wartosc');
     }
   };
   return (
@@ -23,6 +26,7 @@ const CategorySearch = ({ className, history, searchCategory }) => {
           type='text'
           placeholder='Szukaj zestawu'
           onChange={e => handleChange(e.target.value)}
+          onKeyDown={e => handleKeyPress(e.key)}
         />
         <CloseButton
           className='search-icon'

@@ -13,7 +13,7 @@ export const Card1 = styled.div`
   ${boxShadow1};
 
   &:hover {
-    outline: 4px solid orange;
+    outline: 4px solid ${orange};
   }
 
   .container {

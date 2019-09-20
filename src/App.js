@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import GlobalStyle from './GlobalStyle';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/layout/header/Header';
@@ -19,9 +19,15 @@ import UserFaq from './components/layout/userSection/UserFaq';
 import Footer from './components/layout/Footer';
 import { UserIsAuthenticated } from './redux/auth/authWrapper';
 
+const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
+
 const HomeLayout = () => {
+  const myRef = useRef(null);
+  useEffect(() => {
+    scrollToRef(myRef);
+  }, []);
   return (
-    <main>
+    <main ref={myRef}>
       <Hero />
       <Section1 />
       <CategoriesDashboard />
@@ -31,8 +37,12 @@ const HomeLayout = () => {
 };
 
 const Layout2 = () => {
+  const myRef = useRef(null);
+  useEffect(() => {
+    scrollToRef(myRef);
+  }, []);
   return (
-    <main>
+    <main ref={myRef}>
       <WaveContainer />
       <Switch>
         <Route
@@ -64,7 +74,7 @@ const Layout2 = () => {
   );
 };
 
-function App() {
+const App = () => {
   return (
     <>
       <GlobalStyle />
@@ -75,6 +85,6 @@ function App() {
       <Footer />
     </>
   );
-}
+};
 
 export default withRouter(App);

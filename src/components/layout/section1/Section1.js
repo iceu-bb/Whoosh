@@ -84,9 +84,9 @@ export default styled(Section1)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    ${boxShadow1};
     text-align: center;
     padding: 10px 25px;
+    ${boxShadow1};
 
     & > svg {
       font-size: 4rem;

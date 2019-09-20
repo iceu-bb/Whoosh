@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { orange } from '../../utilities';
 import { HeadingH2, HeadingH4, Paragraph } from '../elements';
 import { FaRegEnvelope, FaMobileAlt, FaRegMap } from 'react-icons/fa';
 
@@ -83,7 +84,7 @@ export default styled(Footer)`
     margin-top: -10px;
     margin-right: 20px;
     & > svg {
-      fill: orange;
+      fill: ${orange};
     }
   }
 `;

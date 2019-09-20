@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
@@ -8,8 +8,11 @@ import { orange } from '../../../utilities';
 const Header = ({ className }) => {
   const [moved, set] = useState(false);
 
+  const myRef = useRef(null);
+  const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
+  const executeScroll = () => scrollToRef(myRef);
+
   useEffect(() => {
-    // use WAYPOINT here
     window.addEventListener('scroll', OnScroll);
     return () => {
       window.removeEventListener('scroll', OnScroll);
@@ -30,7 +33,7 @@ const Header = ({ className }) => {
 
   return (
     <header className={className} moved={moved}>
-      <div className='container'>
+      <div ref={myRef} className='container'>
         <animated.div
           className='animated'
           style={{
@@ -38,7 +41,11 @@ const Header = ({ className }) => {
           }}
         />
 
-        <Link to='/' className={moved ? 'logo yellow' : 'logo '}>
+        <Link
+          onClick={executeScroll}
+          to='/'
+          className={moved ? 'logo yellow' : 'logo '}
+        >
           Whoosh
         </Link>
         <Nav moved={moved} />

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { orange, black, gradientMain } from '../../utilities';
+import { orange, black, gradientMain, boxShadow1 } from '../../utilities';
 import { applyStyleModifiers } from 'styled-components-modifiers';
 
 const BUTTON_MODIFIERS = {
@@ -29,6 +29,7 @@ export const Button = styled.button`
   cursor: pointer;
   text-transform: uppercase;
   text-decoration: none;
+  ${boxShadow1};
 
   transition: all 0.2s ease;
 
