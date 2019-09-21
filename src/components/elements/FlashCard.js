@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { boxShadow1 } from '../../utilities';
+import { boxShadow2, boxShadowInset, below } from '../../utilities';
 import { useSpring, animated } from 'react-spring';
 
 const FlashCard = ({ className, english, polish, key, style }) => {
@@ -35,31 +35,48 @@ const FlashCard = ({ className, english, polish, key, style }) => {
 };
 
 export default styled(FlashCard)`
+  width: 500px;
+  height: 300px;
+  font-size: 3rem;
+
+  ${below.smallMed`
+    width: 400px;
+    font-size: 2.8rem;
+  `}
+  ${below.small`
+    width: 350px;
+    height: 250px;
+    font-size: 2.6rem;
+  `}
+   ${below.phone`
+    height: 200px;
+    width: 275px;
+    font-size: 2.4rem;
+  `}
+  ${below.ultraSmallPhone`
+    height: 180px;
+    width: 250px;
+    font-size: 2.2rem;
+  `}
+
   .side {
-    font-size: 3rem;
     background-color: #fff;
     display: flex;
     padding: 15px;
     align-items: center;
     justify-content: center;
-    width: 500px;
-    height: 300px;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     position: absolute;
     top: 0;
     backface-visibility: hidden;
     border: 0.5px solid #eee;
     border-radius: 5px;
-    ${boxShadow1};
+    ${boxShadow2};
     word-break: break-all;
     white-space: normal;
 
     will-change: transform, opacity;
-  }
-
-  .front {
-  }
-
-  .back {
   }
 `;

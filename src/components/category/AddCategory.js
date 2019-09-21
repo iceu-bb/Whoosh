@@ -94,13 +94,14 @@ export default styled(
     )(reduxForm({ form: 'registerNewCategory' })(AddCategory))
   )
 )`
-  padding: 100px 0;
+  padding: 100px 2%;
   margin: 0 auto;
   max-width: 600px;
   text-align: center;
 
   .form {
     margin: 70px auto 0;
+    padding: 0 10px;
     max-width: 400px;
   }
 `;

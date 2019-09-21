@@ -1,18 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import CardListItem from './CardListItem';
+import { Paragraph } from '../elements';
 
 const ListOfCard = ({ className, cards, length, categoryName }) => {
   return (
     <div className={className}>
       <div className='container'>
-        <p className='text'>
-          Lista słówek w tej kategorii ({length - 1})
-          <p>
-            możesz wybrać kolejność listy: -od najstarszego, -od najmłodzego,
-            -alfabetycznie
-          </p>
-        </p>
+        <Paragraph modifiers={['feature', 'fontBig']}>
+          Lista słówek w tej kategorii ({length})
+        </Paragraph>
         <div className='grid'>
           {cards.map(card => (
             <CardListItem
@@ -29,7 +26,7 @@ const ListOfCard = ({ className, cards, length, categoryName }) => {
 
 export default styled(ListOfCard)`
   background-color: #eee;
-  padding: 60px 0 100px;
+  padding: 20px 0 50px;
 
   .container {
     margin: 0 auto;
@@ -42,10 +39,5 @@ export default styled(ListOfCard)`
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
     grid-row-gap: 20px;
-  }
-
-  .text {
-    font-size: 2rem;
-    margin-bottom: 20px;
   }
 `;

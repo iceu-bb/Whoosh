@@ -4,6 +4,7 @@ import { Field, reduxForm, getFormValues } from 'redux-form';
 import TextInputForm from '../elements/forms/TextInputForm';
 import { useOnClickOutside } from '../../helpers';
 import { IconButton } from '../elements';
+import { below } from '../../utilities';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
 const CardItemForm = ({
@@ -48,13 +49,6 @@ const CardItemForm = ({
               ownClassName='flashcard-input'
             />
           </div>
-          {/* <IconButton
-            className='confirm-button'
-            type='submit'
-            disabled={invalid || submitting || pristine}
-          >
-            <FaRegCheckCircle />
-          </IconButton> */}
         </form>
       )}
     </>
@@ -65,30 +59,32 @@ export default styled(reduxForm({ form: 'cardItemForm' })(CardItemForm))`
   font-size: 1.5rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 20px;
   position: relative;
 
+  ${below.small`
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+
+      & > div:first-child {
+        border-bottom: 1px solid #ccc;
+      }
+    `}
+
   .form-field {
-    height: 100px;
+    min-height: 60px;
+    height: auto;
     padding: 10px;
     position: relative;
     border-right: 1px solid #ddd;
     & > div {
       max-width: 90%;
+      ${below.small`
+        max-width: 75%;
+      `}
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
-  }
-
-  .confirm-button {
-    background-color: green;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translete(-50%, -50%);
-    border: none;
-    font-size: 25px;
   }
 `;

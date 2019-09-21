@@ -37,6 +37,6 @@ export default styled(MobileMenuInner)`
   .close-button {
     position: absolute;
     top: 15px;
-    right: 40px;
+    right: 38px;
   }
 `;

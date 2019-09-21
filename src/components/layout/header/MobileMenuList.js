@@ -34,7 +34,7 @@ const MobileMenuList = ({ className }) => {
 export default styled(MobileMenuList)`
   font-size: 2.5rem;
   width: 100vw;
-  height: 90vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -31,15 +31,19 @@ export default styled(Wave)`
 
   ${below.large`
     height: 250px;
+    margin-bottom: ${props => props.trend === 'down' && ' -250px'};
   `};
   ${below.medium`
     height: 200px;
+    margin-bottom: ${props => props.trend === 'down' && ' -200px'};
     `};
   ${below.small`
     height: 175px;
+    margin-bottom: ${props => props.trend === 'down' && ' -175px'};
     `};
   ${below.phone`
     height: 160px;
+    margin-bottom: ${props => props.trend === 'down' && ' -160px'};
     `};
 
   .svg {

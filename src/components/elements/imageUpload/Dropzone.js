@@ -8,7 +8,7 @@ import ShowError from './ShowError';
 const PreviewContainer = styled.div`
   margin: 0 auto;
   height: 300px;
-  width: 400px;
+  max-width: 400px;
   margin-top: 75px;
   margin-bottom: 75px;
   border ${({ isDragActive }) => (isDragActive ? '3px dashed black' : 'none')}

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import { orange } from '../../utilities';
+import { orange, below } from '../../utilities';
 
 const ButtonsContainer = ({ className, setIndex, index, length }) => {
   useEffect(() => {
@@ -57,9 +57,14 @@ const ButtonsContainer = ({ className, setIndex, index, length }) => {
 export default styled(ButtonsContainer)`
   margin: 25px auto 200px;
   display: flex;
+  padding: 0 20px;
   align-items: center;
-  width: 500px;
+  max-width: 500px;
   justify-content: space-evenly;
+
+  ${below.smallMed`
+    margin: 25px auto 100px;
+  `}
 
   .counter {
     font-size: 2rem;
@@ -67,7 +72,10 @@ export default styled(ButtonsContainer)`
 
   .arrow-button {
     padding: 10px;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    ${below.smallMed`
+     font-size: 2.5rem;
+  `}
     font-weight: 300;
     font-weight: 500;
     border: none;

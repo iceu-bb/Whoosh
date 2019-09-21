@@ -113,10 +113,16 @@ const ICON_BUTTON_MODIFIERS = {
 
 export const IconButton = styled(CloseButton)`
   background-color: orange;
-  font-size: 2rem;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
+  font-size: 1.9rem;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+
+  ${below.small`
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+  `};
 
   ${applyStyleModifiers(ICON_BUTTON_MODIFIERS)}
 `;

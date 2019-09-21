@@ -5,6 +5,7 @@ import { FlashCard, HeadingH3 } from '../elements';
 import ButtonsContainer from './ButtonsContainer';
 import CardList from './CardList';
 import AddCard from './AddCard';
+import { below } from '../../utilities';
 import Wave from '../layout/wave/Wave';
 import CardSummary from './CardSummary';
 import CategoryContainer from '../category/CategoriesContainer';
@@ -85,5 +86,21 @@ export default styled(CardContainer)`
     margin: 0 auto;
     height: 300px;
     width: 500px;
+
+    ${below.smallMed`
+    width: 400px;
+  `}
+    ${below.small`
+    height: 250px;
+    width: 350px;
+  `}
+   ${below.phone`
+    height: 200px;
+    width: 275px;
+  `}
+   ${below.ultraSmallPhone`
+    height: 180px;
+    width: 250px;
+  `}
   }
 `;

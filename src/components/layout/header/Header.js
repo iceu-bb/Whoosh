@@ -60,7 +60,6 @@ export default styled(Header)`
   background-color: transparent;
   border-bottom: 1px solid #eee;
   z-index: 20;
-  overflow-x: hidden;
   ${below.medium`
       height: 70px;
       padding-left: 2%;
