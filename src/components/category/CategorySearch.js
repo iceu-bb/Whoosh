@@ -7,7 +7,7 @@ import { CloseButton } from '../elements';
 import { below } from '../../utilities';
 import { withRouter } from 'react-router-dom';
 
-const CategorySearch = ({ className, history, searchCategory }) => {
+const CategorySearch = ({ className, history, searchCategory, mobile }) => {
   const [inputValue, setInputValue] = useState('');
   const handleChange = value => setInputValue(value);
   const handleKeyPress = key => key === 'Enter' && handleSearch(inputValue);
@@ -60,9 +60,11 @@ export default styled(
   .input {
     background-color: ${({ moved }) => (moved ? '#ccc' : 'inherit')};
     border: ${({ moved }) => (moved ? 'none' : '1px solid #fff')};
+    border: ${({ mobile }) => mobile && '1px solid orange'};
     color: inherit;
     font-size: 1.5rem;
-    width: 200px;
+    font-size: ${({ mobile }) => mobile && '1.8rem'};
+    width: ${({ mobile }) => (mobile ? '250px' : '200px')};
     height: 40px;
     border-radius: 20px;
     padding: 0 50px 0 20px;

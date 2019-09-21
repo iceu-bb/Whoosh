@@ -60,12 +60,11 @@ export default styled(Header)`
   background-color: transparent;
   border-bottom: 1px solid #eee;
   z-index: 20;
+  overflow-x: hidden;
   ${below.medium`
       height: 70px;
+      padding-left: 2%;
   `}
-  /* ${below.small`
-      height: 60px;
-  `} */
 
   .container {
     max-width: 1800px;
@@ -77,7 +76,6 @@ export default styled(Header)`
     color: #fff;
     ${below.smallMed`
       justify-content: space-between;
-      padding: 0 30px 0 20px;
     `}
   }
 

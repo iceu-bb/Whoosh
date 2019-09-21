@@ -1,35 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+import {
+  useTransition,
+  useSpring,
+  useChain,
+  config,
+  animated
+} from 'react-spring';
+import { CloseButtonMenu } from '../../elements';
 import { below } from '../../../utilities';
 import MenuMobileInner from './MobileMenuInner';
+import { FaBuffer } from 'react-icons/fa';
 
-const MobileMenu = ({ className }) => {
+const MobileMenu = ({ className, moved }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const springRef = useRef();
+  const { x } = useSpring({
+    x: isMenuOpen ? 0 : 100,
+    config: config.stiff
+  });
+
   return (
     <div className={className}>
-      <button onClick={() => setMenuOpen(!isMenuOpen)}>MENU</button>
-      {isMenuOpen && (
-        <MenuMobileInner setMenuOpen={setMenuOpen} isMenuOpen={isMenuOpen} />
-      )}
+      <CloseButtonMenu front={true} onClick={() => setMenuOpen(!isMenuOpen)}>
+        <FaBuffer />
+      </CloseButtonMenu>
+      <MenuMobileInner
+        x={x}
+        setMenuOpen={setMenuOpen}
+        isMenuOpen={isMenuOpen}
+      />
     </div>
   );
 };
 
 export default styled(MobileMenu)`
-  font-size: 3rem;
   color: inherit;
-  padding: 20px;
-  position: relative;
-  z-index: 30;
+  z-index: 40;
+  position: fixed;
   cursor: pointer;
+  top: 15px;
+  right: 30px;
 
-  .menu-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: #fff;
-    z-index: 100;
+  & > button {
+    border: ${({ moved }) => (moved ? '2px solid orange' : '2px solid #fff')};
+    color: ${({ moved }) => (moved ? 'orange' : '#fff')};
   }
 `;

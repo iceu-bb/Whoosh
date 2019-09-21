@@ -56,9 +56,34 @@ export const CloseButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 
   &:hover {
     background-color: #ffb300;
+  }
+
+  :active,
+  :focus {
+    outline: none;
+  }
+`;
+
+export const CloseButtonMenu = styled(CloseButton)`
+  color: #ccc;
+  font-size: 1.8rem;
+  background: inherit;
+  border: 2px solid #ccc;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease 0.2s;
+
+  &:hover {
+    background-color: inherit;
   }
 `;
 

@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { logoutUser } from '../../../redux/auth/authActions';
 
 const SignOut = ({ logoutUser, history }) => {
   return (
@@ -14,4 +16,9 @@ const SignOut = ({ logoutUser, history }) => {
   );
 };
 
-export default withRouter(SignOut);
+export default withRouter(
+  connect(
+    null,
+    { logoutUser }
+  )(SignOut)
+);

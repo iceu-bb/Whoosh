@@ -30,7 +30,7 @@ const HomeLayout = () => {
     <main ref={myRef}>
       <Hero />
       <Section1 />
-      <CategoriesDashboard />
+      {/* <CategoriesDashboard /> */}
       <Section2 />
     </main>
   );
@@ -81,7 +81,7 @@ const App = () => {
       <ModalManager />
       <Header />
       <Route exact path='/' component={HomeLayout} />
-      <Route exact path='/(.+)' component={Layout2} />
+      {/* <Route exact path='/(.+)' component={Layout2} /> */}
       <Footer />
     </>
   );

@@ -5,12 +5,11 @@ import { NavLink } from 'react-router-dom';
 import { yellow, gradientMain, below } from '../../../utilities';
 import { Button } from '../../elements';
 import { openModal } from '../../../redux/modal/modalActionts';
-import { logoutUser } from '../../../redux/auth/authActions';
 import CategorySearch from '../../category/CategorySearch';
 import UserLink from './UserLink';
 import MobileMenu from './MobileMenu';
 
-const Nav = ({ className, moved, openModal, auth, profile, logoutUser }) => {
+const Nav = ({ className, moved, openModal, auth, profile }) => {
   const isAuthenticated = auth.isLoaded && !auth.isEmpty;
   const userName = profile.displayName;
   return (
@@ -56,7 +55,6 @@ const Nav = ({ className, moved, openModal, auth, profile, logoutUser }) => {
           <li>
             <UserLink
               className='hide-medium'
-              logoutUser={logoutUser}
               userName={userName}
               moved={moved}
             />
@@ -64,7 +62,7 @@ const Nav = ({ className, moved, openModal, auth, profile, logoutUser }) => {
         )}
         {isAuthenticated && (
           <li class='mobile-menu'>
-            <MobileMenu />
+            <MobileMenu moved={moved} />
           </li>
         )}
       </ul>
@@ -80,7 +78,7 @@ const mapStateToProps = state => ({
 export default styled(
   connect(
     mapStateToProps,
-    { openModal, logoutUser }
+    { openModal }
   )(Nav)
 )`
   .list {
@@ -110,6 +108,10 @@ export default styled(
     z-index: 30;
     transition: all 0.3s ease;
 
+    ${below.smallMed`
+    padding: 10px 15px;
+    `}
+
     &:hover {
       color: ${yellow};
     }
@@ -117,7 +119,7 @@ export default styled(
 
   .smaller-sm {
     ${below.small`
-    padding: 10px 20px;
+    padding: 10px 17px;
     `}
     ${below.phone`
     padding: 5px 10px;
@@ -144,7 +146,7 @@ export default styled(
   .mobile-menu{
     display: none;
     ${below.smallMed`
-      display: inline-block;
+      display: block;
       `}
   }
 `;
