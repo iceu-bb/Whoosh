@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button, HeadingH1, Paragraph } from '../../elements';
 import Wave from '../wave/Wave';
 import { openModal } from '../../../redux/modal/modalActionts';
-import { gradientMain } from '../../../utilities';
+import { gradientMain, below } from '../../../utilities';
 
 const Hero = ({ className, openModal, auth }) => {
   const isAuthenticated = auth.isLoaded && !auth.isEmpty;
@@ -39,7 +39,7 @@ const Hero = ({ className, openModal, auth }) => {
             </Button>
           )}
         </div>
-        <div>laptop image here </div>
+        <div className='laptop-container'>laptop image here</div>
       </div>
       <Wave trend='up' />
     </div>
@@ -58,11 +58,30 @@ export default styled(
 )`
   padding: 200px 0 0;
   ${gradientMain};
+  ${below.smallMed`
+    padding: 150px 0 0;
+  `};
+
   .container {
     margin: 0 auto;
+    padding: 0 30px;
     max-width: 1200px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 50px;
+
+    ${below.smallMed`
+    grid-template-columns: 1fr;
+    grid-column-gap: 0;
+    grid-row-gap: 50px;
+    text-align: center;
+    padding: 0 10px;
+    `};
+  }
+
+  .laptop-container {
+    width: 100%;
+    height: 400px;
+    background-color: teal;
   }
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
 import { useSpring, animated } from 'react-spring';
-import { orange } from '../../../utilities';
+import { orange, below } from '../../../utilities';
 
 const Header = ({ className }) => {
   const [moved, set] = useState(false);
@@ -40,7 +40,6 @@ const Header = ({ className }) => {
             transform: x.interpolate(x => `translate3d(${-1 * x}%,0,0)`)
           }}
         />
-
         <Link
           onClick={executeScroll}
           to='/'
@@ -61,6 +60,12 @@ export default styled(Header)`
   background-color: transparent;
   border-bottom: 1px solid #eee;
   z-index: 20;
+  ${below.medium`
+      height: 70px;
+  `}
+  /* ${below.small`
+      height: 60px;
+  `} */
 
   .container {
     max-width: 1800px;
@@ -70,12 +75,16 @@ export default styled(Header)`
     justify-content: space-around;
     align-items: center;
     color: #fff;
+    ${below.smallMed`
+      justify-content: space-between;
+      padding: 0 30px 0 20px;
+    `}
   }
 
   .animated {
     height: 100%;
     width: 100%;
-    background-color: rgba(255, 242, 238, 0.92);
+    background-color: rgba(255, 242, 238, 0.93);
     position: absolute;
     top: 0;
     left: 0;
@@ -93,6 +102,13 @@ export default styled(Header)`
     padding: 10px;
     z-index: 30;
     transition: all 0.3s ease 0.1s;
+    ${below.medium`
+      font-size: 3rem;
+    `}
+    ${below.phone`
+      font-size: 2.5rem;
+      font-weight: bold;
+    `}
   }
 
   .yellow {

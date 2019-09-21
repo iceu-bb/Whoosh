@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { searchCategory } from '../../redux/category/actions';
 import { FaSearch } from 'react-icons/fa';
 import { CloseButton } from '../elements';
+import { below } from '../../utilities';
 import { withRouter } from 'react-router-dom';
 
 const CategorySearch = ({ className, history, searchCategory }) => {
@@ -47,12 +48,13 @@ export default styled(
     )(CategorySearch)
   )
 )`
-  font-size: 2rem;
-  z-index: 30;
-  position: relative;
+  padding: 10px 20px;
 
   .input-container {
+    font-size: 2rem;
+    z-index: 30;
     display: inline-block;
+    position: relative;
   }
 
   .input {
@@ -68,6 +70,12 @@ export default styled(
 
     &:focus {
       width: 250px;
+      ${below.medium`
+      width: 220px;
+      `}
+      ${below.smallMed`
+      width: 250px;
+      `}
     }
   }
 

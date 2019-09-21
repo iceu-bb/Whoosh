@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { orange, black, gradientMain, boxShadow1 } from '../../utilities';
+import { orange, black, boxShadow1, below } from '../../utilities';
 import { applyStyleModifiers } from 'styled-components-modifiers';
 
 const BUTTON_MODIFIERS = {

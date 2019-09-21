@@ -34,10 +34,7 @@ const UserLink = ({ className, userName, moved, logoutUser }) => {
         setOpenPanel(!openPanel);
       }}
     >
-      <FaCaretDown
-        className='link'
-        style={{ marginTop: 3, fontSize: '2.5rem' }}
-      />
+      <FaCaretDown />
       {transition.map(
         ({ item, key, props: animation }) =>
           item && (
@@ -66,15 +63,20 @@ const UserLink = ({ className, userName, moved, logoutUser }) => {
 };
 
 export default styled(UserLink)`
-  /* same style like link put it to one styled comp */
+  margin-left: 20px;
+  position: relative;
+  z-index: 30;
   color: inherit;
-  font-size: 1.8rem;
   font-weight: 400;
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
-  position: relative;
-  z-index: 30;
+
+  & > svg {
+    padding: 0;
+    margin-top: 3px;
+    font-size: 2.5rem;
+  }
 
   .panel {
     background: #fff;
@@ -94,8 +96,8 @@ export default styled(UserLink)`
       border-right: 10px solid transparent;
       border-bottom: 15px solid #fff;
       position: absolute;
-      top: -18px;
-      right: 0px;
+      top: -19px;
+      right: 1px;
     }
   }
 

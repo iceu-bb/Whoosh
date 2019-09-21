@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { orange, boxShadow1 } from '../../utilities';
+import { orange, boxShadow2 } from '../../utilities';
 
 export const Card1 = styled.div`
   width: 350px;
@@ -10,7 +10,7 @@ export const Card1 = styled.div`
   text-decoration: none;
   color: #000;
   transition: all 0.2s ease;
-  ${boxShadow1};
+  ${boxShadow2};
 
   &:hover {
     outline: 4px solid ${orange};

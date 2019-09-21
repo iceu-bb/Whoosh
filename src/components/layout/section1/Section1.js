@@ -8,7 +8,7 @@ import {
   HeadingH4,
   Paragraph
 } from '../../elements';
-import { boxShadow1 } from '../../../utilities';
+import { boxShadow2, below } from '../../../utilities';
 import { FaTabletAlt, FaBolt, FaPlane, FaBook } from 'react-icons/fa';
 
 const Section1 = ({ className }) => {
@@ -23,7 +23,7 @@ const Section1 = ({ className }) => {
           użytkowników ćwiczy i uczy sie ponad 20 tysięcy zestawów do nauki.
         </Paragraph>
         <Paragraph modifiers='feature'>
-          Nasza misia jest prosta, pomagać uczniom ćwiczyć i doskonalić swój
+          Naszą misja jest prosta, pomagać uczniom ćwiczyć i doskonalić swój
           język angielski. Whoosh dostarcza angażujące aktywności dzięki którym
           nauka słownictwa staje się prosta i przyjemna.
         </Paragraph>
@@ -66,27 +66,49 @@ export default styled(Section1)`
   .text-container {
     max-width: 600px;
     text-align: center;
+    ${below.small`
+      padding: 0 15px;
+    `};
   }
 
   .feature-container {
     margin: 50px 0;
     display: grid;
+    max-width: 90vw;
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 20px;
     grid-row-gap: 30px;
     justify-content: center;
+    ${below.medium`
+    grid-column-gap: 15px;
+    `};
+    ${below.smallMed`
+     grid-template-columns: repeat(2, 1fr);
+     grid-column-gap: 30px;
+    `};
+    ${below.small`
+      grid-column-gap: 15px;
+      grid-row-gap: 15px;
+    `};
   }
 
   .feature-item {
     height: 200px;
-    width: 230px;
+    max-width: 230px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 10px 25px;
-    ${boxShadow1};
+    ${boxShadow2};
+
+    ${below.small`
+     max-height: 170px;
+    `};
+    ${below.ultraSmallPhone`
+     max-height: 150px;
+    `}
 
     & > svg {
       font-size: 4rem;
