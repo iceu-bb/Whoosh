@@ -73,10 +73,10 @@ export default styled(
     { addCard }
   )(reduxForm({ form: 'registerNewCard', validate })(AddCard))
 )`
-  padding: 70px 7%;
+  padding: 0 7% 50px;
 
   .form {
-    margin: 0 auto;
+    margin: 20px auto;
     max-width: 500px;
   }
 `;

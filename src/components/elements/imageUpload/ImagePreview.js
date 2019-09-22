@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { below } from '../../../utilities';
 
 const RenderPreview = styled.div`
-
   background-color: #eee;
   display: flex;
   justify-content: center;
@@ -14,6 +14,9 @@ const RenderPreview = styled.div`
 
 const Image = styled.img`
   max-height: 300px;
+  ${below.phone`
+    max-width: 350px;
+  `}
 `;
 
 const ImagePreview = ({ image: { name, preview } }) => (

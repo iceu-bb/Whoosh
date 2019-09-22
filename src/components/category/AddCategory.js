@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import TextInputForm from '../elements/forms/TextInputForm';
-import { addCategory } from '../../redux/category/actions';
+import { addCategory, fetchCategoriesList } from '../../redux/category/actions';
 import { HeadingH2, Button, Paragraph } from '../elements';
 import Dropzone from '../elements/imageUpload/Dropzone';
 import { withRouter } from 'react-router-dom';
@@ -31,7 +31,8 @@ const AddCategory = ({
   reset,
   addCategory,
   history,
-  categories
+  categories,
+  fetchCategoriesList
 }) => {
   const [image, setImage] = useState([]);
 
@@ -43,6 +44,7 @@ const AddCategory = ({
   const resetForm = categoryName => {
     setImage([]);
     reset();
+    fetchCategoriesList();
     history.push(`/category/${categoryName}`);
   };
 
@@ -90,7 +92,7 @@ export default styled(
   withRouter(
     connect(
       mapStateToProps,
-      { addCategory }
+      { addCategory, fetchCategoriesList }
     )(reduxForm({ form: 'registerNewCategory' })(AddCategory))
   )
 )`

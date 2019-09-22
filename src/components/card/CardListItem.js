@@ -124,8 +124,9 @@ export default styled(
       justify-content: center;
       align-items: center;
       border-right: 1px solid #ccc;
-      word-break: break-all;
       white-space: normal;
+      word-break: break-all;
+      hyphens: auto;
     }
     ${below.small`
       grid-template-columns: 1fr;

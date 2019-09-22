@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import CardContainer from './CardContainer';
 import {
@@ -16,22 +16,33 @@ const CardDashboard = ({
   userId
 }) => {
   const categoryName = `${match.params.categoryId}`;
-
+  const [isExist, setIsExist] = useState(false);
   useEffect(() => {
+    // subscribe to data
     categories.length === 0 && fetchCategoriesList();
     let unsubscribe = () => {};
     subscribeCollectionChanges(categoryName, func => {
       unsubscribe = func;
     });
+
+    // check if category exist
+    const isCategoryExist = categories.find(
+      category => category.name === categoryName
+    );
+    console.log(isCategoryExist);
+    setIsExist(isCategoryExist);
+
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [categories]);
 
   return isLoading ? (
     <div>Loading data</div>
-  ) : listOfCards.length === 0 ? (
-    <div>Kategoria nie istnieje bądź jest pusta</div>
+  ) : !isExist ? (
+    <div style={{ margin: 100, textAlign: 'center', fontSize: '3rem' }}>
+      KATEGORIA NIE ISTNIEJE
+    </div>
   ) : (
     <div>
       <CardContainer

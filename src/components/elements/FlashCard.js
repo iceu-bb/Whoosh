@@ -74,8 +74,9 @@ export default styled(FlashCard)`
     border: 0.5px solid #eee;
     border-radius: 5px;
     ${boxShadow2};
-    word-break: break-all;
     white-space: normal;
+    overflow-wrap: break-word;
+    word-break: normal;
 
     will-change: transform, opacity;
   }

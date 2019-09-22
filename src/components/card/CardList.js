@@ -7,7 +7,7 @@ const ListOfCard = ({ className, cards, length, categoryName }) => {
   return (
     <div className={className}>
       <div className='container'>
-        <Paragraph modifiers={['feature', 'fontBig']}>
+        <Paragraph modifiers={['feature', 'fontBig', 'margin']}>
           Lista słówek w tej kategorii ({length})
         </Paragraph>
         <div className='grid'>
@@ -26,7 +26,7 @@ const ListOfCard = ({ className, cards, length, categoryName }) => {
 
 export default styled(ListOfCard)`
   background-color: #eee;
-  padding: 20px 0 50px;
+  padding: 20px 0;
 
   .container {
     margin: 0 auto;

@@ -6,6 +6,9 @@ const PARAGRAPH_MODIFIERS = {
   marginBig: () => `
   margin-bottom: 40px;
   `,
+  margin: () => `
+  margin-bottom: 25px;
+  `,
   feature: () => `
   color: #000;
   font-size: 1.6rem;

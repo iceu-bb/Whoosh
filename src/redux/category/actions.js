@@ -4,7 +4,7 @@ import {
   SEARCH_CATEGORIES,
   GET_USER_CATEGORIES
 } from './constants';
-
+import { toastr } from 'react-redux-toastr';
 import {
   asyncActionStart,
   asyncActionFinish,
@@ -103,9 +103,9 @@ export const addCard = (values, categoryName) => async (
       cardCounter: firestore.FieldValue.increment(1)
     });
 
-    // window.alert(`Dodałeś kartę do zestawu ${categoryName}`);
+    toastr.success('Sukces', 'Fiszka została dodana');
   } catch (error) {
-    console.log(error);
+    toastr.error('Błąd', 'Problem z dodaniem fiszki');
   }
 };
 
@@ -140,15 +140,11 @@ export const addCategory = (values, image) => async (
         createdAt: firestore.FieldValue.serverTimestamp(),
         private: false,
         editable: true,
-        cardCounter: 0,
+        cardCounter: 1,
         imagePath: imageURL
       });
 
     // 4) create data for collection with pattern: categoryName_words
-    await firestore.add(`${categoryName}_words`, {
-      init: true
-    });
-
     await firestore.add(`${categoryName}_words`, {
       author: user.displayName,
       authorId: user.uid,
@@ -157,9 +153,9 @@ export const addCategory = (values, image) => async (
       polish: 'Przejdź niżej by zobaczyć jakie masz opcje'
     });
 
-    window.alert(`Dodałeś kategorię ${categoryName}`);
+    toastr.success('Sukces', 'Zestaw został dodany');
   } catch (error) {
-    console.log(error);
+    toastr.error('Bład', 'Problem z dodaniem zestawu');
   }
 };
 
@@ -178,9 +174,9 @@ export const removeCard = (categoryName, cardId) => async (
       cardCounter: firestore.FieldValue.increment(-1)
     });
 
-    // window.alert('successful removed card');
+    toastr.success('Sukces', 'Fiszka została usunięta');
   } catch (error) {
-    console.log(error);
+    toastr.error('Bład', 'Nie udało się usunąć fiszki');
   }
 };
 
@@ -196,9 +192,8 @@ export const updateCard = (values, categoryName, cardId) => async (
       english,
       polish
     });
-    // window.alert('successful edited card');
   } catch (error) {
-    console.log(error);
+    toastr.error('Bład', 'Wystąpił problem podczas edycji fiszki');
   }
 };
 
@@ -269,8 +264,8 @@ export const deleteCategory = categoryName => async (
       payload: data2
     });
 
-    window.alert('successful removed category');
+    toastr.success('Sukces', 'Zestaw został usunięty');
   } catch (error) {
-    console.log(error);
+    toastr.error('Bład', 'Nie udało się usunąć zestawu');
   }
 };

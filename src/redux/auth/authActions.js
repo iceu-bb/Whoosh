@@ -12,7 +12,6 @@ export const registerAccount = values => async (
     let createdUser = await firebase
       .auth()
       .createUserWithEmailAndPassword(values.email, values.password);
-    console.log(createdUser);
     await createdUser.user.updateProfile({
       displayName: values.displayName
     });
@@ -21,8 +20,6 @@ export const registerAccount = values => async (
       createdAt: firestore.FieldValue.serverTimestamp()
     };
     await firestore.set(`users/${createdUser.user.uid}`, { ...newUser });
-    window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}
-    `);
     dispatch(closeModal());
   } catch (error) {
     console.log(error);
@@ -55,7 +52,6 @@ export const logoutUser = () => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
     await firebase.logout();
-    window.alert('Zostałeś poprawnie wylogowany!');
   } catch (error) {
     console.log(error);
   }

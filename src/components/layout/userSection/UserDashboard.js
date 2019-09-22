@@ -15,7 +15,7 @@ const UserDashboard = ({
   useEffect(() => {
     categories.length === 0 && fetchCategoriesList();
     getUserCategories(userId);
-  }, []);
+  }, [categories]);
 
   const message = `moje zestawy (${categories.length})`;
 
