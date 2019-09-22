@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { fetchCategoriesList } from '../../redux/category/actions';
 import CategoriesContainer from './CategoriesContainer';
 import { declinedWord } from '../../helpers';
 
-const SearchCategoryDashboard = ({ categories }) => {
+const SearchCategoryDashboard = ({ categories, fetchCategoriesList }) => {
+  useEffect(() => {
+    categories.length === 0 && fetchCategoriesList();
+  }, []);
+
   const message = `Znaleziono ${categories.length} ${declinedWord(
     'zestaw',
     categories.length
@@ -26,5 +31,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { fetchCategoriesList }
 )(SearchCategoryDashboard);

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { orange } from '../../utilities';
+import { orange, below } from '../../utilities';
 
 export const ModalWrapper = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -15,12 +15,18 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalInner = styled.div`
-  max-width: 450px;
   width: 450px;
   min-height: 250px;
   border-radius: 6px;
   background-color: #fff;
   padding-bottom: 30px;
+
+  ${below.small`
+    width: 400px;
+  `}
+  ${below.phone`
+    width: 90vw;
+  `}
 `;
 
 export const Header = styled.div`

@@ -7,7 +7,7 @@ import { orange, black, boxShadow1 } from '../../../utilities';
 import { useTransition, animated, config } from 'react-spring';
 import { useOnClickOutside } from '../../../helpers';
 
-const UserLink = ({ className, userName, moved, logoutUser }) => {
+const UserLink = ({ className, userName, moved }) => {
   const [openPanel, setOpenPanel] = useState(false);
 
   const buttonRef = useRef();
@@ -51,7 +51,7 @@ const UserLink = ({ className, userName, moved, logoutUser }) => {
                     <Link to='/user/faq'>Pomoc</Link>
                   </li>
                   <li className='panel-list-item'>
-                    <SignOut logoutUser={logoutUser} />
+                    <SignOut />
                   </li>
                 </ul>
               </animated.div>

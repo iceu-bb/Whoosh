@@ -1,10 +1,19 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getUserCategories } from '../../../redux/category/actions';
+import {
+  getUserCategories,
+  fetchCategoriesList
+} from '../../../redux/category/actions';
 import CategoriesContainer from '../../category/CategoriesContainer';
 
-const UserDashboard = ({ getUserCategories, userId, categories }) => {
+const UserDashboard = ({
+  getUserCategories,
+  userId,
+  categories,
+  fetchCategoriesList
+}) => {
   useEffect(() => {
+    categories.length === 0 && fetchCategoriesList();
     getUserCategories(userId);
   }, []);
 
@@ -29,5 +38,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getUserCategories }
+  { getUserCategories, fetchCategoriesList }
 )(UserDashboard);

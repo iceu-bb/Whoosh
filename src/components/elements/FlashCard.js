@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { boxShadow2, boxShadowInset, below } from '../../utilities';
+import { boxShadow2, below } from '../../utilities';
 import { useSpring, animated } from 'react-spring';
 
 const FlashCard = ({ className, english, polish, key, style }) => {

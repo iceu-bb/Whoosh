@@ -36,11 +36,12 @@ const HomeLayout = () => {
   );
 };
 
-const Layout2 = () => {
+const Layout2 = ({ location: { pathname } }) => {
   const myRef = useRef(null);
   useEffect(() => {
     scrollToRef(myRef);
-  }, []);
+  }, [pathname]);
+
   return (
     <main ref={myRef}>
       <WaveContainer />

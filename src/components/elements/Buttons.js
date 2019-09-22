@@ -30,8 +30,11 @@ export const Button = styled.button`
   text-transform: uppercase;
   text-decoration: none;
   ${boxShadow1};
-
   transition: all 0.2s ease;
+
+  ${below.small`
+    padding: 15px 20px;
+  `};
 
   &:hover {
     opacity: 0.9;

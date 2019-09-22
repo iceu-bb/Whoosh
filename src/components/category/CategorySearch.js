@@ -7,13 +7,20 @@ import { CloseButton } from '../elements';
 import { below } from '../../utilities';
 import { withRouter } from 'react-router-dom';
 
-const CategorySearch = ({ className, history, searchCategory, mobile }) => {
+const CategorySearch = ({
+  className,
+  history,
+  searchCategory,
+  mobile,
+  setMenuOpen
+}) => {
   const [inputValue, setInputValue] = useState('');
   const handleChange = value => setInputValue(value);
   const handleKeyPress = key => key === 'Enter' && handleSearch(inputValue);
   const handleSearch = value => {
     if (value) {
       searchCategory(value);
+      setMenuOpen && setMenuOpen(false);
       history.push('/search');
     } else {
       window.alert('wprowadz wartosc');

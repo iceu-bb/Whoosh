@@ -1,11 +1,8 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import {
-  useTransition,
   useSpring,
-  useChain,
   config,
-  animated
 } from 'react-spring';
 import { CloseButtonMenu } from '../../elements';
 import { below } from '../../../utilities';

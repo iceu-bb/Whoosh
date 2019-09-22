@@ -132,7 +132,17 @@ const RegisterModal = ({
                         label='nazwa użytkownika'
                         ownClassName='login-input'
                       />
-                      {error && <span>{error}</span>}
+                      {error && (
+                        <span
+                          style={{
+                            fontSize: '1.6rem',
+                            color: 'red',
+                            margin: 10
+                          }}
+                        >
+                          {error}
+                        </span>
+                      )}
                       <Button
                         type='submit'
                         disabled={invalid || submitting || pristine}

@@ -10,7 +10,13 @@ import Wave from '../layout/wave/Wave';
 import CardSummary from './CardSummary';
 import CategoryContainer from '../category/CategoriesContainer';
 
-const CardContainer = ({ className, cards, categoryName, categories }) => {
+const CardContainer = ({
+  className,
+  cards,
+  categoryName,
+  categories,
+  userId
+}) => {
   // index of current Card
   const [index, setIndex] = useState(0);
 
@@ -18,7 +24,7 @@ const CardContainer = ({ className, cards, categoryName, categories }) => {
     from: {
       position: 'absolute',
       opacity: 0,
-      transform: `translate3d(150px, 0, 0)`
+      transform: `translate3d(50px, 3px, 0)`
     },
     enter: {
       position: 'absolute',
@@ -28,15 +34,23 @@ const CardContainer = ({ className, cards, categoryName, categories }) => {
     leave: {
       position: 'absolute',
       opacity: 0,
-      transform: `translate3d(-50px, 0, 0)`
+      transform: `translate3d(-50px, 3px, 0)`
     },
     config: config.gentle
   });
 
-  const randomCategories =
-    categories.length > 0 &&
-    categories.sort(() => 0.5 - Math.random()).slice(0, 3);
-  // filter out categories created by currnet user and current category
+  let randomCategories = [];
+  if (categories.length > 0) {
+    // filter out categories created by currnet user and current category, then pick 3 catrgories from random list
+    const filteredCategories = categories
+      .filter(
+        category =>
+          category.authorId !== userId && category.name !== categoryName
+      )
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 3);
+    randomCategories = [...filteredCategories];
+  }
 
   return (
     <div className={className}>
@@ -60,7 +74,7 @@ const CardContainer = ({ className, cards, categoryName, categories }) => {
       <Wave trend='down' />
       <CardSummary categoryName={categoryName} />
       <CategoryContainer
-        categories={randomCategories || []}
+        categories={randomCategories}
         showTitle='Być może zainteresują cię również'
         message='Weird problem'
       />

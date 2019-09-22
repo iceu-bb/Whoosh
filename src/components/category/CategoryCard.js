@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { deleteCategory } from '../../redux/category/actions';
+import { openModal } from '../../redux/modal/modalActionts';
 import { Card1, IconButton } from '../elements';
 import { declinedWord } from '../../helpers';
 import { FaRegTrashAlt } from 'react-icons/fa';
@@ -16,7 +17,7 @@ const Image = styled.div`
   background-position: center;
 `;
 
-const CategoryCard = ({ category, settings, deleteCategory }) => {
+const CategoryCard = ({ category, settings, deleteCategory, openModal }) => {
   return (
     <div style={{ position: 'relative', zIndex: 1 }}>
       <Link
@@ -43,8 +44,7 @@ const CategoryCard = ({ category, settings, deleteCategory }) => {
         <IconButton
           modifiers={['small', 'red', 'positioned']}
           onClick={() => {
-            console.log('kliklem usuń');
-            deleteCategory(category.name);
+            openModal('ConfirmationModal', { categoryName: category.name });
           }}
         >
           <FaRegTrashAlt />
@@ -56,5 +56,5 @@ const CategoryCard = ({ category, settings, deleteCategory }) => {
 
 export default connect(
   null,
-  { deleteCategory }
+  { deleteCategory, openModal }
 )(CategoryCard);

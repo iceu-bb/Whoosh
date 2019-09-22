@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { orange, boxShadow2 } from '../../utilities';
+import { orange, boxShadow2, below } from '../../utilities';
 
 export const Card1 = styled.div`
   width: 350px;
@@ -14,6 +14,9 @@ export const Card1 = styled.div`
 
   &:hover {
     outline: 4px solid ${orange};
+    ${below.small`
+    outline: none;
+    `}
   }
 
   .container {

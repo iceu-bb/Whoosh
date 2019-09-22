@@ -20,7 +20,7 @@ const MobileMenuInner = ({ className, x, setMenuOpen, isMenuOpen }) => {
         >
           <FaTimes />
         </CloseButtonMenu>
-        {isMenuOpen && <MobileMenuList />}
+        {isMenuOpen && <MobileMenuList setMenuOpen={setMenuOpen} />}
       </div>
     </animated.div>
   );
@@ -37,6 +37,6 @@ export default styled(MobileMenuInner)`
   .close-button {
     position: absolute;
     top: 15px;
-    right: 38px;
+    right: 30px;
   }
 `;

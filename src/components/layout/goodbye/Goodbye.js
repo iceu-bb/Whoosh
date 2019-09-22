@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { HeadingH2, HeadingH3, Button } from '../../elements';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
 
 const Goodbye = ({ className }) => {
   return (
@@ -41,8 +40,8 @@ const Goodbye = ({ className }) => {
   );
 };
 
-export default styled(withRouter(Goodbye))`
-  margin-top: -80px;
+export default styled(Goodbye)`
+  margin-top: -30px;
   padding: 100px 0;
   background-color: #fff;
 

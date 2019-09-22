@@ -4,12 +4,14 @@ import TestModal from '../../components/elements/TestModal';
 import LoginModal from '../../components/modals/LoginModal';
 import RegisterModal from '../../components/modals/RegisterModal';
 import UnauthModal from '../../components/modals/UnauthModal';
+import ConfirmationModal from '../../components/modals/ConfirmationModal';
 
 const modalLookup = {
   TestModal,
   LoginModal,
   RegisterModal,
-  UnauthModal
+  UnauthModal,
+  ConfirmationModal
 };
 
 const ModalManager = ({ currentModal }) => {

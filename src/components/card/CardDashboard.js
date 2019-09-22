@@ -1,18 +1,24 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import CardContainer from './CardContainer';
-import { subscribeCollectionChanges } from '../../redux/category/actions';
+import {
+  subscribeCollectionChanges,
+  fetchCategoriesList
+} from '../../redux/category/actions';
 
 const CardDashboard = ({
   listOfCards,
+  fetchCategoriesList,
   subscribeCollectionChanges,
   isLoading,
   match,
-  categories
+  categories,
+  userId
 }) => {
   const categoryName = `${match.params.categoryId}`;
 
   useEffect(() => {
+    categories.length === 0 && fetchCategoriesList();
     let unsubscribe = () => {};
     subscribeCollectionChanges(categoryName, func => {
       unsubscribe = func;
@@ -32,6 +38,7 @@ const CardDashboard = ({
         cards={listOfCards}
         categoryName={categoryName}
         categories={categories}
+        userId={userId}
       />
     </div>
   );
@@ -40,10 +47,11 @@ const CardDashboard = ({
 const mapStateToProps = state => ({
   listOfCards: state.category.currentCategoryItems,
   isLoading: state.async.loading,
-  categories: state.category.categoriesList
+  categories: state.category.categoriesList,
+  userId: state.firebase.auth.uid
 });
 
 export default connect(
   mapStateToProps,
-  { subscribeCollectionChanges }
+  { subscribeCollectionChanges, fetchCategoriesList }
 )(CardDashboard);

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { closeModal, openModal } from '../../redux/modal/modalActionts';
+import { closeModal } from '../../redux/modal/modalActionts';
+import { deleteCategory, removeCard } from '../../redux/category/actions';
 import { FaTimes } from 'react-icons/fa';
 import {
   ModalWrapper,
@@ -13,16 +14,22 @@ import {
 } from '../elements/index';
 import { withRouter } from 'react-router';
 
-const UnauthModal = ({ className, closeModal, history, openModal }) => {
+const ConfirmationModal = ({
+  className,
+  closeModal,
+  categoryName,
+  deleteCategory,
+  cardId,
+  removeCard
+}) => {
   return (
     <div className={className}>
       <ModalWrapper>
         <ModalInner>
           <Header>
-            <span>Brak Autoryzacji</span>
+            <span>Potwierdzenie usunięcia</span>
             <CloseButton
               onClick={() => {
-                history.goBack();
                 closeModal();
               }}
             >
@@ -31,27 +38,34 @@ const UnauthModal = ({ className, closeModal, history, openModal }) => {
           </Header>
           <div className='content'>
             <Paragraph modifiers='feature'>
-              Nie możesz zobaczyć tej strony. Tylko zalogowani użytkownicy mają
-              dostęp.
+              Czy na pewno chcesz usunąć{' '}
+              {cardId ? (
+                'tą fiszkę ?'
+              ) : (
+                <>
+                  zestaw
+                  <span className='bold'> {categoryName} ?</span>
+                </>
+              )}
             </Paragraph>
-
             <div className='buttons-container'>
               <Button
                 modifiers='white'
-                onClick={() => {
+                onClick={async () => {
+                  cardId
+                    ? removeCard(categoryName, cardId)
+                    : await deleteCategory(categoryName);
                   closeModal();
-                  openModal('LoginModal', null);
                 }}
               >
-                Zaloguj się
+                Tak
               </Button>
               <Button
                 onClick={() => {
                   closeModal();
-                  openModal('RegisterModal', null);
                 }}
               >
-                Zarejestruj się
+                Nie
               </Button>
             </div>
           </div>
@@ -65,8 +79,8 @@ export default styled(
   withRouter(
     connect(
       null,
-      { closeModal, openModal }
-    )(UnauthModal)
+      { deleteCategory, closeModal, removeCard }
+    )(ConfirmationModal)
   )
 )`
   .content {
@@ -77,8 +91,12 @@ export default styled(
   }
 
   .buttons-container {
-    margin-top: 30px;
+    margin-top: 40px;
     display: flex;
     justify-content: space-around;
+  }
+
+  .bold {
+    font-weight: bold;
   }
 `;

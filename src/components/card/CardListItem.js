@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { removeCard, updateCard } from '../../redux/category/actions';
+import { updateCard } from '../../redux/category/actions';
+import { openModal } from '../../redux/modal/modalActionts';
 import CardListItemForm from './CardListItemForm';
 import { FaRegTrashAlt, FaRegEdit } from 'react-icons/fa';
 import { IconButton } from '../elements';
@@ -13,8 +14,8 @@ const CardListItem = ({
   card,
   userId,
   categoryName,
-  removeCard,
-  updateCard
+  updateCard,
+  openModal
 }) => {
   const { english, polish, author } = card;
   const [englishWord, setEnglishWord] = useState(english);
@@ -74,7 +75,12 @@ const CardListItem = ({
             </IconButton>
             <IconButton
               style={{ backgroundColor: 'red' }}
-              onClick={() => removeCard(categoryName, card.id)}
+              onClick={() => {
+                openModal('ConfirmationModal', {
+                  categoryName,
+                  cardId: card.id
+                });
+              }}
             >
               <FaRegTrashAlt />
             </IconButton>
@@ -94,7 +100,7 @@ const mapStateToProps = state => ({
 export default styled(
   connect(
     mapStateToProps,
-    { removeCard, updateCard }
+    { updateCard, openModal }
   )(CardListItem)
 )`
   background-color: #fff;
