@@ -10,6 +10,7 @@ const UserDashboard = ({
   getUserCategories,
   userId,
   categories,
+  userCategories,
   fetchCategoriesList
 }) => {
   useEffect(() => {
@@ -17,12 +18,12 @@ const UserDashboard = ({
     getUserCategories(userId);
   }, [categories]);
 
-  const message = `moje zestawy (${categories.length})`;
+  const message = `moje zestawy (${userCategories.length})`;
 
   return (
     <div>
       <CategoriesContainer
-        categories={categories}
+        categories={userCategories}
         failMessage='Nie znaleziono żadnych pasujących zestawów'
         showTitle={message}
         settings={true}
@@ -33,7 +34,8 @@ const UserDashboard = ({
 
 const mapStateToProps = state => ({
   userId: state.firebase.auth.uid,
-  categories: state.category.userCategories
+  categories: state.category.categoriesList,
+  userCategories: state.category.userCategories
 });
 
 export default connect(

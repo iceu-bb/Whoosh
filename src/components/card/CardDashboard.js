@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import CardContainer from './CardContainer';
 import {
   subscribeCollectionChanges,
-  fetchCategoriesList
+  fetchCategoriesList,
+  cleanCurrentCategoryItems
 } from '../../redux/category/actions';
+import { LoadingComponent } from '../elements';
 
 const CardDashboard = ({
   listOfCards,
@@ -13,7 +15,8 @@ const CardDashboard = ({
   isLoading,
   match,
   categories,
-  userId
+  userId,
+  cleanCurrentCategoryItems
 }) => {
   const categoryName = `${match.params.categoryId}`;
   const [isExist, setIsExist] = useState(false);
@@ -29,16 +32,16 @@ const CardDashboard = ({
     const isCategoryExist = categories.find(
       category => category.name === categoryName
     );
-    console.log(isCategoryExist);
     setIsExist(isCategoryExist);
 
     return () => {
       unsubscribe();
+      cleanCurrentCategoryItems();
     };
   }, [categories]);
 
   return isLoading ? (
-    <div>Loading data</div>
+    <LoadingComponent />
   ) : !isExist ? (
     <div style={{ margin: 100, textAlign: 'center', fontSize: '3rem' }}>
       KATEGORIA NIE ISTNIEJE
@@ -50,6 +53,7 @@ const CardDashboard = ({
         categoryName={categoryName}
         categories={categories}
         userId={userId}
+        isLoading={isLoading}
       />
     </div>
   );
@@ -64,5 +68,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { subscribeCollectionChanges, fetchCategoriesList }
+  { subscribeCollectionChanges, fetchCategoriesList, cleanCurrentCategoryItems }
 )(CardDashboard);

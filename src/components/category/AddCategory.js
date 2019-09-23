@@ -8,6 +8,7 @@ import { HeadingH2, Button, Paragraph } from '../elements';
 import Dropzone from '../elements/imageUpload/Dropzone';
 import { withRouter } from 'react-router-dom';
 import Resizer from 'react-image-file-resizer';
+import { LoadingComponent } from '../elements';
 
 const checkIfCategoryNameExist = (categories, name) => {
   const isExist = categories.filter(item => item.name === name);
@@ -33,7 +34,8 @@ const AddCategory = ({
   addCategory,
   history,
   categories,
-  fetchCategoriesList
+  fetchCategoriesList,
+  isLoading
 }) => {
   const [image, setImage] = useState([]);
   const [imageblob, setImageblob] = useState([]);
@@ -59,6 +61,7 @@ const AddCategory = ({
   }, [image]);
 
   const handleCategorySubmit = async values => {
+    window.scrollTo(0, 0);
     await addCategory(values, imageblob[0]);
     resetForm(values.name);
   };
@@ -69,6 +72,8 @@ const AddCategory = ({
     fetchCategoriesList();
     history.push(`/category/${categoryName}`);
   };
+
+  if (isLoading) return <LoadingComponent />;
 
   return (
     <div className={className}>
@@ -107,7 +112,8 @@ const AddCategory = ({
 };
 
 const mapStateToProps = state => ({
-  categories: state.category.categoriesList
+  categories: state.category.categoriesList,
+  isLoading: state.async.loading
 });
 
 export default styled(

@@ -3,11 +3,23 @@ import styled from 'styled-components';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { orange, below } from '../../utilities';
 
+function throttled(delay, fn) {
+  let lastCall = 0;
+  return function(...args) {
+    const now = new Date().getTime();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    return fn(...args);
+  };
+}
+
 const ButtonsContainer = ({ className, setIndex, index, length }) => {
   useEffect(() => {
-    window.addEventListener('keyup', handleKeyPress);
+    window.addEventListener('keyup', throttledHandleKeyPress);
     return () => {
-      window.removeEventListener('keyup', handleKeyPress);
+      window.removeEventListener('keyup', throttledHandleKeyPress);
     };
   }, []);
 
@@ -28,6 +40,7 @@ const ButtonsContainer = ({ className, setIndex, index, length }) => {
       leftButtonRef.current.click();
     }
   };
+  const throttledHandleKeyPress = throttled(200, handleKeyPress);
 
   return (
     <div className={className}>

@@ -14,7 +14,8 @@ const CardContainer = ({
   cards,
   categoryName,
   categories,
-  userId
+  userId,
+  isLoading
 }) => {
   const [randomCategories, setRandomCategories] = useState([]);
   useEffect(() => {
@@ -54,9 +55,11 @@ const CardContainer = ({
           />
         </>
       ) : (
-        <div style={{ margin: 50, textAlign: 'center', fontSize: '3rem' }}>
-          Zestaw jest pusty !
-        </div>
+        !isLoading && (
+          <div style={{ margin: 50, textAlign: 'center', fontSize: '3rem' }}>
+            Zestaw jest pusty !
+          </div>
+        )
       )}
 
       <AddCard categoryName={categoryName} />

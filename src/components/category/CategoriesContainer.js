@@ -1,15 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import CategoryCard from './CategoryCard';
 import { HeadingH2 } from '../elements';
+import { LoadingComponent } from '../elements';
 
 const CategoriesContainer = ({
   categories,
   className,
   failMessage,
   showTitle,
-  settings
+  settings,
+  isLoading
 }) => {
+  if (isLoading) return <LoadingComponent />;
+
   return (
     <>
       {categories.length === 0 ? (
@@ -34,7 +39,16 @@ const CategoriesContainer = ({
   );
 };
 
-export default styled(CategoriesContainer)`
+const mapStateToProps = state => ({
+  isLoading: state.async.loading
+});
+
+export default styled(
+  connect(
+    mapStateToProps,
+    {}
+  )(CategoriesContainer)
+)`
   padding: 100px 0;
   text-align: center;
   background-color: #fff;

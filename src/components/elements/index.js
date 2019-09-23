@@ -5,3 +5,5 @@ export * from './Buttons';
 export * from './Paragraphs';
 export * from './Cards';
 export * from './ModalElements';
+export * from './LoadingComponent';
+export * from './LoadingButton';

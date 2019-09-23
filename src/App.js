@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import GlobalStyle from './GlobalStyle';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/layout/header/Header';
@@ -19,71 +19,81 @@ import UserFaq from './components/layout/userSection/UserFaq';
 import Footer from './components/layout/Footer';
 import { UserIsAuthenticated } from './redux/auth/authWrapper';
 
-const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
-
-const HomeLayout = () => {
-  const myRef = useRef(null);
+const HomeLayout = ({ location: { pathname } }) => {
   useEffect(() => {
-    scrollToRef(myRef);
-  }, []);
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
-    <main ref={myRef}>
-      <Hero />
-      <Section1 />
-      {/* <CategoriesDashboard /> */}
-      <Section2 />
-    </main>
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <Section1 />
+        <CategoriesDashboard />
+        <Section2 />
+      </main>
+      <Footer />
+    </>
   );
 };
-
+const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
 const Layout2 = ({ location: { pathname } }) => {
   const myRef = useRef(null);
-  useEffect(() => {
+  useLayoutEffect(() => {
     scrollToRef(myRef);
   }, [pathname]);
-
   return (
-    <main ref={myRef}>
-      <WaveContainer />
-      <Switch>
-        <Route
-          exact
-          path='/search'
-          component={UserIsAuthenticated(SearchCategoryDashboard)}
-        />
-        <Route exact path='/add' component={UserIsAuthenticated(AddCategory)} />
-        <Route
-          exact
-          path='/category/:categoryId'
-          component={UserIsAuthenticated(CardDashboard)}
-        />
-        <Route
-          exact
-          path='/user/my-categories'
-          component={UserIsAuthenticated(UserDashboard)}
-        />
-        <Route
-          exact
-          path='/user/settings'
-          component={UserIsAuthenticated(UserSettings)}
-        />
-        <Route exact path='/user/faq' component={UserFaq} />
-        <Route exact path='/goodbye' component={Goodbye} />
-        <Route exact path='/test' component={UserIsAuthenticated(Test)} />
-      </Switch>
-    </main>
+    <>
+      <Header />
+      <main ref={myRef}>
+        <WaveContainer />
+        <Switch>
+          <Route
+            exact
+            path='/search'
+            component={UserIsAuthenticated(SearchCategoryDashboard)}
+          />
+          <Route
+            exact
+            path='/add'
+            component={UserIsAuthenticated(AddCategory)}
+          />
+          <Route
+            exact
+            path='/category/:categoryId'
+            component={UserIsAuthenticated(CardDashboard)}
+          />
+          <Route
+            exact
+            path='/user/my-categories'
+            component={UserIsAuthenticated(UserDashboard)}
+          />
+          <Route
+            exact
+            path='/user/settings'
+            component={UserIsAuthenticated(UserSettings)}
+          />
+          <Route exact path='/user/faq' component={UserFaq} />
+          <Route exact path='/goodbye' component={Goodbye} />
+          <Route exact path='/test' component={UserIsAuthenticated(Test)} />
+        </Switch>
+      </main>
+      <Footer />
+    </>
   );
 };
 
-const App = () => {
+const App = ({ location: { pathname } }) => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <>
       <GlobalStyle />
       <ModalManager />
-      <Header />
       <Route exact path='/' component={HomeLayout} />
       <Route exact path='/(.+)' component={Layout2} />
-      <Footer />
     </>
   );
 };

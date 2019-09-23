@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
@@ -11,7 +11,7 @@ const FakePixel = styled.div`
   width: 1px;
   height: 1px;
   background-color: transparent;
-  top: 20px;
+  top: 80px;
 `;
 
 const Header = ({ className }) => {

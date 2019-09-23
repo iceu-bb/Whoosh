@@ -121,6 +121,7 @@ export const addCategory = (values, image) => async (
   const user = firebase.auth().currentUser;
   const categoryName = values.name;
   try {
+    dispatch(asyncActionStart());
     // 1) upload image to firebase Storage
     const uploadedFile = await storage
       .ref(`images`)
@@ -153,9 +154,10 @@ export const addCategory = (values, image) => async (
       english: 'Naciśnij, żeby zobaczyć jak działają fiszki',
       polish: 'Przejdź niżej by zobaczyć jakie masz opcje'
     });
-
+    dispatch(asyncActionFinish());
     toastr.success('Sukces', 'Zestaw został dodany');
   } catch (error) {
+    dispatch(asyncActionFinish());
     toastr.error('Bład', 'Problem z dodaniem zestawu');
   }
 };
@@ -238,6 +240,7 @@ export const deleteCategory = categoryName => async (
   const categories = getState().category.categoriesList;
   const userId = firebase.auth().currentUser.uid;
   try {
+    dispatch(asyncActionStart());
     // 1) delete category doc
     await firestore.delete(`categories/${categoryName}`);
 
@@ -271,8 +274,18 @@ export const deleteCategory = categoryName => async (
       payload: data2
     });
 
+    dispatch(asyncActionFinish());
     toastr.success('Sukces', 'Zestaw został usunięty');
   } catch (error) {
+    dispatch(asyncActionError());
     toastr.error('Bład', 'Nie udało się usunąć zestawu');
   }
+};
+
+export const cleanCurrentCategoryItems = () => dispatch => {
+  const data = [];
+  dispatch({
+    type: FETCH_CATEGORY_ITEMS,
+    payload: data
+  });
 };

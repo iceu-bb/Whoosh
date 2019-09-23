@@ -4,7 +4,7 @@ import CategoriesContainer from './CategoriesContainer';
 import { fetchCategoriesList } from '../../redux/category/actions';
 import { declinedWord } from '../../helpers';
 
-const CategoriesDashboard = ({ fetchCategoriesList, categories }) => {
+const CategoriesDashboard = ({ fetchCategoriesList, categories, loading }) => {
   useEffect(() => {
     fetchCategoriesList();
   }, []);

@@ -13,6 +13,7 @@ import {
   Button
 } from '../elements/index';
 import { withRouter } from 'react-router';
+import { LoadingButton } from '../elements';
 
 const ConfirmationModal = ({
   className,
@@ -20,7 +21,8 @@ const ConfirmationModal = ({
   categoryName,
   deleteCategory,
   cardId,
-  removeCard
+  removeCard,
+  isLoading
 }) => {
   return (
     <div className={className}>
@@ -58,6 +60,7 @@ const ConfirmationModal = ({
                   closeModal();
                 }}
               >
+                {isLoading && <LoadingButton />}
                 Tak
               </Button>
               <Button
@@ -75,10 +78,14 @@ const ConfirmationModal = ({
   );
 };
 
+const mapStateToProps = state => ({
+  isLoading: state.async.loading
+});
+
 export default styled(
   withRouter(
     connect(
-      null,
+      mapStateToProps,
       { deleteCategory, closeModal, removeCard }
     )(ConfirmationModal)
   )
