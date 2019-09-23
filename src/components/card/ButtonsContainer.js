@@ -63,7 +63,7 @@ export default styled(ButtonsContainer)`
   justify-content: space-evenly;
 
   ${below.smallMed`
-    margin: 25px auto 100px;
+    margin: 35px auto 100px;
   `}
 
   .counter {

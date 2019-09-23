@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
@@ -7,6 +7,7 @@ import { addCategory, fetchCategoriesList } from '../../redux/category/actions';
 import { HeadingH2, Button, Paragraph } from '../elements';
 import Dropzone from '../elements/imageUpload/Dropzone';
 import { withRouter } from 'react-router-dom';
+import Resizer from 'react-image-file-resizer';
 
 const checkIfCategoryNameExist = (categories, name) => {
   const isExist = categories.filter(item => item.name === name);
@@ -35,9 +36,30 @@ const AddCategory = ({
   fetchCategoriesList
 }) => {
   const [image, setImage] = useState([]);
+  const [imageblob, setImageblob] = useState([]);
+
+  const optimizeImage = () => {
+    Resizer.imageFileResizer(
+      image[0],
+      250,
+      400,
+      'jpeg',
+      100,
+      0,
+      uri => {
+        setImageblob([uri]);
+      },
+      'blob'
+    );
+  };
+
+  useEffect(() => {
+    if (image[0] && image[0].size > 250000) optimizeImage();
+    else setImageblob([image[0]]);
+  }, [image]);
 
   const handleCategorySubmit = async values => {
-    await addCategory(values, image[0]);
+    await addCategory(values, imageblob[0]);
     resetForm(values.name);
   };
 

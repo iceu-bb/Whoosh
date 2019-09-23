@@ -30,7 +30,7 @@ const HomeLayout = () => {
     <main ref={myRef}>
       <Hero />
       <Section1 />
-      <CategoriesDashboard />
+      {/* <CategoriesDashboard /> */}
       <Section2 />
     </main>
   );

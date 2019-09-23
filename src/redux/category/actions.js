@@ -10,6 +10,7 @@ import {
   asyncActionFinish,
   asyncActionError
 } from '../async/asyncActions';
+import fuzzy from 'fuzzy';
 
 // Couldn't fetch subcollections on client -  so there will be separate collection with flashcard words data for every category with pattern: categoryName_words
 
@@ -199,7 +200,13 @@ export const updateCard = (values, categoryName, cardId) => async (
 
 export const searchCategory = value => (dispatch, getState) => {
   const categories = getState().category.categoriesList;
-  const data = categories.filter(item => item.name.includes(value));
+  const listOfCategoriesName = categories.map(category => category.name);
+  let fuzzyResults = fuzzy
+    .filter(value, listOfCategoriesName, {})
+    .map(result => result.string);
+  const data = categories.filter(category =>
+    fuzzyResults.includes(category.name)
+  );
   dispatch({
     type: SEARCH_CATEGORIES,
     payload: data

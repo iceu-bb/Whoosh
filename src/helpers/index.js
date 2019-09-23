@@ -13,6 +13,7 @@ export const useLockBodyScroll = () => {
   }, []); // Empty array ensures effect is only run on mount and unmount
 };
 
+// copied from https://usehooks.com/
 export const useAnimationOnModal = () => {
   const [on, toggle] = useState(true);
   const transition = useTransition(on, null, {
@@ -30,6 +31,7 @@ export const useAnimationOnModal = () => {
   return [on, toggle, transition, opacityAnimate];
 };
 
+// copied from https://usehooks.com/
 export const useOnClickOutside = (ref, handler) => {
   useEffect(() => {
     const listener = event => {

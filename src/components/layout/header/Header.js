@@ -4,52 +4,51 @@ import { Link } from 'react-router-dom';
 import Nav from './Nav';
 import { useSpring, animated } from 'react-spring';
 import { orange, below } from '../../../utilities';
+import { Waypoint } from 'react-waypoint';
+
+const FakePixel = styled.div`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background-color: transparent;
+  top: 20px;
+`;
 
 const Header = ({ className }) => {
-  const [moved, set] = useState(false);
+  const [moved, setMoved] = useState(false);
 
-  const myRef = useRef(null);
+  const scrollRef = useRef(null);
   const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
-  const executeScroll = () => scrollToRef(myRef);
-
-  useEffect(() => {
-    window.addEventListener('scroll', OnScroll);
-    return () => {
-      window.removeEventListener('scroll', OnScroll);
-    };
-  }, []);
-
-  const OnScroll = () => {
-    if (window.pageYOffset > 80) {
-      set(true);
-    } else {
-      set(false);
-    }
-  };
+  const executeScroll = () => scrollToRef(scrollRef);
 
   const { x } = useSpring({
     x: moved ? 0 : 100
   });
 
   return (
-    <header className={className} moved={moved}>
-      <div ref={myRef} className='container'>
-        <animated.div
-          className='animated'
-          style={{
-            transform: x.interpolate(x => `translate3d(${-1 * x}%,0,0)`)
-          }}
-        />
-        <Link
-          onClick={executeScroll}
-          to='/'
-          className={moved ? 'logo yellow' : 'logo '}
-        >
-          Whoosh
-        </Link>
-        <Nav moved={moved} />
-      </div>
-    </header>
+    <>
+      <Waypoint onEnter={() => setMoved(false)} onLeave={() => setMoved(true)}>
+        <FakePixel />
+      </Waypoint>
+      <header className={className} moved={moved}>
+        <div ref={scrollRef} className='container'>
+          <animated.div
+            className='animated'
+            style={{
+              transform: x.interpolate(x => `translate3d(${-1 * x}%,0,0)`)
+            }}
+          />
+          <Link
+            onClick={executeScroll}
+            to='/'
+            className={moved ? 'logo yellow' : 'logo '}
+          >
+            Whoosh
+          </Link>
+          <Nav moved={moved} />
+        </div>
+      </header>
+    </>
   );
 };
 

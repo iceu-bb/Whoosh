@@ -31,7 +31,7 @@ const DropzoneInput = ({ setImage, type, image, meta: { touched, error } }) => {
     onDrop,
     multiple: false,
     accept: 'image/*',
-    maxSize: 3000000
+    maxSize: 10000000
   });
 
   return (
