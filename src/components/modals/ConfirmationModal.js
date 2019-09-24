@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { closeModal } from '../../redux/modal/modalActionts';
 import { deleteCategory, removeCard } from '../../redux/category/actions';
 import { FaTimes } from 'react-icons/fa';
+import { useEscapeToCloseModal } from '../../helpers';
 import {
   ModalWrapper,
   ModalInner,
@@ -24,6 +25,7 @@ const ConfirmationModal = ({
   removeCard,
   isLoading
 }) => {
+  useEscapeToCloseModal(closeModal);
   return (
     <div className={className}>
       <ModalWrapper>

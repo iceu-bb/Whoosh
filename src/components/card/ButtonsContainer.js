@@ -2,18 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { orange, below } from '../../utilities';
-
-function throttled(delay, fn) {
-  let lastCall = 0;
-  return function(...args) {
-    const now = new Date().getTime();
-    if (now - lastCall < delay) {
-      return;
-    }
-    lastCall = now;
-    return fn(...args);
-  };
-}
+import { throttled } from '../../helpers';
 
 const ButtonsContainer = ({ className, setIndex, index, length }) => {
   useEffect(() => {

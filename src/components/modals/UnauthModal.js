@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { closeModal, openModal } from '../../redux/modal/modalActionts';
+import { useEscapeToCloseModal } from '../../helpers';
 import { FaTimes } from 'react-icons/fa';
 import {
   ModalWrapper,
@@ -14,6 +15,10 @@ import {
 import { withRouter } from 'react-router';
 
 const UnauthModal = ({ className, closeModal, history, openModal }) => {
+  useEscapeToCloseModal(() => {
+    history.goBack();
+    closeModal();
+  });
   return (
     <div className={className}>
       <ModalWrapper>

@@ -87,7 +87,7 @@ export const addCard = (values, categoryName) => async (
   const firestore = getFirestore();
   const firebase = getFirebase();
   const user = firebase.auth().currentUser;
-  const { english, polish } = values;
+  const [english, polish] = [values.english.trim(), values.polish.trim()];
 
   // 1) add new Card to Category
   try {
@@ -119,7 +119,7 @@ export const addCategory = (values, image) => async (
   const firestore = getFirestore();
   const storage = firebase.storage();
   const user = firebase.auth().currentUser;
-  const categoryName = values.name;
+  const categoryName = values.name.trim();
   try {
     dispatch(asyncActionStart());
     // 1) upload image to firebase Storage
@@ -189,7 +189,7 @@ export const updateCard = (values, categoryName, cardId) => async (
   { getFirestore }
 ) => {
   const firestore = getFirestore();
-  const { english, polish } = values;
+  const [english, polish] = [values.english.trim(), values.polish.trim()];
   try {
     await firestore.update(`${categoryName}_words/${cardId}`, {
       english,

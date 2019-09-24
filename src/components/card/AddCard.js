@@ -5,12 +5,27 @@ import { Field, reduxForm } from 'redux-form';
 import TextInputForm from '../elements/forms/TextInputForm';
 // import SelectInputForm from '../elements/forms/SelectInputForm';
 import { addCard } from '../../redux/category/actions';
-import { combineValidators, isRequired } from 'revalidate';
+import {
+  composeValidators,
+  combineValidators,
+  isRequired,
+  hasLengthBetween
+} from 'revalidate';
 import { HeadingH3, Button } from '../elements';
 
 const validate = combineValidators({
-  english: isRequired({ message: 'Podaj angielską wersję' }),
-  polish: isRequired({ message: 'Podaj polską wersję' })
+  english: composeValidators(
+    isRequired({ message: 'Podaj angielską wersję' }),
+    hasLengthBetween(3, 150)({
+      message: 'Wymagane minimum 3 znaki, maksymalnie 150 znaków'
+    })
+  )(),
+  polish: composeValidators(
+    isRequired({ message: 'Podaj polską wersję' }),
+    hasLengthBetween(3, 150)({
+      message: 'Wymagane minimum 3 znaki, maksymalnie 150 znaków'
+    })
+  )()
 });
 
 const AddCard = ({
@@ -34,14 +49,6 @@ const AddCard = ({
           reset();
         })}
       >
-        {/* <Field
-          name='category'
-          component={SelectInputForm}
-          options={categories}
-          type='select'
-          placeholder='wybierz kategorię'
-          label='wybierz kategorię'
-        /> */}
         <Field
           name='english'
           component={TextInputForm}

@@ -28,8 +28,8 @@ const CardListItem = ({
 
   const handleSubmission = async values => {
     await updateCard(values, categoryName, card.id);
-    setEnglishWord(values.english);
-    setPolishWord(values.polish);
+    setEnglishWord(values.english.trim());
+    setPolishWord(values.polish.trim());
     setEdit(false);
   };
 
@@ -124,8 +124,8 @@ export default styled(
       justify-content: center;
       align-items: center;
       border-right: 1px solid #ccc;
-      white-space: normal;
-      word-break: break-all;
+      overflow-x: hidden;
+      word-wrap: break-word;
       hyphens: auto;
     }
     ${below.small`

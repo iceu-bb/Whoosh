@@ -13,7 +13,6 @@ export const useLockBodyScroll = () => {
   }, []); // Empty array ensures effect is only run on mount and unmount
 };
 
-// copied from https://usehooks.com/
 export const useAnimationOnModal = () => {
   const [on, toggle] = useState(true);
   const transition = useTransition(on, null, {
@@ -75,4 +74,37 @@ export const declinedWord = (word, number) => {
     : (helperWord = 0);
 
   return words['array' + helperNumber][helperWord];
+};
+
+export const throttled = (delay, fn) => {
+  let lastCall = 0;
+  return function(...args) {
+    const now = new Date().getTime();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    return fn(...args);
+  };
+};
+
+export const useEscapeToCloseModal = (
+  closeModal = () => {
+    console.log('closed');
+  }
+) => {
+  useEffect(() => {
+    window.addEventListener('keydown', throttledHandleKeyPress);
+
+    return () => {
+      window.removeEventListener('keydown', throttledHandleKeyPress);
+    };
+  }, []);
+
+  const handleKeyPress = ({ key }) => {
+    if (key === 'Escape') {
+      closeModal();
+    }
+  };
+  const throttledHandleKeyPress = throttled(200, handleKeyPress);
 };

@@ -14,11 +14,11 @@ const CategorySearch = memo(
     const handleKeyPress = key => key === 'Enter' && handleSearch(inputValue);
     const handleSearch = value => {
       if (value) {
-        searchCategory(value);
+        searchCategory(value.trim());
         setMenuOpen && setMenuOpen(false);
         history.push('/search');
       } else {
-        window.alert('wprowadz wartosc');
+        window.alert('Wpisz coś, żeby wyszukać zestaw.');
       }
     };
     return (

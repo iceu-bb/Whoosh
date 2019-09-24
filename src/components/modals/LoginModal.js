@@ -6,7 +6,11 @@ import { closeModal } from '../../redux/modal/modalActionts';
 import TextInputForm from '../elements/forms/TextInputForm';
 import { loginUser, socialLogin } from '../../redux/auth/authActions';
 import { Button } from '../elements/index';
-import { useAnimationOnModal, useLockBodyScroll } from '../../helpers';
+import {
+  useAnimationOnModal,
+  useLockBodyScroll,
+  useEscapeToCloseModal
+} from '../../helpers';
 import { FaTimes } from 'react-icons/fa';
 
 import {
@@ -31,6 +35,7 @@ const LoginModal = ({
 }) => {
   useLockBodyScroll();
   const [on, toggle, transition, opacityAnimate] = useAnimationOnModal();
+  useEscapeToCloseModal(closeModal);
   return (
     <animated.div style={opacityAnimate}>
       <ModalWrapper>

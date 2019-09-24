@@ -7,6 +7,17 @@ import Wave from '../wave/Wave';
 import { openModal } from '../../../redux/modal/modalActionts';
 import { gradientMain, below } from '../../../utilities';
 
+const Image = styled.img`
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+
+  ${below.medium`
+  max-width: 600px;
+    `};
+`;
+
 const Hero = memo(({ className, openModal, auth }) => {
   const isAuthenticated = auth.isLoaded && !auth.isEmpty;
   return (
@@ -39,7 +50,9 @@ const Hero = memo(({ className, openModal, auth }) => {
             </Button>
           )}
         </div>
-        <div className='laptop-container'>laptop image here</div>
+        <div className='laptop-container'>
+          <Image src={'../assets/macbook.png'} alt='macbook photo' />
+        </div>
       </div>
       <Wave trend='up' />
     </div>
@@ -70,18 +83,22 @@ export default styled(
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 50px;
 
-    ${below.smallMed`
+    ${below.medium`
     grid-template-columns: 1fr;
     grid-column-gap: 0;
     grid-row-gap: 50px;
     text-align: center;
-    padding: 0 10px;
+    padding: 0 20px;
     `};
   }
 
   .laptop-container {
-    width: 100%;
-    height: 400px;
-    background-color: teal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ${below.medium`
+    padding: 30px 0 60px;
+    `};
   }
 `;

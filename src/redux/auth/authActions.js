@@ -8,15 +8,20 @@ export const registerAccount = values => async (
 ) => {
   const firebase = getFirebase();
   const firestore = getFirestore();
+  const [email, password, displayName] = [
+    values.email.trim(),
+    values.password,
+    values.displayName.trim()
+  ];
   try {
     let createdUser = await firebase
       .auth()
-      .createUserWithEmailAndPassword(values.email, values.password);
+      .createUserWithEmailAndPassword(email, password);
     await createdUser.user.updateProfile({
-      displayName: values.displayName
+      displayName
     });
     let newUser = {
-      displayName: values.displayName,
+      displayName: displayName,
       createdAt: firestore.FieldValue.serverTimestamp()
     };
     await firestore.set(`users/${createdUser.user.uid}`, { ...newUser });
@@ -35,10 +40,9 @@ export const loginUser = values => async (
   { getFirebase }
 ) => {
   const firebase = getFirebase();
+  const [email, password] = [values.email.trim(), values.password];
   try {
-    await firebase
-      .auth()
-      .signInWithEmailAndPassword(values.email, values.password);
+    await firebase.auth().signInWithEmailAndPassword(email, password);
     dispatch(closeModal());
   } catch (error) {
     console.log(error);

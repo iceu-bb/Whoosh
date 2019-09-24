@@ -21,7 +21,13 @@ const isExistCategoryName = (value, ...props) => {
   return isExist ? 'wybrana nazwa juz istnieje' : undefined;
 };
 
-const required = value => (value ? undefined : 'Required');
+const hasLengthBetween3and50 = value => {
+  return value.length < 3 || value.length > 50
+    ? 'Wymagane minimum 3 znaki, maksymalnie 50 znaków'
+    : undefined;
+};
+
+const required = value => (value ? undefined : 'Podaj nazwę zestawu');
 
 const AddCategory = ({
   className,
@@ -56,6 +62,10 @@ const AddCategory = ({
   };
 
   useEffect(() => {
+    categories.length === 0 && fetchCategoriesList();
+  }, [categories]);
+
+  useEffect(() => {
     if (image[0] && image[0].size > 250000) optimizeImage();
     else setImageblob([image[0]]);
   }, [image]);
@@ -70,7 +80,7 @@ const AddCategory = ({
     setImage([]);
     reset();
     fetchCategoriesList();
-    history.push(`/category/${categoryName}`);
+    history.push(`/category/${categoryName.trim()}`);
   };
 
   if (isLoading) return <LoadingComponent />;
@@ -90,7 +100,7 @@ const AddCategory = ({
           placeholder='Nazwa zestawu'
           label='nazwa zestawu'
           ownClassName='login-input'
-          validate={[isExistCategoryName, required]}
+          validate={[isExistCategoryName, required, hasLengthBetween3and50]}
         />
         <Field
           name='image'

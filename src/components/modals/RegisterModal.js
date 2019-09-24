@@ -5,7 +5,11 @@ import { Field, reduxForm } from 'redux-form';
 import { closeModal } from '../../redux/modal/modalActionts';
 import TextInputForm from '../elements/forms/TextInputForm';
 import { registerAccount, socialLogin } from '../../redux/auth/authActions';
-import { useAnimationOnModal, useLockBodyScroll } from '../../helpers';
+import {
+  useAnimationOnModal,
+  useLockBodyScroll,
+  useEscapeToCloseModal
+} from '../../helpers';
 import { Button } from '../elements/index';
 import { FaTimes } from 'react-icons/fa';
 import {
@@ -60,8 +64,8 @@ const validate = combineValidators({
   )(),
   displayName: composeValidators(
     isRequired({ message: 'Nazwa użytkownika jest wymagana' }),
-    hasLengthBetween(2, 32)({
-      message: 'Nazwa musi składać się z minimum 3 znaków, maksymalnie 32 znaki'
+    hasLengthBetween(3, 32)({
+      message: 'Wymagane minimum 3 znaki, maksymalnie 32 znaki'
     })
   )()
 });
@@ -78,6 +82,7 @@ const RegisterModal = ({
 }) => {
   useLockBodyScroll();
   const [on, toggle, transition, opacityAnimate] = useAnimationOnModal();
+  useEscapeToCloseModal(closeModal);
   return (
     <animated.div style={opacityAnimate}>
       <ModalWrapper>

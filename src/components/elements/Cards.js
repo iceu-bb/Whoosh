@@ -21,7 +21,7 @@ export const Card1 = styled.div`
 
   .container {
     display: flex;
-    height: 25%;
+    min-height: 25%;
     justify-content: space-evenly;
     align-items: center;
     position: relative;
@@ -29,13 +29,19 @@ export const Card1 = styled.div`
 
   .name {
     font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .author {
     color: ${orange};
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0 7px;
   }
 
   .hidden {
     visibility: hidden;
+    padding-left: 20px;
   }
 `;

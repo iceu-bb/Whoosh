@@ -16,7 +16,7 @@ const CategoriesDashboard = ({ fetchCategoriesList, categories, loading }) => {
   return (
     <div>
       <CategoriesContainer
-        categories={categories}
+        categories={categories.slice(0, 12)}
         failMessage='loading data'
         showTitle={message}
       />
