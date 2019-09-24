@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,7 @@ import Wave from '../wave/Wave';
 import { openModal } from '../../../redux/modal/modalActionts';
 import { gradientMain, below } from '../../../utilities';
 
-const Hero = ({ className, openModal, auth }) => {
+const Hero = memo(({ className, openModal, auth }) => {
   const isAuthenticated = auth.isLoaded && !auth.isEmpty;
   return (
     <div className={className}>
@@ -44,7 +44,7 @@ const Hero = ({ className, openModal, auth }) => {
       <Wave trend='up' />
     </div>
   );
-};
+});
 
 const mapStateToProps = state => ({
   auth: state.firebase.auth

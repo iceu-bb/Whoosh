@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { orange, below } from '../../utilities';
 import { HeadingH2, HeadingH4, Paragraph } from '../elements';
 import { FaRegEnvelope, FaMobileAlt, FaRegMap } from 'react-icons/fa';
 
-const Footer = ({ className }) => {
+const Footer = memo(({ className }) => {
   return (
     <footer className={className}>
       <div className='company-info'>
@@ -46,7 +46,7 @@ const Footer = ({ className }) => {
       </div>
     </footer>
   );
-};
+});
 
 export default styled(Footer)`
   margin: 0 auto;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
@@ -9,7 +9,7 @@ import CategorySearch from '../../category/CategorySearch';
 import UserLink from './UserLink';
 import MobileMenu from './MobileMenu';
 
-const Nav = ({ className, moved, openModal, auth, profile }) => {
+const Nav = memo(({ className, moved, openModal, auth, profile }) => {
   const isAuthenticated = auth.isLoaded && !auth.isEmpty;
   const userName = profile.displayName;
   return (
@@ -68,7 +68,7 @@ const Nav = ({ className, moved, openModal, auth, profile }) => {
       </ul>
     </nav>
   );
-};
+});
 
 const mapStateToProps = state => ({
   auth: state.firebase.auth,

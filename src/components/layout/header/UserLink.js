@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, memo } from 'react';
 import styled from 'styled-components';
 import { FaCaretDown } from 'react-icons/fa';
 import SignOut from './SignOut';
@@ -7,7 +7,7 @@ import { orange, black, boxShadow1 } from '../../../utilities';
 import { useTransition, animated, config } from 'react-spring';
 import { useOnClickOutside } from '../../../helpers';
 
-const UserLink = ({ className, userName, moved }) => {
+const UserLink = memo(({ className, userName, moved }) => {
   const [openPanel, setOpenPanel] = useState(false);
 
   const buttonRef = useRef();
@@ -60,7 +60,7 @@ const UserLink = ({ className, userName, moved }) => {
       )}
     </div>
   );
-};
+});
 
 export default styled(UserLink)`
   margin-left: 20px;

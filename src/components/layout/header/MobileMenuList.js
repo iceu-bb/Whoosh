@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useLockBodyScroll } from '../../../helpers';
 import CategorySearch from '../../category/CategorySearch';
 import SignOut from './SignOut';
 
-const MobileMenuList = ({ className, setMenuOpen }) => {
+const MobileMenuList = memo(({ className, setMenuOpen }) => {
   useLockBodyScroll();
   return (
     <ul className={className}>
@@ -37,7 +37,7 @@ const MobileMenuList = ({ className, setMenuOpen }) => {
       </li>
     </ul>
   );
-};
+});
 
 export default styled(MobileMenuList)`
   font-size: 2.5rem;

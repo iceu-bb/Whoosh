@@ -80,7 +80,7 @@ const AddCategory = ({
       <HeadingH2 modifiers='orange'>Dodaj nowy Zestaw</HeadingH2>
       <Paragraph modifiers={['feature', 'marginBig', 'fontBig']}>
         Stworzenie zestawu jest banalnie proste. Wystarczy że wpiszesz nazwę i
-        dodasz zdjęcie (max-size: 3MB).
+        dodasz zdjęcie (max-size: 10MB).
       </Paragraph>
       <form className='form' onSubmit={handleSubmit(handleCategorySubmit)}>
         <Field

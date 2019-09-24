@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 import { CloseButtonMenu } from '../../elements';
 import MobileMenuList from './MobileMenuList';
 import { FaTimes } from 'react-icons/fa';
 
-const MobileMenuInner = ({ className, x, setMenuOpen, isMenuOpen }) => {
+const MobileMenuInner = memo(({ className, x, setMenuOpen, isMenuOpen }) => {
   return (
     <animated.div
       className={className}
@@ -24,7 +24,7 @@ const MobileMenuInner = ({ className, x, setMenuOpen, isMenuOpen }) => {
       </div>
     </animated.div>
   );
-};
+});
 
 export default styled(MobileMenuInner)`
   position: fixed;

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, memo } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
@@ -14,7 +14,7 @@ const FakePixel = styled.div`
   top: 80px;
 `;
 
-const Header = ({ className }) => {
+const Header = memo(({ className }) => {
   const [moved, setMoved] = useState(false);
 
   const scrollRef = useRef(null);
@@ -50,7 +50,7 @@ const Header = ({ className }) => {
       </header>
     </>
   );
-};
+});
 
 export default styled(Header)`
   position: fixed;

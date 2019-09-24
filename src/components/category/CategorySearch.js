@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { searchCategory } from '../../redux/category/actions';
@@ -7,45 +7,41 @@ import { CloseButton } from '../elements';
 import { below } from '../../utilities';
 import { withRouter } from 'react-router-dom';
 
-const CategorySearch = ({
-  className,
-  history,
-  searchCategory,
-  mobile,
-  setMenuOpen
-}) => {
-  const [inputValue, setInputValue] = useState('');
-  const handleChange = value => setInputValue(value);
-  const handleKeyPress = key => key === 'Enter' && handleSearch(inputValue);
-  const handleSearch = value => {
-    if (value) {
-      searchCategory(value);
-      setMenuOpen && setMenuOpen(false);
-      history.push('/search');
-    } else {
-      window.alert('wprowadz wartosc');
-    }
-  };
-  return (
-    <div className={className}>
-      <div className='input-container'>
-        <input
-          className='input'
-          type='text'
-          placeholder='Szukaj zestawu'
-          onChange={e => handleChange(e.target.value)}
-          onKeyDown={e => handleKeyPress(e.key)}
-        />
-        <CloseButton
-          className='search-icon'
-          onClick={() => handleSearch(inputValue)}
-        >
-          <FaSearch />
-        </CloseButton>
+const CategorySearch = memo(
+  ({ className, history, searchCategory, mobile, setMenuOpen }) => {
+    const [inputValue, setInputValue] = useState('');
+    const handleChange = value => setInputValue(value);
+    const handleKeyPress = key => key === 'Enter' && handleSearch(inputValue);
+    const handleSearch = value => {
+      if (value) {
+        searchCategory(value);
+        setMenuOpen && setMenuOpen(false);
+        history.push('/search');
+      } else {
+        window.alert('wprowadz wartosc');
+      }
+    };
+    return (
+      <div className={className}>
+        <div className='input-container'>
+          <input
+            className='input'
+            type='text'
+            placeholder='Szukaj zestawu'
+            onChange={e => handleChange(e.target.value)}
+            onKeyDown={e => handleKeyPress(e.key)}
+          />
+          <CloseButton
+            className='search-icon'
+            onClick={() => handleSearch(inputValue)}
+          >
+            <FaSearch />
+          </CloseButton>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
 
 export default styled(
   withRouter(

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import {
@@ -11,7 +11,7 @@ import {
 import { boxShadow2, below } from '../../../utilities';
 import { FaTabletAlt, FaBolt, FaPlane, FaBook } from 'react-icons/fa';
 
-const Section1 = ({ className }) => {
+const Section1 = memo(({ className }) => {
   return (
     <div className={className}>
       <HeadingH3>Nasza oferta</HeadingH3>
@@ -51,7 +51,7 @@ const Section1 = ({ className }) => {
       </Button>
     </div>
   );
-};
+});
 
 export default styled(Section1)`
   max-width: 1200px;

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styled from 'styled-components';
 import { Waypoint } from 'react-waypoint';
 import { useSpring, animated, config } from 'react-spring';
 import { HeadingH2, Paragraph } from '../../elements';
 import { below } from '../../../utilities';
 
-const Section2 = ({ className }) => {
+const Section2 = memo(({ className }) => {
   const [on, toggle] = useState(false);
   const [on2, toggle2] = useState(false);
   const animation1 = useSpring({
@@ -48,7 +48,7 @@ const Section2 = ({ className }) => {
       </div>
     </section>
   );
-};
+});
 
 export default styled(Section2)`
   padding: 100px 0;

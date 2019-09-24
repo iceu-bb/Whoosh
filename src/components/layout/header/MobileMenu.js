@@ -1,15 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, memo } from 'react';
 import styled from 'styled-components';
-import {
-  useSpring,
-  config,
-} from 'react-spring';
+import { useSpring, config } from 'react-spring';
 import { CloseButtonMenu } from '../../elements';
 import { below } from '../../../utilities';
 import MenuMobileInner from './MobileMenuInner';
 import { FaBuffer } from 'react-icons/fa';
 
-const MobileMenu = ({ className, moved }) => {
+const MobileMenu = memo(({ className, moved }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const springRef = useRef();
@@ -30,7 +27,7 @@ const MobileMenu = ({ className, moved }) => {
       />
     </div>
   );
-};
+});
 
 export default styled(MobileMenu)`
   color: inherit;
