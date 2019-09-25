@@ -2,14 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { orangeMain, yellowMain, below } from '../../utilities';
-import { HeadingH2, Button } from '../elements';
+import { HeadingH2, Button, Paragraph } from '../elements';
 
-const CardSummary = ({ className, categoryName }) => {
+const CardSummary = ({ className }) => {
   return (
     <section className={className}>
       <div className='container'>
         <HeadingH2>Obracaj fiszki i ucz się!</HeadingH2>
-        <p style={{ marginBottom: 30 }}>
+        <p className='hide-small text'>
+          Fiszki możesz przesuwać również za pomocą strzałek klawiatury, a
+          obracać naciskająć klawisz Control.
+        </p>
+        <p className='text'>
           Pod spodem możesz dodać słówko do tej kategorii badż edytować i usunąć
           te fiszki które dodałeś wcześniej.
         </p>
@@ -44,5 +48,15 @@ export default styled(CardSummary)`
   .container {
     max-width: 500px;
     margin: 30px auto 0;
+  }
+
+  .text{
+    margin-bottom: 30px;
+  }
+
+  .hide-small{
+    ${below.small`
+      display: none;
+  `}
   }
 `;

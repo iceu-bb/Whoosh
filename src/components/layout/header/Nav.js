@@ -9,9 +9,8 @@ import CategorySearch from '../../category/CategorySearch';
 import UserLink from './UserLink';
 import MobileMenu from './MobileMenu';
 
-const Nav = memo(({ className, moved, openModal, auth, profile }) => {
+const Nav = memo(({ className, moved, openModal, auth }) => {
   const isAuthenticated = auth.isLoaded && !auth.isEmpty;
-  const userName = profile.displayName;
   return (
     <nav className={className}>
       <ul className={moved ? 'list black' : 'list'}>
@@ -19,30 +18,35 @@ const Nav = memo(({ className, moved, openModal, auth, profile }) => {
           <CategorySearch moved={moved} className='hide-medium' />
         </li>
         <li>
-          <NavLink to='/add' className='link hide-medium'>
+          <NavLink
+            to='/add'
+            className='link hide-medium'
+            aria-label='Add category'
+          >
             Dodaj zestaw
           </NavLink>
         </li>
         {!isAuthenticated && (
           <>
             <li>
-              <div
+              <NavLink
                 className='link smaller-sm'
+                aria-label='Log in'
+                to='#'
                 onClick={() => openModal('LoginModal', null)}
               >
                 Zaloguj się
-              </div>
+              </NavLink>
             </li>
             <li>
-              <div
-                className='link smaller-sm'
-                onClick={() => openModal('RegisterModal', null)}
-              >
+              <div className='smaller-sm'>
                 <Button
                   modifiers='nav'
                   className={
                     moved ? 'btn-phone orange-background' : 'btn-phone'
                   }
+                  aria-label='Register'
+                  onClick={() => openModal('RegisterModal', null)}
                 >
                   Zarejestruj się
                 </Button>
@@ -53,15 +57,11 @@ const Nav = memo(({ className, moved, openModal, auth, profile }) => {
 
         {isAuthenticated && (
           <li>
-            <UserLink
-              className='hide-medium'
-              userName={userName}
-              moved={moved}
-            />
+            <UserLink className='hide-medium' moved={moved} />
           </li>
         )}
         {isAuthenticated && (
-          <li class='mobile-menu'>
+          <li className='mobile-menu'>
             <MobileMenu moved={moved} />
           </li>
         )}
@@ -71,8 +71,7 @@ const Nav = memo(({ className, moved, openModal, auth, profile }) => {
 });
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth,
-  profile: state.firebase.profile
+  auth: state.firebase.auth
 });
 
 export default styled(

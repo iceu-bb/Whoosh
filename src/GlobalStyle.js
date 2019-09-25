@@ -31,9 +31,6 @@ const GlobalStyle = createGlobalStyle`
     ::selection {
         background: #F1BC2E;
     }
-
-    main {
-    }
 `;
 
 export default GlobalStyle;

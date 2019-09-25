@@ -45,6 +45,7 @@ export const loginUser = values => async (
   try {
     await firebase.auth().signInWithEmailAndPassword(email, password);
     dispatch(closeModal());
+    toastr.success('Sukces', 'Zalogowano pomyślnie');
   } catch (error) {
     console.log(error);
     throw new SubmissionError({
@@ -82,7 +83,7 @@ export const socialLogin = selectedProvider => async (
         createdAt: firestore.FieldValue.serverTimestamp()
       });
     }
-    window.alert(`Logged in successfully`);
+    toastr.success('Sukces', 'Zalogowano pomyślnie');
   } catch (error) {
     console.log(error);
   }
@@ -98,7 +99,7 @@ export const updatePassword = values => async (
   const { password1 } = values;
   try {
     await user.updatePassword(password1);
-    await dispatch(reset('settings'));
+    await dispatch(reset('passwordChange'));
     toastr.success('Sukces', 'Pomyślnie zmieniono hasło');
   } catch (error) {
     throw new SubmissionError({

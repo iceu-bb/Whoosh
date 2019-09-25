@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { useTransition, config } from 'react-spring';
 import { below } from '../../utilities';
 import { FlashCard } from '../elements';
+import { throttled } from '../../helpers';
 
-const CardContainer = styled.div`
+const FlashCardContainer = styled.div`
     margin: 0 auto;
     height: 300px;
     width: 500px;
@@ -24,7 +25,6 @@ const CardContainer = styled.div`
     height: 180px;
     width: 250px;
   `}
-
 `;
 
 const FlashcardContainer = ({ cards, index }) => {
@@ -48,7 +48,7 @@ const FlashcardContainer = ({ cards, index }) => {
   });
 
   return (
-    <CardContainer>
+    <FlashCardContainer>
       {cards.length !== 0 &&
         transitions.map(({ item, key, props: animation }) => (
           <FlashCard
@@ -58,7 +58,7 @@ const FlashcardContainer = ({ cards, index }) => {
             english={item.english}
           />
         ))}
-    </CardContainer>
+    </FlashCardContainer>
   );
 };
 

@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { closeModal } from '../../redux/modal/modalActionts';
-import { deleteCategory, removeCard } from '../../redux/category/actions';
+import { deleteCategory } from '../../redux/category/categoryActions';
+import { removeCard } from '../../redux/card/cardActions';
 import { FaTimes } from 'react-icons/fa';
 import { useEscapeToCloseModal } from '../../helpers';
 import {

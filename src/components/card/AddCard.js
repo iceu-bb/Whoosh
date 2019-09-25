@@ -3,30 +3,9 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import TextInputForm from '../elements/forms/TextInputForm';
-// import SelectInputForm from '../elements/forms/SelectInputForm';
-import { addCard } from '../../redux/category/actions';
-import {
-  composeValidators,
-  combineValidators,
-  isRequired,
-  hasLengthBetween
-} from 'revalidate';
+import { addCard } from '../../redux/card/cardActions';
 import { HeadingH3, Button } from '../elements';
-
-const validate = combineValidators({
-  english: composeValidators(
-    isRequired({ message: 'Podaj angielską wersję' }),
-    hasLengthBetween(3, 150)({
-      message: 'Wymagane minimum 3 znaki, maksymalnie 150 znaków'
-    })
-  )(),
-  polish: composeValidators(
-    isRequired({ message: 'Podaj polską wersję' }),
-    hasLengthBetween(3, 150)({
-      message: 'Wymagane minimum 3 znaki, maksymalnie 150 znaków'
-    })
-  )()
-});
+import { addCardValidator } from '../../helpers';
 
 const AddCard = ({
   handleSubmit,
@@ -55,7 +34,7 @@ const AddCard = ({
           type='text'
           placeholder='angielska wersja'
           label='angielska wersja'
-          ownClassName='login-input'
+          ownClassName='classic-input'
         />
         <Field
           name='polish'
@@ -63,7 +42,7 @@ const AddCard = ({
           type='text'
           placeholder='polska wersja'
           label='polska wersja'
-          ownClassName='login-input'
+          ownClassName='classic-input'
         />
         {error && <span>{error}</span>}
         <Button type='submit' disabled={invalid || submitting || pristine}>
@@ -78,7 +57,7 @@ export default styled(
   connect(
     null,
     { addCard }
-  )(reduxForm({ form: 'registerNewCard', validate })(AddCard))
+  )(reduxForm({ form: 'registerNewCard', validate: addCardValidator })(AddCard))
 )`
   padding: 0 7% 50px;
 

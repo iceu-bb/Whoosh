@@ -7,8 +7,8 @@ import {
   HeadingH3,
   HeadingH4,
   Paragraph
-} from '../../elements';
-import { boxShadow2, below } from '../../../utilities';
+} from '../elements';
+import { boxShadow2, below } from '../../utilities';
 import { FaTabletAlt, FaBolt, FaPlane, FaBook } from 'react-icons/fa';
 
 const Section1 = memo(({ className }) => {

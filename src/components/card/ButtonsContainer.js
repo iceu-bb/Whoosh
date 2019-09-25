@@ -41,7 +41,7 @@ const ButtonsContainer = ({ className, setIndex, index, length }) => {
       >
         <FaArrowLeft />
       </button>
-      <p class='counter'>
+      <p className='counter'>
         {index + 1}/{length}
       </p>
       <button

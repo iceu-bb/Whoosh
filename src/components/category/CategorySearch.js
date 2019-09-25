@@ -1,7 +1,7 @@
 import React, { useState, memo } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { searchCategory } from '../../redux/category/actions';
+import { searchCategory } from '../../redux/category/categoryActions';
 import { FaSearch } from 'react-icons/fa';
 import { CloseButton } from '../elements';
 import { below } from '../../utilities';
@@ -91,6 +91,7 @@ export default styled(
     top: 0;
     border: none;
     transition: all 0.2s ease;
+    will-change: transform;
 
     &:hover {
       background-color: inherit;

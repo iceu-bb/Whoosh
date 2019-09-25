@@ -2,8 +2,8 @@ import React, { useState, memo } from 'react';
 import styled from 'styled-components';
 import { Waypoint } from 'react-waypoint';
 import { useSpring, animated, config } from 'react-spring';
-import { HeadingH2, Paragraph } from '../../elements';
-import { below } from '../../../utilities';
+import { HeadingH2, Paragraph } from '../elements';
+import { below } from '../../utilities';
 
 const Section2 = memo(({ className }) => {
   const [on, toggle] = useState(false);

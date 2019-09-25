@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Nav from './Nav';
 import { useSpring, animated } from 'react-spring';
 import { orange, below } from '../../../utilities';
+import { scrollToRef } from '../../../helpers';
 import { Waypoint } from 'react-waypoint';
 
 const FakePixel = styled.div`
@@ -18,7 +19,6 @@ const Header = memo(({ className }) => {
   const [moved, setMoved] = useState(false);
 
   const scrollRef = useRef(null);
-  const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
   const executeScroll = () => scrollToRef(scrollRef);
 
   const { x } = useSpring({
@@ -30,7 +30,7 @@ const Header = memo(({ className }) => {
       <Waypoint onEnter={() => setMoved(false)} onLeave={() => setMoved(true)}>
         <FakePixel />
       </Waypoint>
-      <header className={className} moved={moved}>
+      <header className={className}>
         <div ref={scrollRef} className='container'>
           <animated.div
             className='animated'
@@ -42,6 +42,7 @@ const Header = memo(({ className }) => {
             onClick={executeScroll}
             to='/'
             className={moved ? 'logo yellow' : 'logo '}
+            aria-label='Home'
           >
             Whoosh
           </Link>
@@ -86,6 +87,7 @@ export default styled(Header)`
     left: 0;
     right: 0;
     z-index: 20;
+    will-change: transform;
   }
 
   .logo {

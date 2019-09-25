@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// props from redux-form HOC
 const TextInputForm = ({
   className,
   ownClassName,
@@ -9,7 +8,6 @@ const TextInputForm = ({
   label,
   placeholder,
   type,
-  autoFocus,
   meta: { touched, error }
 }) => {
   return (
@@ -20,7 +18,6 @@ const TextInputForm = ({
         {...input}
         placeholder={placeholder}
         type={type}
-        autoFocus={autoFocus}
       />
       {label && <label className='label'>{label}</label>}
     </div>
@@ -40,7 +37,7 @@ export default styled(TextInputForm)`
     font-size: 1.3rem;
   }
 
-  .login-input {
+  .classic-input {
     width: 100%;
     height: 45px;
     font-size: 1.7rem;
@@ -50,7 +47,7 @@ export default styled(TextInputForm)`
     margin-bottom: 5px;
   }
 
-  .login-input::placeholder {
+  .classic-input::placeholder {
     color: #ccc;
   }
 

@@ -18,10 +18,8 @@ const Loader = styled.div`
   }
 `;
 
-export const LoadingButton = () => {
-  return (
-    <Loader>
-      <FaSpinner />
-    </Loader>
-  );
-};
+export const LoadingButton = () => (
+  <Loader>
+    <FaSpinner />
+  </Loader>
+);

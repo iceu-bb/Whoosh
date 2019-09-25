@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import Header from '../components/layout/header/Header';
 import CategoriesDashboard from '../components/category/CategoriesDashboard';
 import Hero from '../components/layout/hero/Hero';
-import Section1 from '../components/layout/section1/Section1';
-import Section2 from '../components/layout/section2/Section2';
+import Section1 from '../components/layout/Section1';
+import Section2 from '../components/layout/Section2';
 import Footer from '../components/layout/Footer';
 
 const HomeView = ({ location: { pathname } }) => {

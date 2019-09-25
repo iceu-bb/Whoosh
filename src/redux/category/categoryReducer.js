@@ -3,7 +3,7 @@ import {
   FETCH_CATEGORY_LIST,
   SEARCH_CATEGORIES,
   GET_USER_CATEGORIES
-} from './constants';
+} from './categoryConstants';
 
 const initialState = {
   currentCategoryItems: [],

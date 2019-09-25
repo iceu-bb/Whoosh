@@ -1,13 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import TestModal from '../../components/elements/TestModal';
 import LoginModal from '../../components/modals/LoginModal';
 import RegisterModal from '../../components/modals/RegisterModal';
 import UnauthModal from '../../components/modals/UnauthModal';
 import ConfirmationModal from '../../components/modals/ConfirmationModal';
 
 const modalLookup = {
-  TestModal,
   LoginModal,
   RegisterModal,
   UnauthModal,

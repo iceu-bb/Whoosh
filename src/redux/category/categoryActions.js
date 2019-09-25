@@ -3,7 +3,7 @@ import {
   FETCH_CATEGORY_LIST,
   SEARCH_CATEGORIES,
   GET_USER_CATEGORIES
-} from './constants';
+} from './categoryConstants';
 import { toastr } from 'react-redux-toastr';
 import {
   asyncActionStart,
@@ -11,8 +11,6 @@ import {
   asyncActionError
 } from '../async/asyncActions';
 import fuzzy from 'fuzzy';
-
-// Couldn't fetch subcollections on client -  so there will be separate collection with flashcard words data for every category with pattern: categoryName_words
 
 export const fetchCategoriesList = () => async (
   dispatch,
@@ -38,75 +36,6 @@ export const fetchCategoriesList = () => async (
   } catch (error) {
     console.log(error);
     dispatch(asyncActionError());
-  }
-};
-
-export const subscribeCollectionChanges = (
-  collectionName,
-  setUnsubscribe
-) => async (dispatch, getState, { getFirestore }) => {
-  const firestore = getFirestore();
-  try {
-    let data = [];
-    const unsubscribe = firestore
-      .collection(`${collectionName}_words`)
-      .onSnapshot(snapshot => {
-        let changes = snapshot.docChanges();
-        // listening for changes
-        changes.forEach(change => {
-          if (change.type === 'added') {
-            // add flashcard
-            let card = {
-              ...change.doc.data(),
-              id: change.doc.id
-            };
-            data.push(card);
-          } else if (change.type === 'removed') {
-            // filter deleted document
-            data = data.filter(el => el.id != change.doc.id);
-          } else if (change.type === 'modified') {
-            //find item and update english and polish words
-            let item = data.find(el => el.id === change.doc.id);
-            item.english = change.doc.data().english;
-            item.polish = change.doc.data().polish;
-          }
-          dispatch({ type: FETCH_CATEGORY_ITEMS, payload: data });
-        });
-      });
-    setUnsubscribe(unsubscribe);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const addCard = (values, categoryName) => async (
-  dispatch,
-  getState,
-  { getFirestore, getFirebase }
-) => {
-  const firestore = getFirestore();
-  const firebase = getFirebase();
-  const user = firebase.auth().currentUser;
-  const [english, polish] = [values.english.trim(), values.polish.trim()];
-
-  // 1) add new Card to Category
-  try {
-    await firestore.collection(`${categoryName}_words`).add({
-      english,
-      polish,
-      author: user.displayName,
-      authorId: user.uid,
-      createdAt: firestore.FieldValue.serverTimestamp()
-    });
-
-    // 2) increment cardCounter
-    await firestore.update(`categories/${categoryName}`, {
-      cardCounter: firestore.FieldValue.increment(1)
-    });
-
-    toastr.success('Sukces', 'Fiszka została dodana');
-  } catch (error) {
-    toastr.error('Błąd', 'Problem z dodaniem fiszki');
   }
 };
 
@@ -159,44 +88,6 @@ export const addCategory = (values, image) => async (
   } catch (error) {
     dispatch(asyncActionFinish());
     toastr.error('Bład', 'Problem z dodaniem zestawu');
-  }
-};
-
-export const removeCard = (categoryName, cardId) => async (
-  dispatch,
-  getState,
-  { getFirestore }
-) => {
-  const firestore = getFirestore();
-  try {
-    // 1) delete doc
-    await firestore.delete(`${categoryName}_words/${cardId}`);
-
-    // 2) update cardCounter
-    await firestore.update(`categories/${categoryName}`, {
-      cardCounter: firestore.FieldValue.increment(-1)
-    });
-
-    toastr.success('Sukces', 'Fiszka została usunięta');
-  } catch (error) {
-    toastr.error('Bład', 'Nie udało się usunąć fiszki');
-  }
-};
-
-export const updateCard = (values, categoryName, cardId) => async (
-  dispatch,
-  getState,
-  { getFirestore }
-) => {
-  const firestore = getFirestore();
-  const [english, polish] = [values.english.trim(), values.polish.trim()];
-  try {
-    await firestore.update(`${categoryName}_words/${cardId}`, {
-      english,
-      polish
-    });
-  } catch (error) {
-    toastr.error('Bład', 'Wystąpił problem podczas edycji fiszki');
   }
 };
 
@@ -279,6 +170,45 @@ export const deleteCategory = categoryName => async (
   } catch (error) {
     dispatch(asyncActionError());
     toastr.error('Bład', 'Nie udało się usunąć zestawu');
+  }
+};
+
+// Subscribe to current displayed Category Items
+export const subscribeCollectionChanges = (
+  collectionName,
+  setUnsubscribe
+) => async (dispatch, getState, { getFirestore }) => {
+  const firestore = getFirestore();
+  try {
+    let data = [];
+    const unsubscribe = firestore
+      .collection(`${collectionName}_words`)
+      .onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        // listening for changes
+        changes.forEach(change => {
+          if (change.type === 'added') {
+            // add flashcard
+            let card = {
+              ...change.doc.data(),
+              id: change.doc.id
+            };
+            data.push(card);
+          } else if (change.type === 'removed') {
+            // filter deleted document
+            data = data.filter(el => el.id != change.doc.id);
+          } else if (change.type === 'modified') {
+            //find item and update english and polish words
+            let item = data.find(el => el.id === change.doc.id);
+            item.english = change.doc.data().english;
+            item.polish = change.doc.data().polish;
+          }
+          dispatch({ type: FETCH_CATEGORY_ITEMS, payload: data });
+        });
+      });
+    setUnsubscribe(unsubscribe);
+  } catch (error) {
+    console.log(error);
   }
 };
 

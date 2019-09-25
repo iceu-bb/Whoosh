@@ -5,7 +5,7 @@ import {
   subscribeCollectionChanges,
   fetchCategoriesList,
   cleanCurrentCategoryItems
-} from '../../redux/category/actions';
+} from '../../redux/category/categoryActions';
 import { LoadingComponent } from '../elements';
 
 const CardDashboard = ({

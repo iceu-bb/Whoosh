@@ -7,7 +7,7 @@ const Loader = styled.div`
   align-items: center;
   min-height: 250px;
   height: 100%;
-  max-width: 100vh;
+  max-width: 100vw;
 
   &:after {
     content: ' ';
@@ -31,6 +31,4 @@ const Loader = styled.div`
   }
 `;
 
-export const LoadingComponent = () => {
-  return <Loader></Loader>;
-};
+export const LoadingComponent = () => <Loader></Loader>;

@@ -11,6 +11,8 @@ const BUTTON_MODIFIERS = {
   nav: () => `
   border: 1px solid white;
   background:rgba(255,255,255,.2);
+  position: relative;
+  z-index: 30;
 
   &:hover {
     background: ${orange};

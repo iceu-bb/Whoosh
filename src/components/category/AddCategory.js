@@ -3,31 +3,20 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import TextInputForm from '../elements/forms/TextInputForm';
-import { addCategory, fetchCategoriesList } from '../../redux/category/actions';
+import {
+  addCategory,
+  fetchCategoriesList
+} from '../../redux/category/categoryActions';
 import { HeadingH2, Button, Paragraph } from '../elements';
 import Dropzone from '../elements/imageUpload/Dropzone';
 import { withRouter } from 'react-router-dom';
 import Resizer from 'react-image-file-resizer';
 import { LoadingComponent } from '../elements';
-
-const checkIfCategoryNameExist = (categories, name) => {
-  const isExist = categories.filter(item => item.name === name);
-  return isExist.length;
-};
-
-const isExistCategoryName = (value, ...props) => {
-  const categories = props[1].categories;
-  const isExist = checkIfCategoryNameExist(categories, value);
-  return isExist ? 'wybrana nazwa juz istnieje' : undefined;
-};
-
-const hasLengthBetween3and50 = value => {
-  return value.length < 3 || value.length > 50
-    ? 'Wymagane minimum 3 znaki, maksymalnie 50 znaków'
-    : undefined;
-};
-
-const required = value => (value ? undefined : 'Podaj nazwę zestawu');
+import {
+  isExistCategoryName,
+  hasLengthBetween3and50,
+  requiredCategory
+} from '../../helpers';
 
 const AddCategory = ({
   className,
@@ -99,8 +88,12 @@ const AddCategory = ({
           type='text'
           placeholder='Nazwa zestawu'
           label='nazwa zestawu'
-          ownClassName='login-input'
-          validate={[isExistCategoryName, required, hasLengthBetween3and50]}
+          ownClassName='classic-input'
+          validate={[
+            isExistCategoryName,
+            requiredCategory,
+            hasLengthBetween3and50
+          ]}
         />
         <Field
           name='image'

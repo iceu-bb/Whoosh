@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { orange, below } from '../../utilities';
+import { below } from '../../utilities';
 
 export const ModalWrapper = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -45,7 +45,7 @@ export const Header = styled.div`
   border-top-right-radius: 6px;
 `;
 
-export const SocialLoginWrapper = styled.div`
+export const SocialLoginWrapper = styled.button`
   font-size: 1.7rem;
   margin: 0 auto;
   height: 60px;
@@ -56,6 +56,7 @@ export const SocialLoginWrapper = styled.div`
   cursor: pointer;
   padding: 0 20px;
   margin-bottom: 30px;
+  background-color: #fff;
 `;
 
 export const SocialIcon = styled.img`

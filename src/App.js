@@ -14,7 +14,7 @@ const App = ({ location: { pathname } }) => {
     <>
       <GlobalStyle />
       <ModalManager />
-      <Suspense fallback={LoadingComponent}>
+      <Suspense fallback={<LoadingComponent />}>
         <Route exact path='/' component={HomeView} />
         <Route exact path='/(.+)' component={SecondView} />
       </Suspense>

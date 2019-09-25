@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchCategoriesList } from '../../redux/category/actions';
+import { fetchCategoriesList } from '../../redux/category/categoryActions';
 import CategoriesContainer from './CategoriesContainer';
 import { declinedWord } from '../../helpers';
 

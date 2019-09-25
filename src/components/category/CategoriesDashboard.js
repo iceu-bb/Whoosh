@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import CategoriesContainer from './CategoriesContainer';
-import { fetchCategoriesList } from '../../redux/category/actions';
+import { fetchCategoriesList } from '../../redux/category/categoryActions';
 import { declinedWord } from '../../helpers';
 
 const CategoriesDashboard = ({ fetchCategoriesList, categories, loading }) => {

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { updateCard } from '../../redux/category/actions';
+import { updateCard } from '../../redux/card/cardActions';
 import { openModal } from '../../redux/modal/modalActionts';
 import CardListItemForm from './CardListItemForm';
 import { FaRegTrashAlt, FaRegEdit } from 'react-icons/fa';

@@ -7,7 +7,7 @@ import { orange, black, boxShadow1 } from '../../../utilities';
 import { useTransition, animated, config } from 'react-spring';
 import { useOnClickOutside } from '../../../helpers';
 
-const UserLink = memo(({ className, userName, moved }) => {
+const UserLink = memo(({ className, moved }) => {
   const [openPanel, setOpenPanel] = useState(false);
 
   const buttonRef = useRef();
@@ -30,6 +30,8 @@ const UserLink = memo(({ className, userName, moved }) => {
     <div
       ref={buttonRef}
       className={className}
+      tabIndex={0}
+      role='button'
       onClick={() => {
         setOpenPanel(!openPanel);
       }}
@@ -42,13 +44,19 @@ const UserLink = memo(({ className, userName, moved }) => {
               <animated.div ref={panelRef} className='panel' style={animation}>
                 <ul className='panel-list'>
                   <li className='panel-list-item'>
-                    <Link to='/user/my-categories'>Moje zestawy do nauki</Link>
+                    <Link to='/user/my-categories' aria-label='categories'>
+                      Moje zestawy do nauki
+                    </Link>
                   </li>
                   <li className='panel-list-item'>
-                    <Link to='/user/settings'>Ustawienia</Link>
+                    <Link to='/user/settings' aria-label='settings'>
+                      Ustawienia
+                    </Link>
                   </li>
                   <li className='panel-list-item'>
-                    <Link to='/user/faq'>Pomoc</Link>
+                    <Link to='/user/faq' aria-label='FAQ'>
+                      Pomoc
+                    </Link>
                   </li>
                   <li className='panel-list-item'>
                     <SignOut />
@@ -87,6 +95,7 @@ export default styled(UserLink)`
     border-radius: 6px;
     border: 0.5px solid #ddd;
     ${boxShadow1};
+    will-change: opacity;
 
     &::before {
       content: '';

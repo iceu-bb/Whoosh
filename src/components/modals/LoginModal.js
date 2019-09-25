@@ -12,7 +12,6 @@ import {
   useEscapeToCloseModal
 } from '../../helpers';
 import { FaTimes } from 'react-icons/fa';
-
 import {
   ModalWrapper,
   ModalInner,
@@ -48,6 +47,7 @@ const LoginModal = ({
                     <Header>
                       <span>Zaloguj się </span>
                       <CloseButton
+                        aria-label='Close Button'
                         onClick={() => {
                           toggle(!on);
                           setTimeout(() => {
@@ -58,7 +58,11 @@ const LoginModal = ({
                         <FaTimes />
                       </CloseButton>
                     </Header>
-                    <SocialLoginWrapper onClick={() => socialLogin('google')}>
+                    <SocialLoginWrapper
+                      aria-label='Google Login'
+                      tabIndex={0}
+                      onClick={() => socialLogin('google')}
+                    >
                       <SocialIcon
                         src='./assets/google-icon.png'
                         alt='google icon'
@@ -72,7 +76,7 @@ const LoginModal = ({
                         type='text'
                         label='Nazwa użytkownika'
                         placeholder='Wprowadź nazwę użytkownika'
-                        ownClassName='login-input'
+                        ownClassName='classic-input'
                       />
                       <Field
                         name='password'
@@ -80,7 +84,7 @@ const LoginModal = ({
                         type='password'
                         label='Hasło'
                         placeholder='Wprowadź swoje hasło'
-                        ownClassName='login-input'
+                        ownClassName='classic-input'
                       />
                       {error && <SubmissionError>{error}</SubmissionError>}
                       <Button type='submit' disabled={touched || pristine}>

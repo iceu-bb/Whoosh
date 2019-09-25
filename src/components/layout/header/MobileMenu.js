@@ -1,15 +1,13 @@
-import React, { useState, useRef, memo } from 'react';
+import React, { useState, memo } from 'react';
 import styled from 'styled-components';
 import { useSpring, config } from 'react-spring';
 import { CloseButtonMenu } from '../../elements';
-import { below } from '../../../utilities';
 import MenuMobileInner from './MobileMenuInner';
 import { FaBuffer } from 'react-icons/fa';
 
 const MobileMenu = memo(({ className, moved }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const springRef = useRef();
   const { x } = useSpring({
     x: isMenuOpen ? 0 : 100,
     config: config.stiff

@@ -1,24 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Field, reduxForm, getFormValues } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import TextInputForm from '../elements/forms/TextInputForm';
-import { useOnClickOutside } from '../../helpers';
-import { IconButton } from '../elements';
 import { below } from '../../utilities';
-import { FaRegCheckCircle } from 'react-icons/fa';
 
 const CardItemForm = ({
   className,
   english,
   polish,
   initialize,
-  handleSubmit,
   handleSubmission,
-  invalid,
-  submitting,
-  pristine,
   isEdited,
-  setEdit,
   formRef
 }) => {
   useEffect(() => {

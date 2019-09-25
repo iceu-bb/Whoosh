@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { applyStyleModifiers } from 'styled-components-modifiers';
-import { below } from '../../utilities';
 
 const PARAGRAPH_MODIFIERS = {
   marginBig: () => `

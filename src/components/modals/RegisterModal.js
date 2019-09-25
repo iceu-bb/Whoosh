@@ -8,7 +8,8 @@ import { registerAccount, socialLogin } from '../../redux/auth/authActions';
 import {
   useAnimationOnModal,
   useLockBodyScroll,
-  useEscapeToCloseModal
+  useEscapeToCloseModal,
+  registerValidator
 } from '../../helpers';
 import { Button } from '../elements/index';
 import { FaTimes } from 'react-icons/fa';
@@ -22,53 +23,6 @@ import {
   SubmissionError,
   CloseButton
 } from '../elements/index';
-
-import {
-  composeValidators,
-  combineValidators,
-  isRequired,
-  createValidator,
-  hasLengthGreaterThan,
-  hasLengthBetween
-} from 'revalidate';
-
-const isValidEmail = createValidator(
-  message => value => {
-    if (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-      return message;
-    }
-  },
-  'Nieprawidłowy adres email'
-);
-
-const isMinimumOneCipher = createValidator(
-  message => value => {
-    if (value && !/^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/i.test(value)) {
-      return message;
-    }
-  },
-  'Hasło musi zawierać przynajmniej jedną cyfre'
-);
-
-const validate = combineValidators({
-  email: composeValidators(
-    isRequired({ message: 'email jest wymagany' }),
-    isValidEmail
-  )(),
-  password: composeValidators(
-    isRequired({ message: 'hasło jest wymagane' }),
-    hasLengthGreaterThan(7)({
-      message: 'Hasło musi mieć minimum 8 znaków'
-    }),
-    isMinimumOneCipher
-  )(),
-  displayName: composeValidators(
-    isRequired({ message: 'Nazwa użytkownika jest wymagana' }),
-    hasLengthBetween(3, 32)({
-      message: 'Wymagane minimum 3 znaki, maksymalnie 32 znaki'
-    })
-  )()
-});
 
 const RegisterModal = ({
   closeModal,
@@ -95,6 +49,7 @@ const RegisterModal = ({
                     <Header>
                       <span>Zarejestruj się </span>
                       <CloseButton
+                        aria-label='Close Button'
                         onClick={() => {
                           toggle(!on);
                           setTimeout(() => {
@@ -105,7 +60,10 @@ const RegisterModal = ({
                         <FaTimes />
                       </CloseButton>
                     </Header>
-                    <SocialLoginWrapper onClick={() => socialLogin('google')}>
+                    <SocialLoginWrapper
+                      aria-label='Google Login'
+                      onClick={() => socialLogin('google')}
+                    >
                       <SocialIcon
                         src='./assets/google-icon.png'
                         alt='google icon'
@@ -119,7 +77,7 @@ const RegisterModal = ({
                         type='text'
                         placeholder='adres e-mail'
                         label='adres e-mail'
-                        ownClassName='login-input'
+                        ownClassName='classic-input'
                       />
                       <Field
                         name='password'
@@ -127,7 +85,7 @@ const RegisterModal = ({
                         type='password'
                         placeholder='hasło'
                         label='hasło'
-                        ownClassName='login-input'
+                        ownClassName='classic-input'
                       />
                       <Field
                         name='displayName'
@@ -135,19 +93,9 @@ const RegisterModal = ({
                         type='text'
                         placeholder='nazwa użytkownika'
                         label='nazwa użytkownika'
-                        ownClassName='login-input'
+                        ownClassName='classic-input'
                       />
-                      {error && (
-                        <span
-                          style={{
-                            fontSize: '1.6rem',
-                            color: 'red',
-                            margin: 10
-                          }}
-                        >
-                          {error}
-                        </span>
-                      )}
+                      {error && <SubmissionError>{error}</SubmissionError>}
                       <Button
                         type='submit'
                         disabled={invalid || submitting || pristine}
@@ -168,4 +116,8 @@ const RegisterModal = ({
 export default connect(
   null,
   { closeModal, registerAccount, socialLogin }
-)(reduxForm({ form: 'registerForm', validate })(RegisterModal));
+)(
+  reduxForm({ form: 'registerForm', validate: registerValidator })(
+    RegisterModal
+  )
+);

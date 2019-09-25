@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
   getUserCategories,
   fetchCategoriesList
-} from '../../../redux/category/actions';
+} from '../../../redux/category/categoryActions';
 import CategoriesContainer from '../../category/CategoriesContainer';
 
 const UserDashboard = ({

@@ -3,15 +3,8 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { updatePassword } from '../../../redux/auth/authActions';
 import { Field, reduxForm } from 'redux-form';
+import { passwordChangeValidator } from '../../../helpers';
 import { HeadingH2, Button, Paragraph, TextInputForm } from '../../elements';
-import {
-  combineValidators,
-  matchesField,
-  isRequired,
-  composeValidators,
-  hasLengthGreaterThan,
-  createValidator
-} from 'revalidate';
 
 const SettingsContainer = styled.div`
   margin: 0 auto;
@@ -25,29 +18,6 @@ const Form = styled.form`
   padding: 0 10px;
   max-width: 400px;
 `;
-
-const isMinimumOneCipher = createValidator(
-  message => value => {
-    if (value && !/^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/i.test(value)) {
-      return message;
-    }
-  },
-  'Hasło musi zawierać przynajmniej jedną cyfre'
-);
-
-const validate = combineValidators({
-  password1: composeValidators(
-    isRequired({ message: 'Wprowadź nowe hasło' }),
-    hasLengthGreaterThan(7)({
-      message: 'Hasło musi mieć minimum 8 znaków'
-    }),
-    isMinimumOneCipher
-  )(),
-  password2: composeValidators(
-    isRequired({ message: 'Potwierdź nowe hasło' }),
-    matchesField('password1')({ message: 'hasła musza być jednakowe' })
-  )()
-});
 
 const UserSettings = ({
   handleSubmit,
@@ -69,7 +39,7 @@ const UserSettings = ({
             type='password'
             placeholder='Wpisz nowe hasło'
             label='Nowe hasło'
-            ownClassName='login-input'
+            ownClassName='classic-input'
           />
           <Field
             name='password2'
@@ -77,7 +47,7 @@ const UserSettings = ({
             type='password'
             placeholder='Potwierdź nowe hasło'
             label='Potwierdź hasło'
-            ownClassName='login-input'
+            ownClassName='classic-input'
           />
           {error && <span>{error}</span>}
           <Button type='submit' disabled={invalid || submitting || pristine}>
@@ -102,4 +72,8 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { updatePassword }
-)(reduxForm({ form: 'settings', validate })(UserSettings));
+)(
+  reduxForm({ form: 'passwordChange', validate: passwordChangeValidator })(
+    UserSettings
+  )
+);

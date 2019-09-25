@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef, lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { UserIsAuthenticated } from '../redux/auth/authWrapper';
+import { scrollToRef } from '../helpers';
 import Header from '../components/layout/header/Header';
 import WaveContainer from '../components/layout/wave/WaveContainer';
 import Footer from '../components/layout/Footer';
@@ -20,9 +21,7 @@ const UserSettingsPage = lazy(() =>
 const UserFaqPage = lazy(() =>
   import('../components/layout/userSection/UserFaq')
 );
-const GoodbyePage = lazy(() => import('../components/layout/goodbye/Goodbye'));
-
-const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
+const GoodbyePage = lazy(() => import('../components/layout/Goodbye'));
 
 const SecondView = ({ location: { pathname } }) => {
   const myRef = useRef(null);
@@ -35,7 +34,7 @@ const SecondView = ({ location: { pathname } }) => {
       <main ref={myRef}>
         <WaveContainer />
         <Switch>
-          <Suspense fallback={LoadingComponent}>
+          <Suspense fallback={<LoadingComponent />}>
             <Route
               exact
               path='/search'
