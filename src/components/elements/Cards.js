@@ -11,6 +11,10 @@ export const Card1 = styled.div`
   color: #000;
   transition: all 0.2s ease;
   ${boxShadow2};
+  ${below.phone`
+    max-width: 96vw;
+    max-height: 250px;
+    `}
 
   &:hover {
     outline: 4px solid ${orange};

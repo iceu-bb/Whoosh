@@ -1,5 +1,7 @@
 import FlashCard from './FlashCard';
+import TextInputForm from './forms/TextInputForm';
 export { FlashCard };
+export { TextInputForm };
 export * from './Headings';
 export * from './Buttons';
 export * from './Paragraphs';

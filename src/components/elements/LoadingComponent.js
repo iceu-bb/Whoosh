@@ -7,7 +7,7 @@ const Loader = styled.div`
   align-items: center;
   min-height: 250px;
   height: 100%;
-  min-width: 100vh;
+  max-width: 100vh;
 
   &:after {
     content: ' ';

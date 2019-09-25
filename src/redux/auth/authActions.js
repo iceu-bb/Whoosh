@@ -1,4 +1,5 @@
-import { SubmissionError } from 'redux-form';
+import { SubmissionError, reset } from 'redux-form';
+import { toastr } from 'react-redux-toastr';
 import { closeModal } from '../modal/modalActionts';
 
 export const registerAccount = values => async (
@@ -84,5 +85,24 @@ export const socialLogin = selectedProvider => async (
     window.alert(`Logged in successfully`);
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const updatePassword = values => async (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+  const { password1 } = values;
+  try {
+    await user.updatePassword(password1);
+    await dispatch(reset('settings'));
+    toastr.success('Sukces', 'Pomyślnie zmieniono hasło');
+  } catch (error) {
+    throw new SubmissionError({
+      _error: error.message
+    });
   }
 };

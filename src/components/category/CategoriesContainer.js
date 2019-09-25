@@ -49,7 +49,8 @@ export default styled(
     {}
   )(CategoriesContainer)
 )`
-  padding: 100px 0;
+  margin: 0 auto;
+  padding: 100px 3%;
   text-align: center;
   background-color: #fff;
   font-size: 2.5rem;
@@ -57,10 +58,12 @@ export default styled(
   .grid {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2%;
     display: grid;
     grid-template-columns: repeat(auto-fill, 350px);
     grid-column-gap: 30px;
     grid-row-gap: 30px;
     justify-content: center;
+    justify-items: center;
   }
 `;

@@ -6,7 +6,7 @@ import { declinedWord } from '../../helpers';
 
 const CategoriesDashboard = ({ fetchCategoriesList, categories, loading }) => {
   useEffect(() => {
-    fetchCategoriesList();
+    categories.length === 0 && fetchCategoriesList();
   }, []);
 
   const message = ` ${categories.length} ${declinedWord(

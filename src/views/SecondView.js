@@ -4,6 +4,7 @@ import { UserIsAuthenticated } from '../redux/auth/authWrapper';
 import Header from '../components/layout/header/Header';
 import WaveContainer from '../components/layout/wave/WaveContainer';
 import Footer from '../components/layout/Footer';
+import { LoadingComponent } from '../components/elements/LoadingComponent';
 
 const SearchPage = lazy(() =>
   import('../components/category/SearchCategoryDashboard')
@@ -34,7 +35,7 @@ const SecondView = ({ location: { pathname } }) => {
       <main ref={myRef}>
         <WaveContainer />
         <Switch>
-          <Suspense fallback={<div>fall</div>}>
+          <Suspense fallback={LoadingComponent}>
             <Route
               exact
               path='/search'
