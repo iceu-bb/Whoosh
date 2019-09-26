@@ -23,7 +23,7 @@ const Goodbye = ({ className }) => {
 
 export default styled(Goodbye)`
   margin-top: -30px;
-  padding: 100px 0;
+  padding: 100px 20px;
   background-color: #fff;
 
   .container {

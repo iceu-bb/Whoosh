@@ -2,9 +2,9 @@ import { createGlobalStyle } from 'styled-components';
 import { fontLato, below } from './utilities';
 
 const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap&subset=latin-ext');
-
     html {
+        max-width: 100vw;
+        overflow-x: hidden;
         font-size: 62.5%;
         scroll-behavior: smooth;
 
@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
+        max-width: 100vw;
         background-color: #fff;
         overflow-x: hidden;
         ${fontLato};

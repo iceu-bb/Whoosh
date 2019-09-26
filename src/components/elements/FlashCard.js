@@ -8,9 +8,11 @@ const FlashCard = ({ className, english, polish, key, style }) => {
   const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('keyup', throttledHandleKeyPress);
+    window.innerWidth > 600 &&
+      window.addEventListener('keyup', throttledHandleKeyPress);
     return () => {
-      window.removeEventListener('keyup', throttledHandleKeyPress);
+      window.innerWidth > 600 &&
+        window.removeEventListener('keyup', throttledHandleKeyPress);
     };
   }, []);
 

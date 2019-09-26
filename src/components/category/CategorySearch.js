@@ -82,6 +82,10 @@ export default styled(
       width: 250px;
       `}
     }
+
+    &::placeholder {
+      color: ${({ mobile }) => (mobile ? '#ddd' : 'inherit')};
+    }
   }
 
   .search-icon {

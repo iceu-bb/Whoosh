@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from './redux/configureStore.js';
 import ReduxToastr from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
+import * as serviceWorker from './serviceWorker';
 import App from './App';
 
 const store = configureStore();
@@ -28,3 +29,5 @@ store.firebaseAuthIsReady.then(() => {
     rootEl
   );
 });
+
+serviceWorker.register();

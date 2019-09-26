@@ -13,6 +13,7 @@ const FakePixel = styled.div`
   height: 1px;
   background-color: transparent;
   top: 80px;
+  left: 5px;
 `;
 
 const Header = memo(({ className }) => {
@@ -55,7 +56,7 @@ const Header = memo(({ className }) => {
 
 export default styled(Header)`
   position: fixed;
-  width: 100%;
+  width: 100vw;
   height: 80px;
   background-color: transparent;
   border-bottom: 1px solid #eee;
@@ -106,6 +107,9 @@ export default styled(Header)`
     ${below.phone`
       font-size: 2.5rem;
       font-weight: bold;
+    `}
+     ${below.ultraSmallPhone`
+      padding: 10px 5px;
     `}
   }
 

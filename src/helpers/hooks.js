@@ -57,10 +57,12 @@ export const useEscapeToCloseModal = (
   }
 ) => {
   useEffect(() => {
-    window.addEventListener('keydown', throttledHandleKeyPress);
+    window.innerWidth > 600 &&
+      window.addEventListener('keydown', throttledHandleKeyPress);
 
     return () => {
-      window.removeEventListener('keydown', throttledHandleKeyPress);
+      window.innerWidth > 600 &&
+        window.removeEventListener('keydown', throttledHandleKeyPress);
     };
   }, []);
 

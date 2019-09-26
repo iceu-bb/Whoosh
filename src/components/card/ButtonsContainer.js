@@ -6,9 +6,11 @@ import { throttled } from '../../helpers';
 
 const ButtonsContainer = ({ className, setIndex, index, length }) => {
   useEffect(() => {
-    window.addEventListener('keyup', throttledHandleKeyPress);
+    window.innerWidth > 600 &&
+      window.addEventListener('keyup', throttledHandleKeyPress);
     return () => {
-      window.removeEventListener('keyup', throttledHandleKeyPress);
+      window.innerWidth > 600 &&
+        window.removeEventListener('keyup', throttledHandleKeyPress);
     };
   }, []);
 

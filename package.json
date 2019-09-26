@@ -20,7 +20,6 @@
     "react-waypoint": "^9.0.2",
     "redux": "^4.0.4",
     "redux-auth-wrapper": "^2.1.0",
-    "redux-devtools-extension": "^2.13.8",
     "redux-firestore": "^0.9.0",
     "redux-form": "^8.2.6",
     "redux-thunk": "^2.3.0",
@@ -29,10 +28,12 @@
     "styled-components-modifiers": "^1.2.4"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,5 +49,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.8",
+    "source-map-explorer": "^2.1.0"
   }
 }
