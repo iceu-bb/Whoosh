@@ -2,21 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
-import TextInputForm from '../elements/forms/TextInputForm';
+import { withRouter } from 'react-router-dom';
+import Resizer from 'react-image-file-resizer';
 import {
   addCategory,
   fetchCategoriesList
 } from '../../redux/category/categoryActions';
+
+import TextInputForm from '../elements/forms/TextInputForm';
 import { HeadingH2, Button, Paragraph } from '../elements';
 import Dropzone from '../elements/imageUpload/Dropzone';
-import { withRouter } from 'react-router-dom';
-import Resizer from 'react-image-file-resizer';
 import { LoadingComponent } from '../elements';
 import {
   isExistCategoryName,
   hasLengthBetween3and50,
   requiredCategory
 } from '../../helpers';
+import SEO from '../../SEO';
 
 const AddCategory = ({
   className,
@@ -75,7 +77,8 @@ const AddCategory = ({
   if (isLoading) return <LoadingComponent />;
 
   return (
-    <div className={className}>
+    <section className={className}>
+      <SEO title='Dodaj Zestaw' />
       <HeadingH2 modifiers='orange'>Dodaj nowy Zestaw</HeadingH2>
       <Paragraph modifiers={['feature', 'marginBig', 'fontBig']}>
         Stworzenie zestawu jest banalnie proste. Wystarczy że wpiszesz nazwę i
@@ -110,7 +113,7 @@ const AddCategory = ({
           Dodaj Kategorię
         </Button>
       </form>
-    </div>
+    </section>
   );
 };
 

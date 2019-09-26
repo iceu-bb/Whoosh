@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { HeadingH2, Paragraph } from '../../elements';
+import SEO from '../../../SEO';
 
-const FaqContainer = styled.div`
+const FaqContainer = styled.section`
   margin: 0 auto;
   max-width: 1200px;
   padding: 100px 20px 30px;
@@ -56,6 +57,7 @@ const data = [
 const userFaq = () => {
   return (
     <FaqContainer>
+      <SEO title='Moje Zestawy' />
       {data.map(({ id, title, description }) => (
         <FaqItem key={id}>
           <HeadingH2>{title}</HeadingH2>

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { orangeMain, yellowMain, below } from '../../utilities';
-import { HeadingH2, Button, Paragraph } from '../elements';
+import { HeadingH2, Button } from '../elements';
 
 const CardSummary = ({ className }) => {
   return (

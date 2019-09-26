@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useTransition, config } from 'react-spring';
 import { below } from '../../utilities';
 import { FlashCard } from '../elements';
-import { throttled } from '../../helpers';
 
 const FlashCardContainer = styled.div`
     margin: 0 auto;

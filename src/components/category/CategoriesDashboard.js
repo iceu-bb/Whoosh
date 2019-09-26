@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import CategoriesContainer from './CategoriesContainer';
 import { fetchCategoriesList } from '../../redux/category/categoryActions';
 import { declinedWord } from '../../helpers';
+import CategoriesContainer from './CategoriesContainer';
 
 const CategoriesDashboard = ({ fetchCategoriesList, categories, loading }) => {
   useEffect(() => {
@@ -14,13 +14,13 @@ const CategoriesDashboard = ({ fetchCategoriesList, categories, loading }) => {
     categories.length
   )} do nauki, a ich liczba ciągle rośnie`;
   return (
-    <div>
+    <section>
       <CategoriesContainer
         categories={categories.slice(0, 12)}
         failMessage='loading data'
         showTitle={message}
       />
-    </div>
+    </section>
   );
 };
 

@@ -18,7 +18,7 @@ const Image = styled.div`
 
 const CategoryCard = ({ category, settings, openModal }) => {
   return (
-    <div style={{ position: 'relative', zIndex: 1 }}>
+    <article style={{ position: 'relative' }}>
       <Link
         to={`/category/${category.name}`}
         style={{ textDecoration: 'none' }}
@@ -49,7 +49,7 @@ const CategoryCard = ({ category, settings, openModal }) => {
           <FaRegTrashAlt />
         </IconButton>
       )}
-    </div>
+    </article>
   );
 };
 

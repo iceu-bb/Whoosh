@@ -5,6 +5,7 @@ import {
   fetchCategoriesList
 } from '../../../redux/category/categoryActions';
 import CategoriesContainer from '../../category/CategoriesContainer';
+import SEO from '../../../SEO';
 
 const UserDashboard = ({
   getUserCategories,
@@ -21,14 +22,15 @@ const UserDashboard = ({
   const message = `moje zestawy (${userCategories.length})`;
 
   return (
-    <div>
+    <section>
+      <SEO title='Moje Zestawy' />
       <CategoriesContainer
         categories={userCategories}
         failMessage='Nie znaleziono żadnych pasujących zestawów'
         showTitle={message}
         settings={true}
       />
-    </div>
+    </section>
   );
 };
 

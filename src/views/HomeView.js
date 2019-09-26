@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import Header from '../components/layout/header/Header';
 import CategoriesDashboard from '../components/category/CategoriesDashboard';
 import Hero from '../components/layout/hero/Hero';
 import Section1 from '../components/layout/Section1';
 import Section2 from '../components/layout/Section2';
-import Footer from '../components/layout/Footer';
+import SEO from '../SEO';
 
 const HomeView = ({ location: { pathname } }) => {
   useEffect(() => {
@@ -12,14 +11,13 @@ const HomeView = ({ location: { pathname } }) => {
   }, [pathname]);
   return (
     <>
-      <Header />
+      <SEO title='Strona Główna' />
       <main>
         <Hero />
         <Section1 />
         <CategoriesDashboard />
         <Section2 />
       </main>
-      <Footer />
     </>
   );
 };

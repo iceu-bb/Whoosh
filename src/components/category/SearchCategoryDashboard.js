@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchCategoriesList } from '../../redux/category/categoryActions';
 import CategoriesContainer from './CategoriesContainer';
 import { declinedWord } from '../../helpers';
+import SEO from '../../SEO';
 
 const SearchCategoryDashboard = ({ categories, fetchCategoriesList }) => {
   useEffect(() => {
@@ -15,13 +16,14 @@ const SearchCategoryDashboard = ({ categories, fetchCategoriesList }) => {
   )}`;
 
   return (
-    <div>
+    <section>
+      <SEO title='Wyszukiwarka' />
       <CategoriesContainer
         categories={categories || []}
         failMessage='Nie znaleziono żadnego zestawu pasującego do wzorca. Wyszukaj ponownie'
         showTitle={message}
       />
-    </div>
+    </section>
   );
 };
 

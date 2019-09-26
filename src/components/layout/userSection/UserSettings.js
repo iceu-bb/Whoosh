@@ -5,8 +5,9 @@ import { updatePassword } from '../../../redux/auth/authActions';
 import { Field, reduxForm } from 'redux-form';
 import { passwordChangeValidator } from '../../../helpers';
 import { HeadingH2, Button, Paragraph, TextInputForm } from '../../elements';
+import SEO from '../../../SEO';
 
-const SettingsContainer = styled.div`
+const SettingsContainer = styled.section`
   margin: 0 auto;
   max-width: 500px;
   padding: 100px 20px;
@@ -30,6 +31,7 @@ const UserSettings = ({
 }) => {
   return (
     <SettingsContainer>
+      <SEO title='Ustawienia' />
       <HeadingH2>Ustawienia</HeadingH2>
       {providerId && providerId === 'password' && (
         <Form onSubmit={handleSubmit(updatePassword)}>

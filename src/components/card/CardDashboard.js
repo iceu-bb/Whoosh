@@ -7,6 +7,7 @@ import {
   cleanCurrentCategoryItems
 } from '../../redux/category/categoryActions';
 import { LoadingComponent } from '../elements';
+import SEO from '../../SEO';
 
 const CardDashboard = ({
   listOfCards,
@@ -43,11 +44,12 @@ const CardDashboard = ({
   return isLoading ? (
     <LoadingComponent />
   ) : !isExist ? (
-    <div style={{ margin: 100, textAlign: 'center', fontSize: '3rem' }}>
-      KATEGORIA NIE ISTNIEJE
-    </div>
+    <section style={{ margin: 100, textAlign: 'center', fontSize: '3rem' }}>
+      {`Kategoria ${categoryName} nie istnieje`}
+  </section>
   ) : (
-    <div>
+    <section>
+      <SEO title={`${categoryName}`} />
       <CardContainer
         cards={listOfCards}
         categoryName={categoryName}
@@ -55,7 +57,7 @@ const CardDashboard = ({
         userId={userId}
         isLoading={isLoading}
       />
-    </div>
+    </section>
   );
 };
 
